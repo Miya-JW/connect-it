@@ -1,0 +1,6 @@
+node_modules
+.env
+get_movie.js
+get_music.js
+get_book.js
+get_place.js
