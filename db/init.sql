@@ -8,6 +8,8 @@ drop table if exists album_comments;
 
 drop table if exists book_comments;
 
+drop table if exists comments;
+
 drop table if exists blogs;
 
 drop table if exists tweets;
@@ -100,13 +102,13 @@ create table tags (
 );
 
 create table places(
-    place_id int  primary key,
+    place_id int primary key,
     place_name varchar(64) not null,
     place_address varchar(255) not null,
     place_type varchar(64),
     place_phone_number varchar(50),
     -- user input
-    place_info text 
+    place_info text
 );
 
 create table photo_albums(
@@ -233,17 +235,17 @@ create table tweets (
     foreign key (tweet_place) references places (place_id)
 );
 
-create table tweet_comments(
-    comment_id int auto_increment primary key,
-    comment_tweet_id int,
-    comment_user_id int,
-    comment_date date not null,
-    comment_content varchar(255) not null,
-    comment_comment_id int,
-    foreign key(comment_tweet_id) references tweets(tweet_id),
-    foreign key(comment_user_id) references users(user_id),
-    foreign key(comment_comment_id) references tweet_comments(comment_id)
-);
+-- create table tweet_comments(
+--     comment_id int auto_increment primary key,
+--     comment_tweet_id int,
+--     comment_user_id int,
+--     comment_date date not null,
+--     comment_content varchar(255) not null,
+--     comment_comment_id int,
+--     foreign key(comment_tweet_id) references tweets(tweet_id),
+--     foreign key(comment_user_id) references users(user_id),
+--     foreign key(comment_comment_id) references tweet_comments(comment_id)
+-- );
 
 create table blogs (
     blog_id int auto_increment primary key,
@@ -266,50 +268,70 @@ create table blogs (
     foreign key (blog_place) references places (place_id)
 );
 
-create table blog_comments(
+-- create table blog_comments(
+--     comment_id int auto_increment primary key,
+--     comment_blog_id int,
+--     comment_user_id int,
+--     comment_date date not null,
+--     comment_content varchar(255) not null,
+--     comment_comment_id int,
+--     foreign key(comment_blog_id) references blogs(blog_id),
+--     foreign key(comment_user_id) references users(user_id),
+--     foreign key(comment_comment_id) references blog_comments(comment_id)
+-- );
+
+-- create table movie_comments(
+--     comment_id int auto_increment primary key,
+--     comment_movie_id int,
+--     comment_user_id int,
+--     comment_date date not null,
+--     comment_content varchar(255) not null,
+--     comment_comment_id int,
+--     foreign key(comment_movie_id) references movies(movie_id),
+--     foreign key(comment_user_id) references users(user_id),
+--     foreign key(comment_comment_id) references movie_comments(comment_id)
+-- );
+
+-- create table album_comments(
+--     comment_id int auto_increment primary key,
+--     comment_album_id int,
+--     comment_user_id int,
+--     comment_date date not null,
+--     comment_content varchar(255) not null,
+--     comment_comment_id int,
+--     foreign key(comment_album_id) references albums(album_id),
+--     foreign key(comment_user_id) references users(user_id),
+--     foreign key(comment_comment_id) references album_comments(comment_id)
+-- );
+
+-- create table book_comments(
+--     comment_id int auto_increment primary key,
+--     comment_book_id int,
+--     comment_user_id int,
+--     comment_date date not null,
+--     comment_content varchar(255) not null,
+--     comment_comment_id int,
+--     foreign key(comment_book_id) references books(book_id),
+--     foreign key(comment_user_id) references users(user_id),
+--     foreign key(comment_comment_id) references book_comments(comment_id)
+-- );
+
+create table comments(
     comment_id int auto_increment primary key,
+    comment_user_id int not null,
+    comment_date date not null,
+    comment_content varchar(255) not null,
+    comment_tweet_id int,
     comment_blog_id int,
-    comment_user_id int,
-    comment_date date not null,
-    comment_content varchar(255) not null,
-    comment_comment_id int,
-    foreign key(comment_blog_id) references blogs(blog_id),
-    foreign key(comment_user_id) references users(user_id),
-    foreign key(comment_comment_id) references blog_comments(comment_id)
-);
-
-create table movie_comments(
-    comment_id int auto_increment primary key,
     comment_movie_id int,
-    comment_user_id int,
-    comment_date date not null,
-    comment_content varchar(255) not null,
-    comment_comment_id int,
-    foreign key(comment_movie_id) references movies(movie_id),
-    foreign key(comment_user_id) references users(user_id),
-    foreign key(comment_comment_id) references movie_comments(comment_id)
-);
-
-create table album_comments(
-    comment_id int auto_increment primary key,
     comment_album_id int,
-    comment_user_id int,
-    comment_date date not null,
-    comment_content varchar(255) not null,
-    comment_comment_id int,
-    foreign key(comment_album_id) references albums(album_id),
-    foreign key(comment_user_id) references users(user_id),
-    foreign key(comment_comment_id) references album_comments(comment_id)
-);
-
-create table book_comments(
-    comment_id int auto_increment primary key,
     comment_book_id int,
-    comment_user_id int,
-    comment_date date not null,
-    comment_content varchar(255) not null,
     comment_comment_id int,
-    foreign key(comment_book_id) references books(book_id),
-    foreign key(comment_user_id) references users(user_id),
-    foreign key(comment_comment_id) references book_comments(comment_id)
-);
+    foreign key(comment_user_id) references users (user_id),
+    foreign key(comment_tweet_id) references tweets (tweet_id),
+    foreign key(comment_blog_id) references blogs (blog_id),
+    foreign key(comment_movie_id) references movies (movie_id),
+    foreign key(comment_album_id) references albums (album_id),
+    foreign key(comment_book_id) references books (book_id),
+    foreign key(comment_comment_id) references comments (comment_id)
+)
