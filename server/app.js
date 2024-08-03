@@ -12,6 +12,9 @@ app.use('/api', albumRoutes);
 const artistRoutes = require('./routes/artistRoutes');
 app.use('/api', artistRoutes);
 
+const bookRoutes = require('./routes/bookRoutes');
+app.use('/api', bookRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
