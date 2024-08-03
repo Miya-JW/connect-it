@@ -9,6 +9,9 @@ app.use('/api', userRoutes); // 确保这一行在其他中间件和路由之前
 const albumRoutes = require('./routes/albumRoutes');
 app.use('/api', albumRoutes);
 
+const artistRoutes = require('./routes/artistRoutes');
+app.use('/api', artistRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
