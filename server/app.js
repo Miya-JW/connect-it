@@ -30,6 +30,9 @@ app.use('/api', movieRoutes);
 const placeRoutes = require('./routes/placeRoutes');
 app.use('/api', placeRoutes);
 
+const tagRoutes = require('./routes/tagRoutes');
+app.use('/api', tagRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
