@@ -24,6 +24,9 @@ app.use('/api', photoAlbumRoutes);
 const imageRoutes = require('./routes/imageRoutes');
 app.use('/api', imageRoutes);
 
+const movieRoutes = require('./routes/movieRoutes');
+app.use('/api', movieRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
