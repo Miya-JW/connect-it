@@ -103,7 +103,7 @@ create table tags (
 );
 
 create table places(
-    place_id int primary key,
+    place_id int auto_increment primary key,
     place_name varchar(64) not null,
     place_address varchar(255) not null,
     place_type varchar(64),
