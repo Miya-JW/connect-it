@@ -1,12 +1,12 @@
-drop table if exists tweet_comments;
+-- drop table if exists tweet_comments;
 
-drop table if exists blog_comments;
+-- drop table if exists blog_comments;
 
-drop table if exists movie_comments;
+-- drop table if exists movie_comments;
 
-drop table if exists album_comments;
+-- drop table if exists album_comments;
 
-drop table if exists book_comments;
+-- drop table if exists book_comments;
 
 drop table if exists comments;
 
@@ -29,6 +29,7 @@ drop table if exists topics;
 drop table if exists user_tags;
 
 drop table if exists user_artists;
+drop table if exists photo_albums;
 
 drop table if exists users;
 
@@ -36,7 +37,7 @@ drop table if exists artist_albums;
 
 drop table if exists images;
 
-drop table if exists photo_albums;
+
 
 drop table if exists books;
 
@@ -111,19 +112,7 @@ create table places(
     place_info text
 );
 
-create table photo_albums(
-    photo_album_id int auto_increment primary key,
-    photo_album_date date not null,
-    photo_album_location int,
-    foreign key(photo_album_location) references places(place_id)
-);
 
-create table images(
-    image_id int auto_increment primary key,
-    image_url varchar(255) not null,
-    image_album_id int,
-    foreign key(image_album_id) references photo_albums(photo_album_id)
-);
 
 create table artist_albums(
     artist_id int,
@@ -140,13 +129,28 @@ create table users (
     user_date_of_birth date not null,
     user_place int,
     user_about_me int,
-    user_avatar int,
+    user_avatar varchar(255),
     user_tag int,
     foreign key (user_place) references places (place_id),
-    foreign key (user_avatar) references images (image_id),
     foreign key (user_tag) references tags (tag_id)
 );
+create table photo_albums(
+    photo_album_id int auto_increment primary key,
+    photo_album_name varchar(255) not null,
+    photo_album_description text,
+    photo_album_date date not null,
+    photo_album_location int,
+    photo_album_user_id int not null,
+    foreign key(photo_album_user_id) references users (user_id),
+    foreign key(photo_album_location) references places (place_id)
+);
 
+create table images(
+    image_id int auto_increment primary key,
+    image_url varchar(255) not null,
+    image_album_id int,
+    foreign key(image_album_id) references photo_albums(photo_album_id)
+);
 create table topics(
     topic_id int auto_increment primary key,
     topic_owner_id int,
@@ -334,4 +338,4 @@ create table comments(
     foreign key(comment_album_id) references albums (album_id),
     foreign key(comment_book_id) references books (book_id),
     foreign key(comment_comment_id) references comments (comment_id)
-)
+);
