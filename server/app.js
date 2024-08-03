@@ -33,6 +33,9 @@ app.use('/api', placeRoutes);
 const tagRoutes = require('./routes/tagRoutes');
 app.use('/api', tagRoutes);
 
+const topicRoutes = require('./routes/topicRoutes');
+app.use('/api', topicRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
