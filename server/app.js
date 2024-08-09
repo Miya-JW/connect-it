@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 const userRoutes = require('./routes/userRoutes'); 
-app.use('/api', userRoutes); // 确保这一行在其他中间件和路由之前
+app.use('/api', userRoutes); 
 
 const albumRoutes = require('./routes/albumRoutes');
 app.use('/api', albumRoutes);
@@ -35,6 +35,9 @@ app.use('/api', tagRoutes);
 
 const topicRoutes = require('./routes/topicRoutes');
 app.use('/api', topicRoutes);
+
+const userRelationshipRoutes = require('./routes/userRelationshipRoutes');
+app.use('/api', userRelationshipRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
