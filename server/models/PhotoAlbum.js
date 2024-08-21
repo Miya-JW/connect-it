@@ -17,13 +17,14 @@ const PhotoAlbum = sequelize.define('PhotoAlbum', {
     },
     photo_album_date: {
         type: DataTypes.DATE,
+        defaultValue:Sequelize.NOW,
         allowNull: false
     },
     photo_album_location: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: 'places', // 确保这个表名与数据库中的一致
+            model: 'places', 
             key: 'place_id'
         }
     },
@@ -31,8 +32,20 @@ const PhotoAlbum = sequelize.define('PhotoAlbum', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users', // 确保这个表名与数据库中的一致
+            model: 'users', 
             key: 'user_id'
+        }
+    },photo_album_views: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0, 
+        allowNull: false
+    },
+    photo_album_topic: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'topics', 
+            key: 'topic_id'
         }
     }
 }, {

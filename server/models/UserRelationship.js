@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('./db'); // 确保路径正确
+const sequelize = require('./db'); 
 
 const UserRelationship = sequelize.define('UserRelationship', {
     relationship_id: {

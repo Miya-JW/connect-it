@@ -39,6 +39,15 @@ app.use('/api', topicRoutes);
 const userRelationshipRoutes = require('./routes/userRelationshipRoutes');
 app.use('/api', userRelationshipRoutes);
 
+const tweetRoutes = require('./routes/tweetRoutes');
+app.use('/api', tweetRoutes);
+
+const blogRoutes = require('./routes/blogRoutes');
+app.use('/api', blogRoutes);
+
+const likeRoutes = require('./routes/likeRoutes');
+app.use('/api', likeRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

@@ -1,12 +1,4 @@
--- drop table if exists tweet_comments;
-
--- drop table if exists blog_comments;
-
--- drop table if exists movie_comments;
-
--- drop table if exists album_comments;
-
--- drop table if exists book_comments;
+drop table if exists likes;
 
 drop table if exists comments;
 
@@ -29,15 +21,16 @@ drop table if exists topics;
 drop table if exists user_tags;
 
 drop table if exists user_artists;
+
+drop table if exists images;
+
 drop table if exists photo_albums;
+
+drop table if exists user_relationships;
 
 drop table if exists users;
 
 drop table if exists artist_albums;
-
-drop table if exists images;
-
-
 
 drop table if exists books;
 
@@ -106,13 +99,11 @@ create table places(
     place_id int auto_increment primary key,
     place_name varchar(64) not null,
     place_address varchar(255) not null,
-    place_type varchar(64),
+    place_type varchar(255),
     place_phone_number varchar(50),
     -- user input
     place_info text
 );
-
-
 
 create table artist_albums(
     artist_id int,
@@ -125,22 +116,52 @@ create table artist_albums(
 create table users (
     user_id int auto_increment primary key,
     user_name varchar(50) not null,
+    user_first_name varchar(50) not null,
+    user_last_name varchar(50) not null,
     user_password varchar(64) not null,
+    user_join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_date_of_birth date not null,
     user_place int,
     user_about_me int,
     user_avatar varchar(255),
     user_tag int,
+    unique(user_name),
     foreign key (user_place) references places (place_id),
     foreign key (user_tag) references tags (tag_id)
 );
+
+create table user_relationships(
+    relationship_id int auto_increment primary key,
+    follower_id int not null,
+    following_id int not null,
+    relationship_status enum('following', 'mutual') default 'following',
+    relationship_date timestamp not null default current_timestamp,
+    foreign key(follower_id) references users(user_id),
+    foreign key(following_id) references users(user_id),
+    unique key unique_relationship(follower_id, following_id)
+);
+
+create table topics(
+    topic_id int auto_increment primary key,
+    topic_title varchar(255) not null,
+    topic_owner_id int,
+    topic_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    topic_content text not null,
+    topic_views int not null default 0,
+    unique key(topic_title),
+    foreign key (topic_owner_id) references users (user_id)
+);
+
 create table photo_albums(
     photo_album_id int auto_increment primary key,
     photo_album_name varchar(255) not null,
     photo_album_description text,
-    photo_album_date date not null,
+    photo_album_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     photo_album_location int,
     photo_album_user_id int not null,
+    photo_album_views int not null default 0,
+    photo_album_topic int,
+    foreign key(photo_album_topic) references topics(topic_id),
     foreign key(photo_album_user_id) references users (user_id),
     foreign key(photo_album_location) references places (place_id)
 );
@@ -151,13 +172,6 @@ create table images(
     image_album_id int,
     foreign key(image_album_id) references photo_albums(photo_album_id)
 );
-create table topics(
-    topic_id int auto_increment primary key,
-    topic_owner_id int,
-    topic_date date not null,
-    topic_content text not null,
-    foreign key (topic_owner_id) references users (user_id)
-);
 
 create table user_tags(
     user_id int,
@@ -167,14 +181,13 @@ create table user_tags(
     foreign key(tag_id) references tags(tag_id)
 );
 
-create table user_topics(
-    user_id int,
-    topic_id int,
-    primary key (user_id, topic_id),
-    foreign key(user_id) references users(user_id),
-    foreign key(topic_id) references topics(topic_id)
-);
-
+-- create table user_topics(
+--     user_id int,
+--     topic_id int,
+--     primary key (user_id, topic_id),
+--     foreign key(user_id) references users(user_id),
+--     foreign key(topic_id) references topics(topic_id)
+-- );
 create table user_book_status(
     user_id int,
     book_id int,
@@ -223,7 +236,7 @@ create table tweets (
     tweet_id int auto_increment primary key,
     tweet_auther_id int not null,
     tweet_content varchar(300) not null,
-    tweet_date date not null,
+    tweet_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tweet_img int,
     tweet_topic int,
     tweet_movie int,
@@ -239,30 +252,19 @@ create table tweets (
     foreign key (tweet_place) references places (place_id)
 );
 
--- create table tweet_comments(
---     comment_id int auto_increment primary key,
---     comment_tweet_id int,
---     comment_user_id int,
---     comment_date date not null,
---     comment_content varchar(255) not null,
---     comment_comment_id int,
---     foreign key(comment_tweet_id) references tweets(tweet_id),
---     foreign key(comment_user_id) references users(user_id),
---     foreign key(comment_comment_id) references tweet_comments(comment_id)
--- );
-
 create table blogs (
     blog_id int auto_increment primary key,
     blog_auther_id int not null,
     blog_title varchar(100) not null,
     blog_content text not null,
-    blog_date date not null,
+    blog_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     blog_img int,
     blog_topic int,
     blog_movie int,
     blog_book int,
     blog_music int,
     blog_place int,
+    blog_views int not null default 0,
     foreign key (blog_auther_id) references users (user_id),
     foreign key (blog_img) references images (image_id),
     foreign key (blog_topic) references topics (topic_id),
@@ -272,58 +274,10 @@ create table blogs (
     foreign key (blog_place) references places (place_id)
 );
 
--- create table blog_comments(
---     comment_id int auto_increment primary key,
---     comment_blog_id int,
---     comment_user_id int,
---     comment_date date not null,
---     comment_content varchar(255) not null,
---     comment_comment_id int,
---     foreign key(comment_blog_id) references blogs(blog_id),
---     foreign key(comment_user_id) references users(user_id),
---     foreign key(comment_comment_id) references blog_comments(comment_id)
--- );
-
--- create table movie_comments(
---     comment_id int auto_increment primary key,
---     comment_movie_id int,
---     comment_user_id int,
---     comment_date date not null,
---     comment_content varchar(255) not null,
---     comment_comment_id int,
---     foreign key(comment_movie_id) references movies(movie_id),
---     foreign key(comment_user_id) references users(user_id),
---     foreign key(comment_comment_id) references movie_comments(comment_id)
--- );
-
--- create table album_comments(
---     comment_id int auto_increment primary key,
---     comment_album_id int,
---     comment_user_id int,
---     comment_date date not null,
---     comment_content varchar(255) not null,
---     comment_comment_id int,
---     foreign key(comment_album_id) references albums(album_id),
---     foreign key(comment_user_id) references users(user_id),
---     foreign key(comment_comment_id) references album_comments(comment_id)
--- );
-
--- create table book_comments(
---     comment_id int auto_increment primary key,
---     comment_book_id int,
---     comment_user_id int,
---     comment_date date not null,
---     comment_content varchar(255) not null,
---     comment_comment_id int,
---     foreign key(comment_book_id) references books(book_id),
---     foreign key(comment_user_id) references users(user_id),
---     foreign key(comment_comment_id) references book_comments(comment_id)
--- );
-
 create table comments(
     comment_id int auto_increment primary key,
     comment_user_id int not null,
-    comment_date date not null,
+    comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     comment_content varchar(255) not null,
     comment_tweet_id int,
     comment_blog_id int,
@@ -338,4 +292,33 @@ create table comments(
     foreign key(comment_album_id) references albums (album_id),
     foreign key(comment_book_id) references books (book_id),
     foreign key(comment_comment_id) references comments (comment_id)
+);
+
+create table likes (
+    user_id int not null primary key,
+    book_id int,
+    book_like boolean,
+    movie_id int,
+    movie_like boolean,
+    album_id int,
+    album_like boolean,
+    place_id int,
+    place_like boolean,
+    photo_album_id int,
+    photo_album_like boolean,
+    topic_id int,
+    topic_like boolean,
+    tweet_id int,
+    tweet_like boolean,
+    blog_id int,
+    blog_like boolean,
+    foreign key (user_id) references users (user_id),
+    foreign key (book_id) references books (book_id),
+    foreign key (movie_id) references movies (movie_id),
+    foreign key (album_id) references albums (album_id),
+    foreign key (place_id) references places (place_id),
+    foreign key (photo_album_id) references photo_albums (photo_album_id),
+    foreign key (topic_id) references topics (topic_id),
+    foreign key (tweet_id) references tweets (tweet_id),
+    foreign key (blog_id) references blogs (blog_id)
 );
