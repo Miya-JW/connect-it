@@ -16,15 +16,15 @@ drop table if exists user_book_status;
 
 drop table if exists user_topics;
 
+drop table if exists images;
+
+drop table if exists photo_albums;
+
 drop table if exists topics;
 
 drop table if exists user_tags;
 
 drop table if exists user_artists;
-
-drop table if exists images;
-
-drop table if exists photo_albums;
 
 drop table if exists user_relationships;
 
@@ -116,13 +116,13 @@ create table artist_albums(
 create table users (
     user_id int auto_increment primary key,
     user_name varchar(50) not null,
-    user_first_name varchar(50) not null,
-    user_last_name varchar(50) not null,
-    user_password varchar(64) not null,
+    user_first_name varchar(50) ,
+    user_last_name varchar(50) ,
+    user_password varchar(255) not null,
     user_join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    user_date_of_birth date not null,
+    user_date_of_birth date ,
     user_place int,
-    user_about_me int,
+    user_about_me text,
     user_avatar varchar(255),
     user_tag int,
     unique(user_name),

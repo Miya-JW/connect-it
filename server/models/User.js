@@ -14,11 +14,11 @@ const User = sequelize.define('User', {
     },
     user_first_name:{
         type:DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     user_last_name:{
         type:DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     user_password: {
         type: DataTypes.STRING,
@@ -26,11 +26,12 @@ const User = sequelize.define('User', {
     },
     user_join_date:{
         type:DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
     user_date_of_birth: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     user_place: {
         type: DataTypes.INTEGER,

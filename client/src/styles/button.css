@@ -1,0 +1,39 @@
+/*---------------------------login & register--------------*/
+.con-box button {
+    margin-top: 3%;
+    background-color: var(--btn-color);
+    color: #eee;
+    letter-spacing: 1px;
+    font-size: large;
+    border-radius: 10px;
+    border: 0 solid lightgrey;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 20px;
+}
+
+
+
+
+.con-box button:hover,
+.form-box button:hover {
+    background-color: lightgrey;
+    color: var(--btn-color);
+    transition: background-color 0.5s ease;
+}
+
+button.login_btn button {
+    background-color: var(--background-color-register);
+}
+
+button.register_btn {
+    background-color: var(--background-color-login);
+}
+
+button.btn_login_submit {
+    background-color: var(--btn-login-submit);
+}
+
+button.btn_register_submit {
+    background-color: var(--btn-register-submit);
+}

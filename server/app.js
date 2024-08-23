@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
+
+app.use(cors());  // 这将允许所有域的跨域请求
 app.use(express.json());
 
 const userRoutes = require('./routes/userRoutes'); 
@@ -48,7 +51,7 @@ app.use('/api', blogRoutes);
 const likeRoutes = require('./routes/likeRoutes');
 app.use('/api', likeRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT_SERVER || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
