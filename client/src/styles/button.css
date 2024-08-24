@@ -22,7 +22,7 @@
     transition: background-color 0.5s ease;
 }
 
-button.login_btn button {
+button.login_btn {
     background-color: var(--background-color-register);
 }
 

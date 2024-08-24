@@ -12,6 +12,7 @@ import MusicPage from './pages/MusicPage';
 import PlacePage from './pages/PlacePage';
 import PhotoAlbumPage from './pages/PhotoAlbumPage';
 import TopicPage from './pages/TopicPage';
+import BlogPage from './pages/BlogPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/place" element={<PlacePage/>} />
           <Route path="/album" element={<PhotoAlbumPage/>} />
           <Route path="/topic" element={<TopicPage/>} />
+          <Route path="/blog" element={<BlogPage/>} />
          
     </Routes>
     </Router>

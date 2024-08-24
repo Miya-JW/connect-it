@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
+import logo_img from '../assets/images/logo.jpg';
 
 
 const API_BASE_URL = `http://localhost:3000`; // 这是后端服务器的基础URL
@@ -186,13 +187,13 @@ const AuthForm = () => {
 
                 <div className={isLoginView ? "con-box left hidden" : "con-box left"} >
                     <h2>Link Up, Log In</h2>
-                    <img src="./images/logo.jpg" alt="Background_logo" className='auth_logo_img' />
+                    <img src={logo_img} alt="Background_logo" className='auth_logo_img' />
                     <button className="login_btn" onClick={() => setIsLoginView(true)}>Log in</button>
                 </div>
 
                 <div className={isLoginView ? "con-box right" : "con-box right hidden"}>
                     <h2>Sign Up, Dive In</h2>
-                    <img src="./images/logo.jpg" alt="Background_logo" className='auth_logo_img' />
+                    <img src={logo_img}  alt="Background_logo" className='auth_logo_img' />
                     <button className="register_btn" onClick={() => setIsLoginView(false)}>Sign Up</button>
                 </div>
             </div>

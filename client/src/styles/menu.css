@@ -1,0 +1,70 @@
+.docker {
+    margin-top: 40px;
+    position: relative;
+    height: 40px;
+    width: 700px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    justify-content: center;
+
+
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 100%;
+    justify-content: space-around;
+
+}
+
+.menu_item,
+.gap {
+    transition: all 0.1s ease;
+    /* 平滑过渡效果 */
+    width: calc(var(--i) * 20px);
+    height: calc(var(--i) * 20px);
+    /* 根据内容调整 */
+    justify-content: center;
+    margin-left: 3px;
+}
+
+.menu_item {
+    padding: 4px 20px;
+    width: calc(var(--i, 1) * 200px);
+    height: calc(var(--i, 1) * 30px);
+    background-color: #531A92;
+    /* background: linear-gradient(to bottom, rgb(56, 2, 114), rgb(177, 159, 196)); */
+    color: #f0f5f9;
+    margin-bottom: calc(var(--i, 1) * 50px - 15px);
+    /* 根据缩放调整底部间距 */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    /* 平滑变换效果 */
+    text-transform: uppercase;
+    /* 大写文本 */
+    font-weight: 500;
+
+
+}
+
+.gap {
+    width: calc(var(--i, 1) * 20px);
+    height: 100px;
+    /* 固定高度 */
+
+}
+
+.menu_item:hover {
+    /* background: none; */
+    background-color: #FFD54D;
+    /* background: linear-gradient(to bottom, rgb(255, 230, 37), rgb(255, 250, 179)); */
+    color: #1e2022;
+    transition: background-color 0.5s ease;
+    font-size: large;
+    font-weight: 800;
+}
