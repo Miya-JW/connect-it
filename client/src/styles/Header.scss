@@ -9,6 +9,7 @@ $text_shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
 
 .header {
     position: relative;
+    margin-bottom: 50px;
 }
 
 .header_img {
@@ -22,7 +23,7 @@ $text_shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
 .docker {
     position: absolute;
     top: 0.5%; // 根据需要调整，保持距离顶部的距离
-    right: 2%; // 根据需要调整，保持距离右侧的距离
+    right: 7%; // 根据需要调整，保持距离右侧的距离
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -30,7 +31,7 @@ $text_shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
 
 }
 
-p {
+.logo {
     position: absolute;
     top: 8%;
     left: 5%;
@@ -72,4 +73,38 @@ p {
     transition: background-color width height 0.5s ease, color 0.5s ease;
     font-size: large;
     font-weight: 800;
+}
+
+.input_group{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    display: flex;
+    border: 70px solid $background_color;
+    border-radius: 400% 130% 250% 190%;
+   
+}
+
+
+.select_area {
+    flex: 0 0 30%; // 在大屏幕上占30%宽度，不伸缩
+    @media (max-width: 768px) {
+        flex: 0 0 50%; // 在小屏幕上占50%宽度，不伸缩
+    }
+}
+
+.input_area {
+    flex: 1; // 使输入框填充剩余空间
+    width: 500px;
+}
+
+.search_btn {
+    flex: 0 0 auto; // 按钮宽度自动调整
+    padding: 5px 10px;
+    background-color: $background_color_pink;
+    color: $font_color_dark;
+    font-weight: 600;
+    border:none;
 }

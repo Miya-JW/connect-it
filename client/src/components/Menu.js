@@ -6,18 +6,20 @@ import '../styles/menu.css';
 function Menu() {
     const navigate = useNavigate(); // 使用 useNavigate 钩子
     const pathMap = {
+        home:'/',
         book: '/book',
         music: '/music',
         movie: '/movie',
         place: '/place',
         topic: '/topic',
         album: '/album',
-        blog: '/blog'
+        blog: '/blog',
+        me:'/user/profile'
     };
 
 
     const dockerRef = useRef(null);
-    const [scales, setScales] = useState(Array(16).fill(1));
+    const [scales, setScales] = useState(Array(18).fill(1));
     const lastUpdateTime = useRef(Date.now()); // 用于节流
 
     const handleMouseMove = (e) => {
@@ -47,6 +49,7 @@ function Menu() {
     const handleClick = (itemName) => {
         const path = pathMap[itemName.toLowerCase()];
         if (path) {
+
             navigate(path);
         } else {
             console.error("No path for item:", itemName);
@@ -72,7 +75,7 @@ function Menu() {
     return (
         <div className='docker' ref={dockerRef}>
             <div className="menu">
-                {["blog", "music", "movie", "book", "album", "topic", "place", "time"].flatMap((item, index) => (
+                {["home","blog", "music", "movie", "book", "album", "topic", "place", "me"].flatMap((item, index) => (
                     <React.Fragment key={index}>
                         <div
                             className='menu_item'

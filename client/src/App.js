@@ -13,6 +13,7 @@ import PlacePage from './pages/PlacePage';
 import PhotoAlbumPage from './pages/PhotoAlbumPage';
 import TopicPage from './pages/TopicPage';
 import BlogPage from './pages/BlogPage';
+import SearchResultsPage from './pages/SearchResuletsPage';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/album" element={<PhotoAlbumPage/>} />
           <Route path="/topic" element={<TopicPage/>} />
           <Route path="/blog" element={<BlogPage/>} />
+          <Route path="/search_results/:type" element={<SearchResultsPage />} />
          
     </Routes>
     </Router>
