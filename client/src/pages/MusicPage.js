@@ -1,9 +1,16 @@
 import React from "react";
+import Header from "../components/Header";
+import WhatsNew from "../components/Music_WhatsNew"; // 确保路径正确
+import WhatsPopular from '../components/Music_WhatsPopular';
 
-const homePage = ()=>{
+const MusicPage = () => {
     return (
-        <h1>This is music page</h1>
+        <div>
+            <Header />
+            <WhatsNew />
+            <WhatsPopular/>
+        </div>
     );
 }
 
-export default homePage;
+export default MusicPage;
