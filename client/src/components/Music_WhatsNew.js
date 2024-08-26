@@ -20,27 +20,27 @@ const WhatsNew = () => {
     }, []);
 
     return (
-        <div>
+        <div style={{ marginLeft:'10%' }}>
             <h2 className="mb-3">What's New</h2>
             <Row>
                 {albums.length > 0 ? (
                     albums.map((album, index) => (
                         <Col key={index} md={1} className="mb-4">
-                            <Card className="h-100">
+                            <Card className="h-100" >
                                 <Card.Img variant="top" src={album.album_image} alt={album.album_title} />
                                 <Card.Body className="d-flex flex-column">
                                     <Card.Title >{album.album_title}</Card.Title>
 
-                                    <Card.Text>
-                                        <div >Artist:</div>
+                                    <Card.Text style={{ fontSize:'small' }}>
+                                        <div >Artist: </div>
                                         <div>{album.album_artist_name}</div>
                                     </Card.Text>
-                                    <Card.Text>
-                                        <div >Release Date:</div>
+                                    <Card.Text style={{ fontSize:'small' }}>
+                                        <div >Release Date: </div>
                                         <div>{album.album_release_date}</div>
                                     </Card.Text>
-                                    <Card.Text>
-                                        <div >Total Tracks:</div>
+                                    <Card.Text style={{ fontSize:'small' }}>
+                                        <div >Total Tracks: </div>
                                         <div>{album.album_total_tracks}</div>
                                     </Card.Text>
 
@@ -50,7 +50,7 @@ const WhatsNew = () => {
                         </Col>
                     ))
                 ) : (
-                    <p className="col-12">No new albums found.</p>
+                    <div className="col-12">No new albums found.</div>
                 )}
             </Row>
         </div>

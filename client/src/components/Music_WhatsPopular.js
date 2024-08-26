@@ -19,7 +19,7 @@ const PopularAlbums = () => {
     }, []);
 
     return (
-        <div>
+        <div style={{ marginLeft:'10%' }}>
             <h2 className="mb-3">Popular Albums</h2>
             <Row>
                 {albums.length > 0 ? (
@@ -30,15 +30,15 @@ const PopularAlbums = () => {
                                 <Card.Body className="d-flex flex-column">
                                     <Card.Title >{album.album_title}</Card.Title>
 
-                                    <Card.Text>
+                                    <Card.Text style={{ fontSize:'small' }}>
                                         <div >Artist:</div>
                                         <div>{album.album_artist_name}</div>
                                     </Card.Text>
-                                    <Card.Text>
+                                    <Card.Text style={{ fontSize:'small' }}>
                                         <div >Release Date:</div>
                                         <div>{album.album_release_date}</div>
                                     </Card.Text>
-                                    <Card.Text>
+                                    <Card.Text style={{ fontSize:'small' }}>
                                         <div >Total Tracks:</div>
                                         <div>{album.album_total_tracks}</div>
                                     </Card.Text>

@@ -139,4 +139,44 @@ export const getPopularAlbums = async () => {
     );
 
     return albums;
-}
+};
+
+// 获得 受欢迎歌手
+export const getPopularArtists = async () => {
+    try {
+        const token = await getAuthToken();
+        const response = await axios.get(`https://api.spotify.com/v1/search`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                q: 'genre:pop', // 示例: 改为搜索流行音乐艺术家
+                type: 'artist',
+                market: 'US',
+                limit: 50
+            }
+        });
+
+        // 检查是否成功获取到数据
+        if (response.data && response.data.artists && response.data.artists.items.length > 0) {
+            return response.data.artists.items
+                .sort((a, b) => b.popularity - a.popularity) // 按流行度降序排序
+                .slice(0, 10) // 选择前10位
+                .map(artist => ({
+                    artist_id: artist.id,
+                    artist_name: artist.name,
+                    artist_image: artist.images[0] ? artist.images[0].url : null,
+                    artist_genre: artist.genres.join(', '),
+                    artist_followers: artist.followers.total,
+                    artist_popularity: artist.popularity,
+                    artist_spotify_url: artist.external_urls.spotify
+                }));
+        } else {
+            console.log('No artists found.');
+            return [];
+        }
+    } catch (error) {
+        console.error('Error fetching popular artists:', error);
+        return []; // 在错误情况下返回空数组
+    }
+};
