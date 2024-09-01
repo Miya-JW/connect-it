@@ -45,10 +45,12 @@ drop table if exists places;
 drop table if exists tags;
 
 create table books(
-    book_id int auto_increment primary key,
-    book_title varchar(64) not null,
-    book_ISBN varchar(64),
-    book_publisher varchar(64),
+    book_id varchar(255) primary key,
+    book_title varchar(255) not null,
+    book_author varchar(255),
+    book_image varchar(255),
+    book_ISBN varchar(255),
+    book_publisher varchar(255),
     book_publish_date varchar(64),
     book_genre varchar(64),
     book_summary text,
@@ -83,6 +85,7 @@ create table artists(
 create table albums(
     album_id int auto_increment primary key,
     album_title varchar(60) not null,
+    album_artist_name varchar(100),
     album_image varchar(255),
     album_release_date varchar(60),
     album_total_tracks int,

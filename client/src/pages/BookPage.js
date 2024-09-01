@@ -1,8 +1,16 @@
 import React from "react";
+import Header from "../components/Header";
+import WhatsNew from "../components/book/Book_WhatsNew";
+import WhatsPopular from "../components/book/Book_WhatsPopular";
 
-const homePage = ()=>{
+const homePage = () => {
     return (
-        <h1>This is book page</h1>
+        <div>
+            <Header />
+           <WhatsNew/>
+           <WhatsPopular/>
+        </div>
+
     );
 }
 

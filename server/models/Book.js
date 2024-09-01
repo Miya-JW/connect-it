@@ -3,11 +3,18 @@ const sequelize = require('./db'); // 确保路径正确
 
 const Book = sequelize.define('Book', {
     book_id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.STRING,
         primaryKey: true
     },
     book_title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    book_author: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    book_image: {
         type: DataTypes.STRING,
         allowNull: false
     },
