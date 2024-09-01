@@ -105,8 +105,6 @@ const AuthForm = () => {
             ...(isLoginView ? {} : { password_repeat: event.target.password_repeat.value })
         };
 
-        console.log(userData);
-
         try {
             const response = await fetch(fullEndpoint, {
                 method: 'POST',
@@ -120,13 +118,11 @@ const AuthForm = () => {
             if (!response.ok) {
                 throw new Error(data.message || 'Something went wrong');
             }
-
+            // 处理登录后的逻辑，保存token，跳转页面等
             localStorage.setItem('authToken', data.token);  // 存储令牌
             setLoginMessage(data.message);
             navigate(isLoginView ? '/user/home' : '/user/profile');  // 根据视图导航
-
             console.log('Success:', data);
-            // 这里可以处理登录后的逻辑，如保存token，跳转页面等
         } catch (error) {
             console.error('Error:', error);
             const errorMessage = error.message;
@@ -193,7 +189,7 @@ const AuthForm = () => {
 
                 <div className={isLoginView ? "con-box right" : "con-box right hidden"}>
                     <h2>Sign Up, Dive In</h2>
-                    <img src={logo_img}  alt="Background_logo" className='auth_logo_img' />
+                    <img src={logo_img} alt="Background_logo" className='auth_logo_img' />
                     <button className="register_btn" onClick={() => setIsLoginView(false)}>Sign Up</button>
                 </div>
             </div>
