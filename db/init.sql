@@ -59,7 +59,7 @@ create table books(
 );
 
 create table movies(
-    movie_id int auto_increment primary key,
+    movie_id varchar(255)  primary key,
     movie_title varchar(64) not null,
     movie_director varchar(50) not null,
     movie_date date not null,
@@ -73,7 +73,7 @@ create table movies(
 );
 
 create table artists(
-    artist_id int auto_increment primary key,
+    artist_id varchar(255) primary key,
     artist_name varchar(50) not null,
     artist_image varchar(255),
     artist_spotify_url varchar(255),
@@ -83,7 +83,7 @@ create table artists(
 );
 
 create table albums(
-    album_id int auto_increment primary key,
+    album_id varchar(255)  primary key,
     album_title varchar(60) not null,
     album_artist_name varchar(100),
     album_image varchar(255),
@@ -99,7 +99,7 @@ create table tags (
 );
 
 create table places(
-    place_id int auto_increment primary key,
+    place_id varchar(255)  primary key,
     place_name varchar(64) not null,
     place_address varchar(255) not null,
     place_type varchar(255),
@@ -109,8 +109,8 @@ create table places(
 );
 
 create table artist_albums(
-    artist_id int,
-    album_id int,
+    artist_id varchar(255),
+    album_id varchar(255),
     primary key(artist_id, album_id),
     foreign key(artist_id) references artists(artist_id),
     foreign key(album_id) references albums(album_id)
@@ -124,7 +124,7 @@ create table users (
     user_password varchar(255) not null,
     user_join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_date_of_birth date ,
-    user_place int,
+    user_place varchar(255),
     user_about_me text,
     user_avatar varchar(255),
     user_tag int,
@@ -160,7 +160,7 @@ create table photo_albums(
     photo_album_name varchar(255) not null,
     photo_album_description text,
     photo_album_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    photo_album_location int,
+    photo_album_location varchar(255),
     photo_album_user_id int not null,
     photo_album_views int not null default 0,
     photo_album_topic int,
@@ -193,7 +193,7 @@ create table user_tags(
 -- );
 create table user_book_status(
     user_id int,
-    book_id int,
+    book_id varchar(255),
     book_status enum('to read', 'reading', 'read'),
     primary key (user_id, book_id),
     foreign key(user_id) references users(user_id),
@@ -202,7 +202,7 @@ create table user_book_status(
 
 create table user_movie_status(
     user_id int,
-    movie_id int,
+    movie_id varchar(255),
     movie_status enum('to watch', 'watching', 'watched'),
     primary key (user_id, movie_id),
     foreign key(user_id) references users(user_id),
@@ -211,7 +211,7 @@ create table user_movie_status(
 
 create table user_artists(
     user_id int,
-    artist_id int,
+    artist_id varchar(255),
     primary key(user_id, artist_id),
     foreign key(user_id) references users(user_id),
     foreign key(artist_id) references artists(artist_id)
@@ -219,7 +219,7 @@ create table user_artists(
 
 create table user_album_status(
     user_id int,
-    album_id int,
+    album_id varchar(255),
     album_status enum('to listen', 'listening', 'listened'),
     primary key (user_id, album_id),
     foreign key(user_id) references users(user_id),
@@ -228,7 +228,7 @@ create table user_album_status(
 
 create table user_place_status(
     user_id int,
-    place_id int,
+    place_id varchar(255),
     place_status enum('to visit', 'visiting', 'visited'),
     primary key (user_id, place_id),
     foreign key(user_id) references users(user_id),
@@ -242,10 +242,10 @@ create table tweets (
     tweet_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tweet_img int,
     tweet_topic int,
-    tweet_movie int,
-    tweet_book int,
-    tweet_music int,
-    tweet_place int,
+    tweet_movie varchar(255),
+    tweet_book varchar(255),
+    tweet_music varchar(255),
+    tweet_place varchar(255),
     foreign key (tweet_auther_id) references users (user_id),
     foreign key (tweet_img) references images (image_id),
     foreign key (tweet_topic) references topics (topic_id),
@@ -263,10 +263,10 @@ create table blogs (
     blog_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     blog_img int,
     blog_topic int,
-    blog_movie int,
-    blog_book int,
-    blog_music int,
-    blog_place int,
+    blog_movie varchar(255),
+    blog_book varchar(255),
+    blog_music varchar(255),
+    blog_place varchar(255),
     blog_views int not null default 0,
     foreign key (blog_auther_id) references users (user_id),
     foreign key (blog_img) references images (image_id),
@@ -284,9 +284,9 @@ create table comments(
     comment_content varchar(255) not null,
     comment_tweet_id int,
     comment_blog_id int,
-    comment_movie_id int,
-    comment_album_id int,
-    comment_book_id int,
+    comment_movie_id varchar(255),
+    comment_album_id varchar(255),
+    comment_book_id varchar(255),
     comment_comment_id int,
     foreign key(comment_user_id) references users (user_id),
     foreign key(comment_tweet_id) references tweets (tweet_id),
@@ -299,13 +299,13 @@ create table comments(
 
 create table likes (
     user_id int not null primary key,
-    book_id int,
+    book_id varchar(255),
     book_like boolean,
-    movie_id int,
+    movie_id varchar(255),
     movie_like boolean,
-    album_id int,
+    album_id varchar(255),
     album_like boolean,
-    place_id int,
+    place_id varchar(255),
     place_like boolean,
     photo_album_id int,
     photo_album_like boolean,

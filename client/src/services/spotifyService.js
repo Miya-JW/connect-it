@@ -2,8 +2,8 @@ import axios from 'axios';
 const fetch = require('node-fetch');
 
 // Spotify API credentials
-const clientId = '09985f48e98b4183ba27094866cf3c6d'; // 替换为你的Spotify Client ID
-const clientSecret = '31d9df6f3de94b079fefaf088e8696de'; // 替换为你的Spotify Client Secret
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // 替换为你的Spotify Client ID
+const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET; // 替换为你的Spotify Client Secret
 
 const API_BASE_URL = 'https://api.spotify.com/v1';
 

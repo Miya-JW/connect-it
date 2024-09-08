@@ -1,23 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { getPopularArtists } from '../../services/spotifyService';
-import { Card, Row, Col } from 'react-bootstrap'; // 引入必要的 React-Bootstrap 组件
+import { Card, Row, Col, Button } from 'react-bootstrap'; // 引入必要的 React-Bootstrap 组件
+import { updateUserArtist } from '../../services/serverServies/userArtistService';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSelector } from 'react-redux';
+import { createArtist } from '../../services/serverServies/artistService';
+
 
 const WhatsNew = () => {
     const [artists, setArtists] = useState([]);
+    const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
 
+    //从spotify获取受欢迎歌手信息并写入数据库
     useEffect(() => {
-        const fetchAlbums = async () => {
+        const fetchArtists = async () => {
             try {
-                const popularArtists = await getPopularArtists(); // 不传递任何参数
+                const popularArtists = await getPopularArtists();
                 setArtists(popularArtists);
+                const createPromises = popularArtists.map(async (artist) => {
+                    return createArtist(artist);
+                });
+                const results = await Promise.all(createPromises);
+                console.log('All artists have been processed:', results);
             } catch (error) {
-                console.error('Failed to fetch albums:', error);
+                console.error('Failed to fetch or create artists:', error);
             }
         };
 
-        fetchAlbums();
+        fetchArtists();
     }, []);
+
+
+
+
+
+    // 更新用户对歌手的喜欢状态
+    const handleArtistFollow = (artistId) => {
+        if (!userId) {
+            console.error('User is not logged in');
+            return;
+        }
+        updateUserArtist(userId, artistId).catch(error => {
+            console.error('Failed to update artist:', error);
+        });
+    };
 
     return (
         <div style={{ width: '90%', marginLeft: '5%' }}>
@@ -60,6 +86,8 @@ const WhatsNew = () => {
                                             >
                                                 Listen on Spotify
                                             </Card.Link>
+                                            <Button variant="outline-primary" onClick={() => handleArtistFollow(artist.artist_id)}>Follow</Button>
+
                                         </Card.Body>
                                     </Col>
                                 </Row>

@@ -51,7 +51,8 @@ app.use('/api', blogRoutes);
 const likeRoutes = require('./routes/likeRoutes');
 app.use('/api', likeRoutes);
 
-const PORT = process.env.PORT_SERVER || 3000;
+console.log(process.env.PORT_SERVER);
+const PORT = process.env.PORT_SERVER || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

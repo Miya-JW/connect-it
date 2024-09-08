@@ -1,15 +1,16 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('./db'); // 确保路径正确
 
+
 const Artist = sequelize.define('Artist', {
     artist_id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.STRING,
+        
         primaryKey: true
     },
     artist_name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     artist_image: {
         type: DataTypes.STRING,
@@ -21,7 +22,7 @@ const Artist = sequelize.define('Artist', {
     },
     artist_genre: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     artist_popularity: {
         type: DataTypes.INTEGER,
