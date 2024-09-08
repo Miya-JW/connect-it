@@ -4,10 +4,13 @@ import header_image from '../assets/images/header_img.jpg';
 import Menu from '../components/Menu';
 import SearchBar from '../components/SearchBar';
 import '../styles/Header.scss'; // 如果需要，引入专门的样式文件
+import { logoutUser } from '../store/action';
+import { useDispatch } from 'react-redux';
 
 function Header() {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 初始状态假设用户未登录
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');  // 从本地存储获取令牌
@@ -17,6 +20,7 @@ function Header() {
     const handleLogoutLogin = () => {
         if (isLoggedIn) {
             localStorage.removeItem('authToken');  // 如果已登录，清除令牌
+            dispatch(logoutUser());
         }
         navigate('/auth');  // 导航到登录/注册页面
     };

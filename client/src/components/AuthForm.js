@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
 import logo_img from '../assets/images/logo.jpg';
+import { useSelector,useDispatch } from 'react-redux';
+import { setUser } from '../store/action';
 
 
-const API_BASE_URL = `http://localhost:3000`; // 这是后端服务器的基础URL
 
+
+const API_BASE_URL = `http://localhost:${process.env.REACT_APP_PORT_SERVER}`;
 const AuthForm = () => {
     const navigate = useNavigate(); // 获取 navigate 函数
     const [isLoginView, setIsLoginView] = useState(true);
@@ -13,6 +16,8 @@ const AuthForm = () => {
     const [passwordError, setPasswordError] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const userId = useSelector(state => state.user.userId);
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -115,10 +120,13 @@ const AuthForm = () => {
             });
 
             const data = await response.json();
+            console.log('userdata',data);
             if (!response.ok) {
                 throw new Error(data.message || 'Something went wrong');
             }
             // 处理登录后的逻辑，保存token，跳转页面等
+           
+            dispatch(setUser(data.user_id, data.token));
             localStorage.setItem('authToken', data.token);  // 存储令牌
             setLoginMessage(data.message);
             navigate(isLoginView ? '/user/home' : '/user/profile');  // 根据视图导航
