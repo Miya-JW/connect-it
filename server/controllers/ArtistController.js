@@ -12,11 +12,10 @@ exports.findAllArtists = async (req, res) => {
 
 exports.createArtist = async (req, res) => {
     try {
-        console.log('--------------------------------',req.body);
         const artist = await Artist.create(req.body);
         res.status(201).send(artist);
     } catch (error) {
-        console.error("Error creating artist:", error);
+        //console.error("Error creating artist:", error);
         res.status(500).send({ message: "Error creating artist", error: error.message });
     }
 };

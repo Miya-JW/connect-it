@@ -20,6 +20,7 @@ router.post('/login', userController.loginUser);
 // 用户--喜欢的艺术家
 router.post('/user_artists', userArtistController.createUserArtist);
 router.get('/user_artists/:user_id', userArtistController.getUserArtists);
+router.delete('/user_artists', userArtistController.deleteUserArtist);
 
 // 用户-- 音乐（想听，在听，听过）
 router.put('/user_album_status/:user_id/:album_id', userAlbumStatusController.updateUserAlbumStatus);

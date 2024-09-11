@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getPopularArtists } from '../../services/spotifyService';
 import { Card, Row, Col, Button } from 'react-bootstrap'; // 引入必要的 React-Bootstrap 组件
-import { updateUserArtist } from '../../services/serverServies/userArtistService';
+import { updateUserArtist,deleteUserArtist,getFollowedArtists } from '../../services/serverServies/userArtistService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
 import { createArtist } from '../../services/serverServies/artistService';
@@ -10,6 +10,7 @@ import { createArtist } from '../../services/serverServies/artistService';
 const WhatsNew = () => {
     const [artists, setArtists] = useState([]);
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
+    const [followedArtists, setFollowedArtists] = useState({});// 记录关注的状态
 
     //从spotify获取受欢迎歌手信息并写入数据库
     useEffect(() => {
@@ -31,18 +32,48 @@ const WhatsNew = () => {
     }, []);
 
 
+    // 获取用户关注的所有歌手信息，记录，更新follow按钮状态
+    useEffect(() => {
+        const fetchAndSetFollowedArtists = async () => {
+            // 假设有API方法getFollowedArtists来获取已关注艺术家
+            const followed = await getFollowedArtists(userId);
+            console.log(followed);
+            const followedIds = followed.reduce((acc, artist) => ({
+                ...acc,
+                [artist.artist_id]: true
+            }), {});
+            setFollowedArtists(followedIds);
+        };
+    
+        fetchAndSetFollowedArtists();
+    }, [userId]);  // 依赖于userId
 
 
-
-    // 更新用户对歌手的喜欢状态
-    const handleArtistFollow = (artistId) => {
+    // 处理关注和不关注艺术家
+    const handleArtistFollow = async (artistId) => {
         if (!userId) {
             console.error('User is not logged in');
             return;
         }
-        updateUserArtist(userId, artistId).catch(error => {
-            console.error('Failed to update artist:', error);
-        });
+    
+        const currentlyFollowed = followedArtists[artistId];
+        const newFollowedState = {
+            ...followedArtists,
+            [artistId]: !currentlyFollowed
+        };
+    
+        setFollowedArtists(newFollowedState);  // 先更新本地状态以响应用户操作
+    
+        try {
+            if (!currentlyFollowed) {
+                await updateUserArtist(userId, artistId);  // 关注艺术家
+            } else {
+                await deleteUserArtist(userId,artistId);  // 取消关注
+            }
+        } catch (error) {
+            console.error('Failed to update artist follow status:', error);
+            setFollowedArtists(followedArtists);  // 如果操作失败，恢复之前的状态
+        }
     };
 
     return (
@@ -86,7 +117,10 @@ const WhatsNew = () => {
                                             >
                                                 Listen on Spotify
                                             </Card.Link>
-                                            <Button variant="outline-primary" onClick={() => handleArtistFollow(artist.artist_id)}>Follow</Button>
+                                            {/* <Button variant="outline-primary" onClick={() => handleArtistFollow(artist.artist_id)}>Follow</Button> */}
+                                            <Button variant="outline-primary" onClick={() => handleArtistFollow(artist.artist_id)}>
+                                                {followedArtists[artist.artist_id] ? 'Unfollow' : 'Follow'}
+                                            </Button>
 
                                         </Card.Body>
                                     </Col>

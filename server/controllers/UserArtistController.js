@@ -3,7 +3,6 @@ const Artist = require('../models/Artist');
 
 exports.createUserArtist = async (req, res) => {
     const { user_id, artist_id } = req.body;  // 明确从 req.body 中解构出需要的数据
-console.log('+++++++++++++++++++++++++++++++++++++',user_id,artist_id);
     // 验证 user_id 和 artist_id 是否存在
     if (!user_id || !artist_id) {
         return res.status(400).json({ message: "Both user_id and artist_id are required." });
@@ -46,4 +45,36 @@ exports.getUserArtists = async (req, res) => {
 };
 
 
-// 添加更多方法以处理更新、删除和查询getUserArtist
+exports.deleteUserArtist = async (req, res) => {
+    const { user_id, artist_id } = req.body;  // 从请求体中获取 user_id 和 artist_id
+console.log("server deleting------------------",{ user_id, artist_id });
+    // 验证 user_id 和 artist_id 是否提供
+    if (!user_id || !artist_id) {
+        return res.status(400).json({ message: "Both user_id and artist_id are required." });
+    }
+
+    try {
+        // 尝试删除指定的用户艺术家关系
+        const result = await UserArtist.destroy({
+            where: {
+                user_id: user_id,
+                artist_id: artist_id
+            }
+        });
+
+        // 检查是否实际上删除了任何行
+        if (result === 0) {
+            return res.status(404).json({ message: "No relationship found with the provided user_id and artist_id." });
+        }
+
+        // 返回成功删除的消息
+        res.json({ message: "User artist relationship deleted successfully." });
+    } catch (error) {
+        // 记录错误并返回错误消息
+        console.error("Failed to delete user artist relationship:", error);
+        res.status(500).json({
+            message: "Error deleting user artist relationship",
+            error: error.message || error.toString()
+        });
+    }
+};
