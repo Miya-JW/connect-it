@@ -14,7 +14,7 @@ function Menu() {
         topic: '/topic',
         album: '/album',
         blog: '/blog',
-        me:'/user/profile'
+        me:'/user/home'
     };
 
 
