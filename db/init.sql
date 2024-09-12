@@ -74,10 +74,10 @@ create table movies(
 
 create table artists(
     artist_id varchar(255) primary key,
-    artist_name varchar(50) not null,
+    artist_name varchar(50) ,
     artist_image varchar(255),
     artist_spotify_url varchar(255),
-    artist_genre varchar(60) not null,
+    artist_genre varchar(255) ,
     artist_popularity int,
     artist_followers int
 );

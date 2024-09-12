@@ -1,5 +1,7 @@
+import { checkAndCreateArtists } from '../services/serverServies/artistService';
 import axios from 'axios';
 const fetch = require('node-fetch');
+
 
 // Spotify API credentials
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID; // 替换为你的Spotify Client ID
@@ -49,7 +51,8 @@ export const searchItems = async (searchTerm, searchType) => {
     });
 
     if (searchType === 'music_artist') {
-        return response.data.artists.items.map(artist => ({
+
+        const artists = response.data.artists.items.map(artist => ({
             artist_id: artist.id,
             artist_name: artist.name,
             artist_image: artist.images[0] ? artist.images[0].url : null,
@@ -58,7 +61,9 @@ export const searchItems = async (searchTerm, searchType) => {
             artist_popularity: artist.popularity,
             artist_followers: artist.followers.total
         }));
-    } 
+        await checkAndCreateArtists(artists);
+        return artists;
+    }
     else if (searchType === 'music_album') {
         // 接收到数据后进行排序
         return response.data.albums.items
@@ -115,7 +120,7 @@ export const getPopularAlbums = async () => {
     });
 
     // 假设每个播放列表的第一个专辑是热门的
-   const albums = await Promise.all(
+    const albums = await Promise.all(
         response.data.playlists.items.map(async playlist => {
             const playlistDetails = await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
                 headers: {

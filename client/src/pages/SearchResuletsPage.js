@@ -4,14 +4,13 @@ import { Button, ListGroup, Alert } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
+import MusicArtistsCard from '../components/music/MusicArtistsCard';
 
 
 const SearchResultsPage = () => {
     const location = useLocation();
     const { results } = location.state; // 获取传递过来的搜索结果
     const [expandedId, setExpandedId] = useState(null); // 用于追踪展开的摘要
-
-    console.log(results);
 
     // 如果没有结果或 results 为空数组
     if (!results || results.length === 0) {
@@ -29,24 +28,7 @@ const SearchResultsPage = () => {
         return (
             <div>
                 <Header />
-                <ListGroup>
-                    {results.map(item => (
-                        // Card for Artist
-                        <ListGroup.Item key={item.artist_id}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Img variant="top" src={item.artist_image} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
-                                    <Card.Title>{item.artist_name}</Card.Title>
-                                    <Card.Text>Genre: {item.artist_genre}</Card.Text>
-                                    <Card.Text>Followers: {item.artist_followers.toLocaleString()}</Card.Text>
-                                    <Card.Text>Popularity: {item.artist_popularity}</Card.Text>
-                                    <Card.Link href={item.artist_spotify_url} target="_blank">Listen on Spotify</Card.Link>
-
-                                </Card.Body>
-                            </Card>
-                        </ListGroup.Item>
-                    ))}
-                </ListGroup>
+                <MusicArtistsCard artists={results}/>
             </div>
         );
         //Ablums
