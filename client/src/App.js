@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
-import UserHomePage from './pages/UserHomePage';
 import UserProfile from './pages/UserProfile';
 import UserPage from './pages/UserPage';
 import BookPage from './pages/BookPage';
@@ -22,9 +21,9 @@ function App() {
       <Routes>
           <Route path="/" exact element={<HomePage/>} />
           <Route path="/auth" element={<AuthPage/>} />
-          <Route path="/user/home" element={<UserHomePage/>} />
+          <Route path="/user/home" element={<UserPage/>} />
            <Route path="/user/profile" element={<UserProfile/>} />
-          <Route path="/user/:user_id" element={<UserPage/>} />
+          {/* <Route path="/user/:user_id" element={<UserPage/>} /> */}
           <Route path="/book" element={<BookPage/>} />
           <Route path="/movie" element={<MoviePage/>} />
           <Route path="/music" element={<MusicPage/>} />

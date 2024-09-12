@@ -15,7 +15,7 @@ const WhatsNew = () => {
                 const popularArtists = await getPopularArtists();
                 setArtists(popularArtists);
                 const results = await checkAndCreateArtists(popularArtists);
-                console.log('Processed results:', results);
+                console.log('新增艺术家:', results);
             } catch (error) {
                 console.error('Failed to process artists:', error);
             }

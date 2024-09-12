@@ -8,7 +8,6 @@ import FollowArtistBtn from '../buttons/FollowArtistBtn';
 
 
 const MusicArtistsCard = ({ artists }) => {
-
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
     const [followedArtists, setFollowedArtists] = useState({});// 记录关注的状态
 
@@ -40,7 +39,7 @@ const MusicArtistsCard = ({ artists }) => {
     };
 
 
-
+    //console.log(artists[0].artist_id);
 
     return (
         <div style={{ width: '90%', marginLeft: '5%' }}>
@@ -70,7 +69,7 @@ const MusicArtistsCard = ({ artists }) => {
                                             </Card.Text>
                                             <Card.Text style={{ fontSize: 'small' }}>
                                                 <strong>Followers: </strong>
-                                                <span>{artist.artist_followers.toLocaleString()}</span> {/* Added toLocaleString for better number formatting */}
+                                                <span>{artist.artist_followers ? artist.artist_followers.toLocaleString() : 'N/A'}</span> {/* Added toLocaleString for better number formatting */}
                                             </Card.Text>
                                             <Card.Text style={{ fontSize: 'small' }}>
                                                 <strong>Popularity: </strong>
