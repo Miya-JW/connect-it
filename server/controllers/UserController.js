@@ -158,7 +158,8 @@ exports.updateUser = async (req, res) => {
         } else {
             // 更新其他信息
             // 剔除密码字段，用户名字段，仅更新其他信息
-            const updateData = { ...req.body };
+            const updateData = { ...req.body.newUserInfo };
+            console.log("后端开始更改用户信息： ", updateData);
             delete updateData.currentPassword;
             delete updateData.newPassword;
             delete updateData.user_name;
