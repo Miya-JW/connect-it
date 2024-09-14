@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
-import UserProfile from './pages/UserProfile';
+import UserProfile from './pages/UserProfilePage';
 import UserPage from './pages/UserPage';
 import BookPage from './pages/BookPage';
 import MoviePage from './pages/MoviePage';

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
 import logo_img from '../assets/images/logo.jpg';
 import { useSelector,useDispatch } from 'react-redux';
-import { setUser } from '../store/action';
+import { setUser } from '../store/actions/action';
 
 
 

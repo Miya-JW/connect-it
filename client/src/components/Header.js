@@ -4,7 +4,7 @@ import header_image from '../assets/images/header_img.jpg';
 import Menu from '../components/Menu';
 import SearchBar from '../components/SearchBar';
 import '../styles/Header.scss'; // 如果需要，引入专门的样式文件
-import { logoutUser } from '../store/action';
+import { logoutUser } from '../store/actions/action';
 import { useDispatch } from 'react-redux';
 
 function Header() {

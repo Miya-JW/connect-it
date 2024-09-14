@@ -60,7 +60,7 @@ exports.loginUser = async (req, res) => {
             return res.status(401).send({ message: "Invalid password" });
         }
         const token = jwt.sign({ user_id: user.user_id }, 'your_jwt_secret', { expiresIn: '24h' });
-        res.send({ token: token,user_id:user.user_id });
+        res.send({ token: token, user_id: user.user_id });
     } catch (error) {
         res.status(500).send({ message: "Error logging in user" });
     }
@@ -106,17 +106,72 @@ exports.findUserById = async (req, res) => {
     }
 };
 
+
 exports.updateUser = async (req, res) => {
     try {
-        const user = await User.update(req.body, {
+        const user = await User.findOne({
             where: { user_id: req.params.id }
         });
-        res.send({
-            message: "User updated successfully"
-        });
+
+        if (!user) {
+            return res.status(404).send({ message: "用户不存在" });
+        }
+
+
+        //修改密码
+        // 如果请求中提供了当前密码，则验证密码
+        if (req.body.currentPassword && req.body.newPassword) {
+            // 确保从数据库获取了密码
+            if (!user.user_password) {
+                return res.status(500).send({ message: "未找到用户密码" });
+            }
+
+            // 验证当前密码是否正确
+            const isMatch = await bcrypt.compare(req.body.currentPassword, user.user_password);
+            if (!isMatch) {
+                return res.status(401).send({ message: "密码不正确" });
+            }
+
+            // 更新密码
+            const hashedPassword = await bcrypt.hash(req.body.newPassword, 10);
+            user.user_password = hashedPassword; // 设置新密码
+            await User.update({ user_password: hashedPassword }, {
+                where: { user_id: req.params.id }
+            });
+        }
+        //修改用户名
+        else if (req.body.newUsername) {
+            //确保从数据库获得了用户名
+            const user_name = req.body.newUsername;
+            //验证用户名是否存在
+            const userExists = await User.findOne({
+                where: { user_name: user_name }
+            });
+            if (userExists) {
+                return res.json({ exists: true, message: 'Username already taken.' });
+            } else {
+                await User.update({ user_name: user_name }, {
+                    where: { user_id: req.params.id }
+                });
+            }
+
+        } else {
+            // 更新其他信息
+            // 剔除密码字段，用户名字段，仅更新其他信息
+            const updateData = { ...req.body };
+            delete updateData.currentPassword;
+            delete updateData.newPassword;
+            delete updateData.user_name;
+            await User.update(updateData, { where: { user_id: req.params.id } });
+        }
+
+
+        res.send({ message: "用户信息更新成功" });
     } catch (error) {
+        console.error("更新用户信息时出错：", error);
         res.status(500).send({
-            message: "Error updating user"
+            message: "更新用户信息时出现错误",
+            error: error.message
         });
     }
 };
