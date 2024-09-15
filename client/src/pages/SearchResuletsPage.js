@@ -28,11 +28,11 @@ const SearchResultsPage = () => {
         return (
             <div>
                 <Header />
-                <MusicArtistsCard artists={results}/>
+                <MusicArtistsCard artists={results} />
             </div>
         );
         //Ablums
-    } 
+    }
     //Music Album
     else if (results[0].album_id) {
         return (
@@ -58,7 +58,7 @@ const SearchResultsPage = () => {
                 </ListGroup>
             </div>
         );
-    } 
+    }
     //Book
     else if (results[0].book_id) {
         const toggleSummary = (id) => {
@@ -93,6 +93,40 @@ const SearchResultsPage = () => {
                                             {expandedId === item.book_id ? 'Show Less' : 'Show More'}
                                         </Button>
                                     </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            </div>
+        )
+    }
+    //Users
+    else if (results[0].user_id) {
+        return (
+            <div>
+                <Header />
+                <ListGroup>
+                    {results.map((item) => (
+                        <ListGroup.Item key={item.user_id}>
+                            <Card>
+                                <Card.Body>
+                                    <div style={{ display: 'flex', marginBottom: '1rem' }}>
+                                        <Card.Img className="rounded-circle"
+                                            variant="top"
+                                            src={`${process.env.REACT_APP_SERVER_URL}/uploads${item.user_avatar}` || 'https://via.placeholder.com/100'}
+                                            style={{ width: '100px', height: '100px', marginRight: '1rem' }}
+                                        />
+                                        <div>
+                                            <Card.Title>{item.user_name}</Card.Title>
+                                            <Card.Text>Name: {`${item.user_first_name} ${item.user_last_name}` || 'Unknown'}</Card.Text>
+
+                                            <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                            <Card.Text>About: {item.user_about_me || 'None'}</Card.Text>
+                                            <Card.Text>Tags: {item.user_tag || ''}</Card.Text>
+                                        </div>
+                                    </div>
+
                                 </Card.Body>
                             </Card>
                         </ListGroup.Item>

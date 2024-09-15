@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');  // 确保导入了 Sequelize 的 Op
 
 
 // 验证用户名是否存在
@@ -73,6 +74,31 @@ exports.findAllUsers = async (req, res) => {
         res.send(users);
 
     } catch (error) {
+        res.status(500).send({
+            message: "Error retrieving users"
+        });
+    }
+};
+
+
+exports.searchUsers = async (req, res) => {
+    const searchTerm = req.query.search;  // 假设搜索词是通过查询参数传递的
+
+    try {
+        const users = await User.findAll({
+            where: {
+                [Op.or]: [
+                    { user_name: { [Op.like]: `%${searchTerm}%` } },
+                    { user_first_name: { [Op.like]: `%${searchTerm}%` } },
+                    { user_last_name: { [Op.like]: `%${searchTerm}%` } },
+                    { user_about_me: { [Op.like]: `%${searchTerm}%` } }
+                ]
+            }
+        });
+        res.send(users);
+
+    } catch (error) {
+        console.error("Error retrieving users: ", error);
         res.status(500).send({
             message: "Error retrieving users"
         });
@@ -181,7 +207,7 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-
+//修改用户头像
 exports.updateUserAvatar = async (req, res, data) => {
     try {
 

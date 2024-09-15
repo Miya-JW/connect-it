@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiKey = 'AIzaSyArP51hI0OnZanD_3Ax8xuHDlvB5QPVTEY'; // Google Books API密钥
+const apiKey = process.env.REACT_APP_API_KEY_GOOGLE_BOOKS; // Google Books API密钥
 
 const fetchBooksByQuery = async (query, type) => {
     let url = `https://www.googleapis.com/books/v1/volumes?q=`;
@@ -38,13 +38,6 @@ const fetchBooksByQuery = async (query, type) => {
 
     url += `&key=${apiKey}`;
 
-    // try {
-    //     const response = await axios.get(url);
-    //     return response.data.items ? response.data.items.map(book => formatBookData(book)) : [];
-    // } catch (error) {
-    //     console.error('Error fetching books:', error);
-    //     return [];
-    // }
     try {
         const response = await axios.get(url);
         let books = response.data.items ? response.data.items.map(book => formatBookData(book)) : [];

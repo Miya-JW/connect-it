@@ -1,4 +1,4 @@
-import { userReducer } from "../../store/reducers/reducers";
+
 
 export const updatePassword = async (userId, currentPassword, newPassword) => {
     try {
@@ -59,7 +59,7 @@ export const updateUserInfo = async (userId, newUserInfo) => {
             },
             body: JSON.stringify({
                 newUserInfo // 用户希望设置的新内容
-            }),
+            })
         });
 
         if (!response.ok) {
