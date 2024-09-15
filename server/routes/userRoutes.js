@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const userArtistController = require('../controllers/UserArtistController');
 const userAlbumStatusController = require('../controllers/UserAblumStatusController');
+const fileController = require('../controllers/FileController');
 
 router.get('/users', userController.findAllUsers);
 router.post('/users', userController.createUser);
@@ -16,6 +17,10 @@ router.post('/register', userController.registerUser);
 
 // 用户登录
 router.post('/login', userController.loginUser);
+
+// 头像文件上传路由
+router.put('/users/avatar/:id',fileController.uploadFile,fileController.handleFileUpload);
+
 
 // 用户--喜欢的艺术家
 router.post('/user_artists', userArtistController.createUserArtist);

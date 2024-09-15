@@ -5,6 +5,7 @@ const cors = require('cors');
 
 app.use(cors());  // 这将允许所有域的跨域请求
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 const userRoutes = require('./routes/userRoutes'); 
 app.use('/api', userRoutes); 
@@ -50,6 +51,7 @@ app.use('/api', blogRoutes);
 
 const likeRoutes = require('./routes/likeRoutes');
 app.use('/api', likeRoutes);
+
 
 console.log(process.env.PORT_SERVER);
 const PORT = process.env.PORT_SERVER || 5000;

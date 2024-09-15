@@ -1,3 +1,5 @@
+import { userReducer } from "../../store/reducers/reducers";
+
 export const updatePassword = async (userId, currentPassword, newPassword) => {
     try {
         const response = await fetch((`${process.env.REACT_APP_SERVER_URL}/api/users/${userId}`), {
@@ -69,5 +71,23 @@ export const updateUserInfo = async (userId, newUserInfo) => {
     } catch (error) {
         console.error("更新用户名错误：", error);
         throw error;  // 抛出错误，由调用方处理
+    }
+};
+
+export const updateUserAvatar = async (userId, formData) => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/users/avatar/${userId}`, {
+            method: 'PUT',
+            body: formData,  // 发送 FormData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload file');
+        }
+
+        const result = await response.json();
+        return ('Upload successful', result);
+    } catch (error) {
+        return ('Error uploading file:', error);
     }
 };

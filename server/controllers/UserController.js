@@ -67,9 +67,11 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.findAllUsers = async (req, res) => {
+
     try {
         const users = await User.findAll();
         res.send(users);
+
     } catch (error) {
         res.status(500).send({
             message: "Error retrieving users"
@@ -77,6 +79,7 @@ exports.findAllUsers = async (req, res) => {
     }
 };
 
+//创建用户
 exports.createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -90,6 +93,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.findUserById = async (req, res) => {
+    // req.headers = {}; // 将请求头对象清空
     try {
         const user = await User.findByPk(req.params.id);
         if (user) {
@@ -106,7 +110,7 @@ exports.findUserById = async (req, res) => {
     }
 };
 
-
+//修改用户profile信息
 exports.updateUser = async (req, res) => {
     try {
         const user = await User.findOne({
@@ -176,6 +180,39 @@ exports.updateUser = async (req, res) => {
         });
     }
 };
+
+
+exports.updateUserAvatar = async (req, res, data) => {
+    try {
+
+        const { user_id, user_avatar } = data;  // 接收ID和头像路径
+
+        const user = await User.findOne({
+            where: { user_id: user_id }
+        });
+
+        if (!user) {
+            return res.status(404).send({ message: "用户不存在" });
+        }
+
+        // 更新头像路径
+        user.user_avatar = user_avatar;
+        await user.save();
+
+        return res.send({ message: "用户信息更新成功", user_avatar });
+
+
+    } catch (error) {
+        console.error("更新用户头像时出错：", error);
+        return res.status(500).send({
+            message: "更新用户头像时出现错误",
+            error: error.message
+        });
+    }
+
+}
+
+
 
 exports.deleteUser = async (req, res) => {
     try {
