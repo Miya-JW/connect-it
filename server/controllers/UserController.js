@@ -119,7 +119,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.findUserById = async (req, res) => {
-    // req.headers = {}; // 将请求头对象清空
+
     try {
         const user = await User.findByPk(req.params.id);
         if (user) {

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const UserInfoCard = (results) => {
+   
     return (
         <div>
 

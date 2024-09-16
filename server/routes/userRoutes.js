@@ -22,7 +22,7 @@ router.post('/login', userController.loginUser);
 router.put('/users/avatar/:id',fileController.uploadFile,fileController.handleFileUpload);
 
 // 搜索栏查找用户
-router.get('/users/search',userController.searchUsers);
+router.get('/user-search',userController.searchUsers);
 
 // 用户--喜欢的艺术家
 router.post('/user_artists', userArtistController.createUserArtist);
