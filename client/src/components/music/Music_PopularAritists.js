@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getPopularArtists } from '../../services/spotifyService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { checkAndCreateArtists } from '../../services/serverServies/artistService';
-import MusicArtistsCard from '../music/MusicArtistsCard';
+import MusicArtistsCard from '../cards/MusicArtistsCard';
 
 const WhatsNew = () => {
     const [artists, setArtists] = useState([]);

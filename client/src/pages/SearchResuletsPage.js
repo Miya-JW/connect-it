@@ -1,13 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { ListGroup, Alert } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import {  Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
-import MusicArtistsCard from '../components/music/MusicArtistsCard';
-import UserInfoCard from '../components/user/UserInfoCard';
-import BookCard from '../components/book/BookCard';
-import MusicAlbumCard from '../components/music/MusicAlbumCard';
+import MusicArtistsCard from '../components/cards/MusicArtistsCard';
+import UserInfoCard from '../components/cards/UserInfoCard';
+import BookCard from '../components/cards/BookCard';
+import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 
 
 const SearchResultsPage = () => {

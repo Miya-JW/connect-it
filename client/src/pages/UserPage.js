@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { getFollowedArtists } from '../services/serverServies/userArtistService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
-import MusicArtistsCard from '../components/music/MusicArtistsCard';
+import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 
 const UserPage = () => {
     const [artists, setArtists] = useState([]);
