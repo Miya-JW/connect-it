@@ -10,7 +10,7 @@ exports.getFollowing = async (req, res) => {
             include: [{
                 model: User,
                 as: 'Following',
-                attributes: ['user_id', 'user_name'] // 选择返回的用户属性
+                attributes: ['user_id', 'user_name','user_avatar','user_first_name','user_join_date','user_date_of_birth','user_about_me'] // 选择返回的用户属性
             }]
         });
         res.json(followingUsers);
