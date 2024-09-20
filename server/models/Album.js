@@ -11,6 +11,10 @@ const Album = sequelize.define('Album', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    album_artist_name:{
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     album_image: {
         type: DataTypes.STRING,
         allowNull: true

@@ -60,7 +60,7 @@ exports.getUserAlbumStatuses = async (req, res) => {
             include: [{
                 model: Album,
                 as:'Album',
-                attributes: ['album_id', 'album_title', 'album_image']
+                attributes: ['album_id', 'album_title', 'album_image','album_artist_name','album_release_date','album_total_tracks','album_spotifyUrl']
             },
         {
             model: User,
