@@ -1,6 +1,12 @@
 import axios from 'axios';
 const API_BASE_URL = `http://localhost:${process.env.REACT_APP_PORT_SERVER}`;
 
+// 获取用户
+export const getUser = async (userId) => {
+    const response = await axios.get(`${API_BASE_URL}/api//users/${userId}`, { user_id: userId });
+    return response.data;
+};
+
 
 // 获取用户关注名单
 export const getFollowedUsers = async (userId) => {

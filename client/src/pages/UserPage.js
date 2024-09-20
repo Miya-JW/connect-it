@@ -2,25 +2,39 @@ import React, { useEffect, useState } from 'react';
 import Header from "../components/Header";
 import { getFollowedArtists } from '../services/serverServies/userArtistService';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import { useSelector } from 'react-redux';
 import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
 import { getAlbumStatus } from '../services/serverServies/albumsService';
-import { getFollowedUsers } from '../services/serverServies/userActivityService';
+import { getFollowedUsers, getUser} from '../services/serverServies/userActivityService';
+import { ListGroup } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 
 
 
 const UserPage = ({ userId }) => {
     console.log("user id : ", userId)
+    const [user, setUser] = useState([]);
     const [artists, setArtists] = useState([]);
     const [toListen, setToListen] = useState([]);
     const [listening, setListening] = useState([]);
     const [listened, setListened] = useState([]);
     const [following, setFollowing] = useState([]);
-    //const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
 
     useEffect(() => {
+        const fetchUser = async () => {
+            if (!userId) {
+                console.log('No user ID found');
+                return;  // 如果 userId 未定义，直接返回
+            }
+            try {
+                const user = await getUser(userId);
+                setUser(user);
+            } catch (error) {
+                console.error('Failed to process artists:', error);
+            }
+        }
+
         const fetchArtists = async () => {
             if (!userId) {
                 console.log('No user ID found');
@@ -89,7 +103,7 @@ const UserPage = ({ userId }) => {
                 console.error('Failed to process artists:', error);
             }
         };
-
+        fetchUser();
         fetchAlbums();
         fetchArtists();
         fetchFollowing();
@@ -98,7 +112,35 @@ const UserPage = ({ userId }) => {
     return (
         <div>
             <Header />
+            <div>
+            <h1>User</h1>
+            <ListGroup>
+             
+                    <ListGroup.Item key={user.user_id}>
+                        <Card>
+                            <Card.Body>
+                                <div style={{ display: 'flex', marginBottom: '1rem' }}>
+                                    <Card.Img  className="rounded-circle"
+                                        variant="top"
+                                        src={`${process.env.REACT_APP_SERVER_URL}/uploads${user.user_avatar}` || 'https://via.placeholder.com/100'}
+                                        style={{ width: '100px', height: '100px', marginRight: '1rem' }}
+                                    />
+                                    <div>
+                                        <Card.Title >{user.user_name}</Card.Title>
+                                        <Card.Text>Name: {`${user.user_first_name} ${user.user_last_name}` || 'Unknown'}</Card.Text>
 
+                                        <Card.Text>Join Date: {user.user_join_date ? new Date(user.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                        <Card.Text>About: {user.user_about_me || 'None'}</Card.Text>
+                                        <Card.Text>Tags: {user.user_tag || ''}</Card.Text>
+                                    </div>
+                                </div>
+                                
+                            </Card.Body>
+                        </Card>
+                    </ListGroup.Item>
+                    </ListGroup>
+            </div>
+           
             {following.length > 0 ? (<div>
                 <h1>Following</h1>
                 <UserInfoCard results={following} />
