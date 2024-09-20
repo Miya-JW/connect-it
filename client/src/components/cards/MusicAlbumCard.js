@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import StatusBtn from '../buttons/StatusBtn';
 import { getAlbumStatus } from '../../services/serverServies/albumsService'
 
