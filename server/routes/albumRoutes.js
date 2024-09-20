@@ -8,4 +8,6 @@ router.get('/albums/:id', albumController.findAlbumById);
 router.put('/albums/:id', albumController.updateAlbum);
 router.delete('/albums/:id', albumController.deleteAlbum);
 
+router.post('/check_and_create_albums', albumController.checkAndCreateAlbums);
+
 module.exports = router;

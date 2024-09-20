@@ -1,4 +1,5 @@
 import { checkAndCreateArtists } from '../services/serverServies/artistService';
+import { checkAndCreateAlbums } from '../services/serverServies/albumsService';
 import axios from 'axios';
 const fetch = require('node-fetch');
 
@@ -66,7 +67,7 @@ export const searchItems = async (searchTerm, searchType) => {
     }
     else if (searchType === 'music_album') {
         // 接收到数据后进行排序
-        return response.data.albums.items
+        const albums = response.data.albums.items
             .sort((a, b) => new Date(b.release_date) - new Date(a.release_date)) // 按发布日期降序排序
             .map(album => ({
                 album_id: album.id,
@@ -77,6 +78,8 @@ export const searchItems = async (searchTerm, searchType) => {
                 album_spotifyUrl: album.external_urls.spotify,
                 album_artist_name: album.artists[0] ? album.artists[0].name : 'Unknown Artist'
             }));
+        await checkAndCreateAlbums(albums);
+        return albums;
     }
 
 

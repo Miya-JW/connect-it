@@ -1,13 +1,5 @@
 const Album = require('../models/Album');
 
-// exports.findAllAlbums = async (req, res) => {
-//     try {
-//         const albums = await Album.findAll();
-//         res.send(albums);
-//     } catch (error) {
-//         res.status(500).send({ message: "Error retrieving albums" });
-//     }
-// };
 exports.findAllAlbums = async (req, res) => {
     try {
         console.log("Fetching all albums from the database...");
@@ -64,5 +56,27 @@ exports.deleteAlbum = async (req, res) => {
         }
     } catch (error) {
         res.status(500).send({ message: "Error deleting album" });
+    }
+};
+
+
+
+exports.checkAndCreateAlbums = async (req, res) => {
+    const albums = req.body.albums;
+    try {
+        const results = await Promise.all(albums.map(async (album) => {
+            const found = await Album.findOne({ where: { album_id: album.album_id } });
+            if (!found) {
+                return Album.create(album);
+            }
+            return null;
+        }));
+
+        // 过滤掉 null 值，仅返回新创建的艺术家数据
+        const createdAlbums = results.filter(a => a);
+        res.status(201).json(createdAlbums);
+    } catch (error) {
+        console.error("Error processing albums:", error);
+        res.status(500).json({ message: "Error processing albums", error: error.message });
     }
 };

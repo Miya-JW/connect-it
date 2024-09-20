@@ -10,7 +10,6 @@ import FollowArtistBtn from '../buttons/FollowArtistBtn';
 const MusicArtistsCard = ({ artists }) => {
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
     const [followedArtists, setFollowedArtists] = useState({});// 记录关注的状态
-    console.log("------------",userId)
     useEffect(() => {
         const fetchArtistsAndFollowedStatus = async () => {
             try {
