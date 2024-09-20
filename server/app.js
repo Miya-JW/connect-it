@@ -49,8 +49,6 @@ app.use('/api', tweetRoutes);
 const blogRoutes = require('./routes/blogRoutes');
 app.use('/api', blogRoutes);
 
-const likeRoutes = require('./routes/likeRoutes');
-app.use('/api', likeRoutes);
 
 
 console.log(process.env.PORT_SERVER);

@@ -1,0 +1,1 @@
+ALTER TABLE albums MODIFY album_title VARCHAR(255);

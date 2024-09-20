@@ -30,6 +30,8 @@ router.get('/user_artists/:user_id', userArtistController.getUserArtists);
 router.delete('/user_artists', userArtistController.deleteUserArtist);
 
 // 用户-- 音乐（想听，在听，听过）
-router.put('/user_album_status/:user_id/:album_id', userAlbumStatusController.updateUserAlbumStatus);
-
+router.post('/user_album_status', userAlbumStatusController.createOrUpdateAlbumStatus);
+router.get('/user_album_status/:user_id', userAlbumStatusController.getUserAlbumStatuses);
+router.get('/user_album_status/:userId/:albumId', userAlbumStatusController.getAlbumStatusByUser);
+router.delete('/user_album_status',userAlbumStatusController.deleteAlbumStatus)
 module.exports = router;

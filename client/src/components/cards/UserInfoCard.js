@@ -28,10 +28,10 @@ const UserInfoCard = ({ results }) => {
         fetchUsersAndFollowedStatus();
     }, [userId, results]);  // 当 userId 更新时重新执行
 
-    const handleStatusChange = (user_id, newFollowStatus) => {
+    const handleStatusChange = (album_status, newFollowStatus) => {
         setFollowedUsers(prevState => ({
             ...prevState,
-            [user_id]: newFollowStatus
+            [album_status]: newFollowStatus
         }));
     };
     console.log("userCard:", followedUsers)
