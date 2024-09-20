@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from "../components/Header";
 import { getFollowedArtists } from '../services/serverServies/userArtistService';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
@@ -11,13 +11,14 @@ import { getFollowedUsers } from '../services/serverServies/userActivityService'
 
 
 
-const UserPage = () => {
+const UserPage = ({ userId }) => {
+    console.log("user id : ", userId)
     const [artists, setArtists] = useState([]);
     const [toListen, setToListen] = useState([]);
     const [listening, setListening] = useState([]);
     const [listened, setListened] = useState([]);
     const [following, setFollowing] = useState([]);
-    const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
+    //const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
 
     useEffect(() => {
         const fetchArtists = async () => {
@@ -97,23 +98,22 @@ const UserPage = () => {
     return (
         <div>
             <Header />
-            <div>
+
+            {following.length > 0 ? (<div>
                 <h1>Following</h1>
                 <UserInfoCard results={following} />
-            </div>
-            <div>
+            </div>) : ''}
+
+            {artists.length > 0 ? (<div>
                 <h1>Followed Artists</h1>
                 <MusicArtistsCard artists={artists} />
-            </div>
+            </div>) : ''}
 
             {toListen.length > 0 ? (<div>
                 <h1>To Listen</h1>
                 <MusicAlbumCard results={toListen} />
             </div>) : ''}
-            <div>
-                <h1>To Listen</h1>
-                <MusicAlbumCard results={toListen} />
-            </div>
+
             {listening.length > 0 ? (<div>
                 <h1>Listening</h1>
                 <MusicAlbumCard results={listening} />
@@ -123,7 +123,6 @@ const UserPage = () => {
                 <h1>Listened</h1>
                 <MusicAlbumCard results={listened} />
             </div>) : ''}
-
 
         </div>
     );

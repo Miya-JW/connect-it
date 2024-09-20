@@ -13,17 +13,21 @@ import PhotoAlbumPage from './pages/PhotoAlbumPage';
 import TopicPage from './pages/TopicPage';
 import BlogPage from './pages/BlogPage';
 import SearchResultsPage from './pages/SearchResuletsPage';
+import { useSelector } from 'react-redux';
+import OtherUserPage from './pages/OtherUserPage';
 
 
 function App() {
+  const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
+
   return (
     <Router>
       <Routes>
           <Route path="/" exact element={<HomePage/>} />
           <Route path="/auth" element={<AuthPage/>} />
-          <Route path="/user/home" element={<UserPage/>} />
+          <Route path="/user/home" element={<UserPage userId={userId}/>} />
            <Route path="/user/profile" element={<UserProfile/>} />
-          {/* <Route path="/user/:user_id" element={<UserPage/>} /> */}
+          <Route path="/other-user" element={<OtherUserPage/>} />
           <Route path="/book" element={<BookPage/>} />
           <Route path="/movie" element={<MoviePage/>} />
           <Route path="/music" element={<MusicPage/>} />

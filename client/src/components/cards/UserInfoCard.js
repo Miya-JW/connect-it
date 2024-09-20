@@ -5,9 +5,11 @@ import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFollowedUsers } from '../../services/serverServies/userActivityService'
 import UserFollowBtn from '../buttons/UserFollowBtn';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserInfoCard = ({ results }) => {
+    const navigate = useNavigate();
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
     const [followedUsers, setFollowedUsers] = useState({});// 记录关注的状态
 
@@ -34,7 +36,11 @@ const UserInfoCard = ({ results }) => {
             [album_status]: newFollowStatus
         }));
     };
-    console.log("userCard:", followedUsers)
+
+
+    const toOtherUserPage = (userId) => {
+        navigate(`/other-user`, { state: { userId } });
+    }
     return (
         <div>
             <ListGroup>
@@ -43,13 +49,13 @@ const UserInfoCard = ({ results }) => {
                         <Card>
                             <Card.Body>
                                 <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    <Card.Img className="rounded-circle"
+                                    <Card.Img onClick={() => toOtherUserPage(item.user_id)} className="rounded-circle"
                                         variant="top"
                                         src={`${process.env.REACT_APP_SERVER_URL}/uploads${item.user_avatar}` || 'https://via.placeholder.com/100'}
                                         style={{ width: '100px', height: '100px', marginRight: '1rem' }}
                                     />
                                     <div>
-                                        <Card.Title>{item.user_name}</Card.Title>
+                                        <Card.Title onClick={() => toOtherUserPage(item.user_id)}>{item.user_name}</Card.Title>
                                         <Card.Text>Name: {`${item.user_first_name} ${item.user_last_name}` || 'Unknown'}</Card.Text>
 
                                         <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
