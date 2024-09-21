@@ -6,12 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFollowedUsers } from '../../services/serverServies/userActivityService'
 import UserFollowBtn from '../buttons/UserFollowBtn';
 import { useNavigate } from 'react-router-dom';
+import TagCard from './TagCard';
 
 
 const UserInfoCard = ({ results }) => {
     const navigate = useNavigate();
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
     const [followedUsers, setFollowedUsers] = useState({});// 记录关注的状态
+
 
     useEffect(() => {
         const fetchUsersAndFollowedStatus = async () => {
@@ -56,11 +58,12 @@ const UserInfoCard = ({ results }) => {
                                     />
                                     <div>
                                         <Card.Title onClick={() => toOtherUserPage(item.user_id)}>{item.user_name}</Card.Title>
-                                        <Card.Text>Name: {`${item.user_first_name} ${item.user_last_name}` || 'Unknown'}</Card.Text>
+                                        <Card.Text>Name: {`${item.user_first_name||""} ${item.user_last_name||""}`|| 'Unknown'}</Card.Text>
 
                                         <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
                                         <Card.Text>About: {item.user_about_me || 'None'}</Card.Text>
-                                        <Card.Text>Tags: {item.user_tag || ''}</Card.Text>
+                                        {/* <Card.Text>Tags: {item.user_tag || ''}</Card.Text> */}
+                                        <TagCard user={item}/>
                                     </div>
                                 </div>
                                 <UserFollowBtn

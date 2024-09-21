@@ -185,7 +185,24 @@ exports.updateUser = async (req, res) => {
                 });
             }
 
-        } else {
+        }
+        // 添加tag
+        else if (req.body.newUserInfo.user_tag) {
+            // 获取当前tag
+            let currentTags = user.user_tag ? user.user_tag.split(',') : [];
+            // 添加新tag（如果不存在）
+            if (!currentTags.includes(req.body.newUserInfo.user_tag)) {
+                currentTags.push(req.body.newUserInfo.user_tag);
+            }
+
+            // 更新用户tag信息
+            await User.update({ user_tag: currentTags.join(',') }, {
+                where: { user_id: req.params.id }
+            });
+            return res.send({ message: "用户标签更新成功" });
+        }
+
+        else {
             // 更新其他信息
             // 剔除密码字段，用户名字段，仅更新其他信息
             const updateData = { ...req.body.newUserInfo };

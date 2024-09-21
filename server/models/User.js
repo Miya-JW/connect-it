@@ -54,7 +54,7 @@ const User = sequelize.define('User', {
         }
     },
     user_tag: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
         references: {
             model: 'tags',
