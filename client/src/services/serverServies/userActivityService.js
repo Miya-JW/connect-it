@@ -10,7 +10,7 @@ export const getUser = async (userId) => {
 
 // 获取用户关注名单
 export const getFollowedUsers = async (userId) => {
-    const response = await axios.get(`${API_BASE_URL}/api//user_relationships/following/${userId}`, { user_id: userId });
+    const response = await axios.get(`${API_BASE_URL}/api/user_relationships/following/${userId}`, { user_id: userId });
     return response.data;
 };
 

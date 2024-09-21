@@ -11,6 +11,7 @@ exports.findAllBlogs = async (req, res) => {
 };
 
 exports.createBlog = async (req, res) => {
+    console.log("后端创建新blog············",req.body)
     try {
         const blog = await Blog.create(req.body);
         res.status(201).send(blog);
