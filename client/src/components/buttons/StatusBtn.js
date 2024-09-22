@@ -5,7 +5,6 @@ import { updateAlbumStatus, deleteAlbumStatus } from '../../services/serverServi
 const StatusBtn = ({ user_id, targetId, currentStatus, onStatusChange }) => {
     const [status, setStatus] = useState('Set Status'); // 如果没有当前状态，默认为 "to listen"
     useEffect(() => {
-        console.log("状态变化:", currentStatus); // 调试输出看当前状态
         if (currentStatus) {
             setStatus(currentStatus); // 如果有当前状态传入，则更新状态
         }

@@ -6,20 +6,22 @@ import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
 import { getAlbumStatus } from '../services/serverServies/albumsService';
-import { getFollowedUsers, getUser} from '../services/serverServies/userActivityService';
+import { getFollowedUsers } from '../services/serverServies/userActivityService';
 import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+import { getBlogs } from '../services/serverServies/blogService';
+import BlogCard from '../components/cards/BlogCard';
 
 
 
 const UserPage = ({ userId }) => {
-    console.log("user id : ", userId)
     const [user, setUser] = useState([]);
     const [artists, setArtists] = useState([]);
     const [toListen, setToListen] = useState([]);
     const [listening, setListening] = useState([]);
     const [listened, setListened] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -28,8 +30,21 @@ const UserPage = ({ userId }) => {
                 return;  // 如果 userId 未定义，直接返回
             }
             try {
-                const user = await getUser(userId);
+                const user = await getBlogs(userId);
                 setUser(user);
+            } catch (error) {
+                console.error('Failed to process artists:', error);
+            }
+        }
+
+        const fetchBlogs = async () => {
+            if (!userId) {
+                console.log('No user ID found');
+                return;  // 如果 userId 未定义，直接返回
+            }
+            try {
+                const result = await getBlogs(userId);
+                setBlogs(result);
             } catch (error) {
                 console.error('Failed to process artists:', error);
             }
@@ -104,6 +119,7 @@ const UserPage = ({ userId }) => {
             }
         };
         fetchUser();
+        fetchBlogs();
         fetchAlbums();
         fetchArtists();
         fetchFollowing();
@@ -113,14 +129,14 @@ const UserPage = ({ userId }) => {
         <div>
             <Header />
             <div>
-            <h1>User</h1>
-            <ListGroup>
-             
+                <h1>User</h1>
+                <ListGroup>
+
                     <ListGroup.Item key={user.user_id}>
                         <Card>
                             <Card.Body>
                                 <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    <Card.Img  className="rounded-circle"
+                                    <Card.Img className="rounded-circle"
                                         variant="top"
                                         src={`${process.env.REACT_APP_SERVER_URL}/uploads${user.user_avatar}` || 'https://via.placeholder.com/100'}
                                         style={{ width: '100px', height: '100px', marginRight: '1rem' }}
@@ -134,17 +150,26 @@ const UserPage = ({ userId }) => {
                                         <Card.Text>Tags: {user.user_tag || ''}</Card.Text>
                                     </div>
                                 </div>
-                                
+
                             </Card.Body>
                         </Card>
                     </ListGroup.Item>
-                    </ListGroup>
+                </ListGroup>
             </div>
-           
+
+
+
             {following.length > 0 ? (<div>
                 <h1>Following</h1>
                 <UserInfoCard results={following} />
             </div>) : ''}
+
+            {blogs.length > 0 ? (
+                <>
+                    <h1>Blogs</h1>
+                    <BlogCard blogs={blogs} />
+                </>
+            ) : ''}
 
             {artists.length > 0 ? (<div>
                 <h1>Followed Artists</h1>

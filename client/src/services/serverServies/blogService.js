@@ -24,3 +24,9 @@ export const deleteBlog = async (blog_id) => {
     const response = await axios.delete(`${API_BASE_URL}/api/blogs/${blog_id}`);
     return response.data;
 };
+
+// 编辑blog
+export const updateBlog = async (blog_id, newBlog) => {
+    const response = await axios.put(`${API_BASE_URL}/api/blogs/${blog_id}`, newBlog);
+    return response.data;
+};
