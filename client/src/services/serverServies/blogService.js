@@ -7,9 +7,14 @@ export const getBlogs = async (userId) => {
     return response.data;
 };
 
+// 获得所有blog
+export const getAllBlogs = async () => {
+    const response = await axios.get(`${API_BASE_URL}/api/blogs/`);
+    return response.data;
+};
+
 // 新增blog
 export const createBlog = async (blog) => {
-    console.log("新增blog----",blog)
     const response = await axios.post(`${API_BASE_URL}/api/blogs`, blog);
     return response.data;
 };

@@ -2,6 +2,7 @@ const User = require('./User');
 const UserRelationship = require('./UserRelationship');
 const Album = require('./Album');
 const UserAlbumStatus = require('./UserAlbumStatus');
+const Blog = require('./Blog');
 
 // 定义关联User-UserRelationship
 User.hasMany(UserRelationship, { as: 'Followers', foreignKey: 'follower_id' });
@@ -19,12 +20,9 @@ UserAlbumStatus.belongsTo(User, { as: 'User', foreignKey: 'user_id' });
 Album.hasMany(UserAlbumStatus, { as: 'UserStatuses', foreignKey: 'album_id' });
 UserAlbumStatus.belongsTo(Album, { as: 'Album', foreignKey: 'album_id' });
 
-// User.hasMany(UserAlbumStatus, {as: 'AlbumStatuses',foreignKey: 'user_id' });
-// // 专辑可以有多个用户状态
-// Album.hasMany(UserAlbumStatus, {as: 'UserStatuses',foreignKey: 'album_id'});
-
-// UserAlbumStatus.belongsTo(Album,{as: 'AlbumStatuses',foreignKey: 'user_id' });
-// UserAlbumStatus.belongsTo(User,{as: 'UserStatuses',foreignKey: 'album_id'});
+// Define User-Blog relationship
+User.hasMany(Blog, {as: 'Blogs',foreignKey: 'blog_auther_id'});
+Blog.belongsTo(User, { as: 'Author',foreignKey: 'blog_auther_id'});
 
 
 
@@ -33,6 +31,7 @@ module.exports = {
     User,
     UserRelationship,
     Album,
-    UserAlbumStatus
+    UserAlbumStatus,
+    Blog
 
 };

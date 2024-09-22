@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Editor } from '@tinymce/tinymce-react'; // Import TinyMCE
 import { createBlog } from '../../services/serverServies/blogService';
-import { handleUpload } from '../../services/serverServies/imageService'; // 确保此路径正确
 
 const BlogForm = () => {
     const userId = useSelector(state => state.user.userId);

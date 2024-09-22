@@ -4,7 +4,7 @@ const blogController = require('../controllers/BlogController');
 
 router.get('/blogs', blogController.findAllBlogs);
 router.post('/blogs', blogController.createBlog);
-router.get('/blogs/:id', blogController.findBlogById);
+router.get('/blogs/:id', blogController.findBlogsByUserId);
 router.put('/blogs/:id', blogController.updateBlog);
 router.delete('/blogs/:id', blogController.deleteBlog);
 

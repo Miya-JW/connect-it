@@ -1,17 +1,42 @@
-const Blog = require('../models/Blog');
+const {Blog, User} = require('../models/index');
+
 
 exports.findAllBlogs = async (req, res) => {
+console.log("后端开始获取全部blog")
     try {
-        const blogs = await Blog.findAll();
-        res.send(blogs);
+        const blogs = await Blog.findAll({
+            
+            include: [{
+                model: User, // Ensure User is properly associated and imported
+                as: 'Author', // Assuming this alias from your associations
+                attributes: ['user_name', 'user_avatar']
+            }]
+        });
+
+        if (blogs && blogs.length > 0) {
+            const result = blogs.map(blog => ({
+                blog_id: blog.blog_id,
+                blog_title: blog.blog_title,
+                blog_auther_id:blog.blog_auther_id,
+                blog_content: blog.blog_content,
+                blog_date: blog.blog_date.toISOString(),
+                blog_views: blog.blog_views,
+                author: {
+                    user_name: blog.Author.user_name,
+                    user_avatar: blog.Author.user_avatar
+                }
+            }));
+            res.send(result);
+        } else {
+            res.status(404).send({ message: "No blogs found for this user" });
+        }
     } catch (error) {
-        console.error("Error retrieving blogs:", error);
+        console.error("Error retrieving blogs by user ID:", error);
         res.status(500).send({ message: "Error retrieving blogs", error: error.message });
     }
 };
 
 exports.createBlog = async (req, res) => {
-    console.log("后端创建新blog············",req.body)
     try {
         const blog = await Blog.create(req.body);
         res.status(201).send(blog);
@@ -60,5 +85,40 @@ exports.deleteBlog = async (req, res) => {
     } catch (error) {
         console.error("Error deleting blog:", error);
         res.status(500).send({ message: "Error deleting blog", error: error.message });
+    }
+};
+
+// 根据用户id查询所有blog
+exports.findBlogsByUserId = async (req, res) => {
+    try {
+        const blogs = await Blog.findAll({
+            where: { blog_auther_id: req.params.id },
+            include: [{
+                model: User, // Ensure User is properly associated and imported
+                as: 'Author', // Assuming this alias from your associations
+                attributes: ['user_name', 'user_avatar']
+            }]
+        });
+
+        if (blogs && blogs.length > 0) {
+            const result = blogs.map(blog => ({
+                blog_id: blog.blog_id,
+                blog_title: blog.blog_title,
+                blog_auther_id:blog.blog_auther_id,
+                blog_content: blog.blog_content,
+                blog_date: blog.blog_date,
+                blog_views: blog.blog_views,
+                author: {
+                    user_name: blog.Author.user_name,
+                    user_avatar: blog.Author.user_avatar
+                }
+            }));
+            res.send(result);
+        } else {
+            res.status(404).send({ message: "No blogs found for this user" });
+        }
+    } catch (error) {
+        console.error("Error retrieving blogs by user ID:", error);
+        res.status(500).send({ message: "Error retrieving blogs", error: error.message });
     }
 };
