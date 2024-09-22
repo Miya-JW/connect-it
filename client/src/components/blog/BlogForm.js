@@ -8,6 +8,7 @@ const BlogForm = () => {
     const userId = useSelector(state => state.user.userId);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [showForm, setShowForm] = useState(false); // State to toggle form display
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -20,13 +21,14 @@ const BlogForm = () => {
         alert('Blog submitted! Check console for details.');
         setTitle('');
         setContent('');
+        setShowForm(false); // Hide form after submission
     };
 
     return (
         <Container>
             <Row className="justify-content-md-center">
                 <Col md={8}>
-                    <Form onSubmit={handleSubmit}>
+                {showForm?(<Form onSubmit={handleSubmit}>
                         <Form.Group controlId="blogForm.Title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control
@@ -60,7 +62,12 @@ const BlogForm = () => {
                         <Button variant="primary" type="submit">
                             Submit Blog
                         </Button>
-                    </Form>
+                    </Form>):(
+                        <Button onClick={() => setShowForm(true)} variant="primary">
+                            Create New Blog
+                        </Button>
+                    )}
+                    
                 </Col>
             </Row>
         </Container>
