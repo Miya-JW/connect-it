@@ -6,7 +6,7 @@ import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
 import { getAlbumStatus } from '../services/serverServies/albumsService';
-import { getFollowedUsers } from '../services/serverServies/userActivityService';
+import { getFollowedUsers,getUser } from '../services/serverServies/userActivityService';
 import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { getBlogs } from '../services/serverServies/blogService';
@@ -30,7 +30,7 @@ const UserPage = ({ userId }) => {
                 return;  // 如果 userId 未定义，直接返回
             }
             try {
-                const user = await getBlogs(userId);
+                const user = await getUser(userId);
                 setUser(user);
             } catch (error) {
                 console.error('Failed to process artists:', error);
