@@ -6,11 +6,12 @@ import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
 import { getAlbumStatus } from '../services/serverServies/albumsService';
-import { getFollowedUsers,getUser } from '../services/serverServies/userActivityService';
+import { getFollowedUsers, getUser } from '../services/serverServies/userActivityService';
 import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { getBlogs } from '../services/serverServies/blogService';
 import BlogCard from '../components/cards/BlogCard';
+import '../styles/UserPage.css'
 
 
 
@@ -128,69 +129,76 @@ const UserPage = ({ userId }) => {
     return (
         <div>
             <Header />
-            <div>
-                <h1>User</h1>
-                <ListGroup>
+            <div className='containerUserPage'>
+                <div className="left-column">
+                    <div className='header1'>User</div>
+                    <div className="UserCard">
 
-                    <ListGroup.Item key={user.user_id}>
-                        <Card>
-                            <Card.Body>
-                                <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    <Card.Img className="rounded-circle"
-                                        variant="top"
-                                        src={`${process.env.REACT_APP_SERVER_URL}/uploads${user.user_avatar}` || 'https://via.placeholder.com/100'}
-                                        style={{ width: '100px', height: '100px', marginRight: '1rem' }}
-                                    />
-                                    <div>
-                                        <Card.Title >{user.user_name}</Card.Title>
-                                        <Card.Text>Name: {`${user.user_first_name} ${user.user_last_name}` || 'Unknown'}</Card.Text>
+                   
+                    <ListGroup >
 
-                                        <Card.Text>Join Date: {user.user_join_date ? new Date(user.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
-                                        <Card.Text>About: {user.user_about_me || 'None'}</Card.Text>
-                                        <Card.Text>Tags: {user.user_tag || ''}</Card.Text>
+                        <ListGroup.Item key={user.user_id}>
+                            <Card>
+                                <Card.Body>
+                                    <div style={{ display: 'flex', marginBottom: '1rem' }}>
+                                        <Card.Img className="rounded-circle"
+                                            variant="top"
+                                            src={`${process.env.REACT_APP_SERVER_URL}/uploads${user.user_avatar}` || 'https://via.placeholder.com/100'}
+                                            style={{ width: '100px', height: '100px', marginRight: '1rem' }}
+                                        />
+                                        <div>
+                                            <Card.Title >{user.user_name}</Card.Title>
+                                            <Card.Text>Name: {`${user.user_first_name} ${user.user_last_name}` || 'Unknown'}</Card.Text>
+
+                                            <Card.Text>Join Date: {user.user_join_date ? new Date(user.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                            <Card.Text>About: {user.user_about_me || 'None'}</Card.Text>
+                                            <Card.Text>Tags: {user.user_tag || ''}</Card.Text>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </Card.Body>
-                        </Card>
-                    </ListGroup.Item>
-                </ListGroup>
+                                </Card.Body>
+                            </Card>
+                        </ListGroup.Item>
+                    </ListGroup>
+                    </div>
+
+
+
+                    {following.length > 0 ? (<div>
+                        <div className='header1'>Following</div>
+                        <UserInfoCard results={following} />
+                    </div>) : ''}
+                </div>
+           
+            <div className="right-column">
+                {blogs.length > 0 ? (
+                    <>
+                        <div className='header1'>Blogs</div>
+                        <BlogCard blogs={blogs} />
+                    </>
+                ) : ''}
+
+                {artists.length > 0 ? (<div>
+                    <div className='header1'>Followed Artists</div>
+                    <MusicArtistsCard artists={artists} />
+                </div>) : ''}
+
+                {toListen.length > 0 ? (<div>
+                    <div className='header1'>To Listen</div>
+                    <MusicAlbumCard results={toListen} />
+                </div>) : ''}
+
+                {listening.length > 0 ? (<div>
+                    <div className='header1'>Listening</div>
+                    <MusicAlbumCard results={listening} />
+                </div>) : ''}
+
+                {listened.length > 0 ? (<div>
+                    <div className='header1'>Listened</div>
+                    <MusicAlbumCard results={listened} />
+                </div>) : ''}
             </div>
-
-
-
-            {following.length > 0 ? (<div>
-                <h1>Following</h1>
-                <UserInfoCard results={following} />
-            </div>) : ''}
-
-            {blogs.length > 0 ? (
-                <>
-                    <h1>Blogs</h1>
-                    <BlogCard blogs={blogs} />
-                </>
-            ) : ''}
-
-            {artists.length > 0 ? (<div>
-                <h1>Followed Artists</h1>
-                <MusicArtistsCard artists={artists} />
-            </div>) : ''}
-
-            {toListen.length > 0 ? (<div>
-                <h1>To Listen</h1>
-                <MusicAlbumCard results={toListen} />
-            </div>) : ''}
-
-            {listening.length > 0 ? (<div>
-                <h1>Listening</h1>
-                <MusicAlbumCard results={listening} />
-            </div>) : ''}
-
-            {listened.length > 0 ? (<div>
-                <h1>Listened</h1>
-                <MusicAlbumCard results={listened} />
-            </div>) : ''}
-
+        </div>
         </div>
     );
 }

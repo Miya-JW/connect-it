@@ -1,0 +1,89 @@
+/* 颜色变量被替换为直接的颜色值 */
+/* 定义颜色和样式 */
+:root {
+    --background-color-body: #f0f5f9;
+    --background-color-userCard:#a3b18a;
+    --font-color: #0d1b2a;
+    --card-highlight: rgba(255, 255, 255, 0.5);
+  }
+
+
+
+.containerUserPage {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem; /* 控制左右列之间的间距 */
+    padding: 50px;
+}
+
+.left-column {
+    flex: 1; /* 占据左侧固定比例 */
+    max-width: 300px; /* 设定左侧栏的最大宽度 */
+}
+
+.right-column {
+    flex: 3; /* 右侧内容占据剩余空间 */
+}
+
+
+  body{
+    background-color:var(--background-color-body);
+  }
+
+  
+  /* UserInfoCard 部分 */
+  .UserCard .list-group-item {
+    background-color: var(--background-color); /* 应用背景颜色 */
+    border: none; /* 消除边框 */
+    border-radius: 20px;
+  }
+  
+  .UserCard .list-group-item .card {
+    background-color: var(--background-color); /* 卡片背景色 */
+    color: var(--font-color); /* 字体颜色 */
+    border: none; /* 消除边框 */
+  }
+  
+  .UserCard .list-group-item .card .card-img {
+    border-radius: 50%; /* 圆形图片 */
+    box-shadow: 0 2px 4px var(--card-highlight); /* 图片亮光效果 */
+  }
+  
+  .UserCard .list-group-item .card .card-body .card-title,
+  .UserCard .list-group-item .card .card-body .card-text {
+    color: var(--font-color); /* 标题和文本的字体颜色 */
+  }
+  
+  .UserCard .list-group-item .card .card-body .card-title:hover,
+  .UserCard .list-group-item .card .card-body .card-text:hover {
+    color: #002237; /* 鼠标悬停时亮化字体颜色 (这里使用 CSS 原生计算方法替代 lighten) */
+  }
+
+
+    /* UserInfoCard 部分 */
+    .UserInfoCard .list-group-item {
+        background-color: var(--background-color-userCard); /* 应用背景颜色 */
+        border: none; /* 消除边框 */
+        border-radius: 20px;
+      }
+      
+      .UserInfoCard .list-group-item .card {
+        background-color: var(--background-color-userCard); /* 卡片背景色 */
+        color: var(--font-color); /* 字体颜色 */
+        border: none; /* 消除边框 */
+      }
+      
+      .UserInfoCard .list-group-item .card .card-img {
+        border-radius: 50%; /* 圆形图片 */
+        box-shadow: 0 2px 4px var(--card-highlight); /* 图片亮光效果 */
+      }
+      
+      .UserInfoCard .list-group-item .card .card-body .card-title,
+      .UserInfoCard .list-group-item .card .card-body .card-text {
+        color: var(--font-color); /* 标题和文本的字体颜色 */
+      }
+      
+      .UserInfoCard .list-group-item .card .card-body .card-title:hover,
+      .UserInfoCard .list-group-item .card .card-body .card-text:hover {
+        color: #002237; /* 鼠标悬停时亮化字体颜色 (这里使用 CSS 原生计算方法替代 lighten) */
+      }

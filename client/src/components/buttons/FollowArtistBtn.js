@@ -27,7 +27,7 @@ const FollowArtistBtn = ({ artistId, isFollowed, userId ,onStatusChange}) => {
             console.error('Failed to update artist follow status:', error);
         }
     };
-    return (<div>
+    return (<div className='musicBtn'>
         <Button variant="outline-primary" onClick={() => handleArtistFollow(artistId)}>
             {isFollowed ? 'Unfollow' : 'Follow'}
         </Button>

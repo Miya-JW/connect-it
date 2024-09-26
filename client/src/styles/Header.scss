@@ -10,6 +10,7 @@ $text_shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
 .header {
     position: relative;
     margin-bottom: 50px;
+
 }
 
 .header_img {
@@ -17,6 +18,8 @@ $text_shadow: 8px 8px 5px rgba(0, 0, 0, 0.5);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    width: 100%; /* 宽度占满整个视口宽度 */
+    height: 20vh; /* 高度为视口高度的20% */
 
 }
 

@@ -7,6 +7,7 @@ import { getFollowedUsers } from '../../services/serverServies/userActivityServi
 import UserFollowBtn from '../buttons/UserFollowBtn';
 import { useNavigate } from 'react-router-dom';
 import TagCard from './TagCard';
+import '../../styles/Cards.css';
 
 
 const UserInfoCard = ({ results }) => {
@@ -44,7 +45,7 @@ const UserInfoCard = ({ results }) => {
         navigate(`/other-user`, { state: { userId } });
     }
     return (
-        <div>
+        <div className="UserInfoCard">
             <ListGroup>
                 {results.map((item) => (
                     <ListGroup.Item key={item.user_id}>

@@ -22,43 +22,8 @@ const BlogCard = ({ blogs, refreshBlogs }) => {
         }
     };
 
-    // const handleEditClick = (blogId) => {
-    //     // Toggle the editing mode for the blog
-    //     setEditingBlogId(blogId === editingBlogId ? null : blogId);
-    // };
 
     return (
-        // <Container>
-        //     {blogs.map(blog => (
-        //         <Row key={blog.blog_id} className="mb-4">
-        //             <Col md={12}>
-        //                 <Card>
-        //                     <Card.Body>
-        //                         <Card.Title>{blog.blog_title}</Card.Title>
-        //                         <Card.Subtitle className="mb-2 text-muted">
-        //                             <img src={`${process.env.REACT_APP_IMAGE_URL}${blog.author.user_avatar}`} alt="Author" style={{ width: 30, height: 30, marginRight: 10 }} />
-        //                             {blog.author.user_name}
-        //                         </Card.Subtitle>
-        //                         <Card.Text dangerouslySetInnerHTML={{ __html: blog.blog_content }} />
-        //                         <Card.Text>
-        //                             <small>{new Date(blog.blog_date).toLocaleDateString()}</small>
-        //                         </Card.Text>
-        //                         {userId == blog.blog_auther_id && (
-        //                             <>
-        //                             <Button variant="danger" onClick={() => handleDelete(blog.blog_id)}>
-        //                                 Delete Blog
-        //                             </Button>
-        //                             <Button variant="info" onClick={() => handleEditClick(blog.blog_id)} style={{ marginLeft: '10px' }}>
-        //                                             Edit Blog
-        //                                         </Button>
-        //                             </>
-        //                         )}
-        //                     </Card.Body>
-        //                 </Card>
-        //             </Col>
-        //         </Row>
-        //     ))}
-        // </Container>
         <Container>
             {blogs.map(blog => (
                 <Row key={blog.blog_id} className="mb-4">

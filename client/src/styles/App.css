@@ -41,7 +41,7 @@
 
 * {
   font-family: "Play", Geneva, sans-serif;
-  color: var(--font-color);
+ 
   line-height: 23px;
 }
 
@@ -65,6 +65,16 @@ hr {
   margin-right: 0;
 }
 
+/* ---------header---------- */
+.header1{
+  font-size: 24px; /* 设置字体大小 */
+  font-weight: bold; /* 设置字体加粗 */
+  background: linear-gradient(45deg, #007BFF, #4B0082); /* 定义一个从蓝色到深紫色的渐变 */
+  -webkit-background-clip: text; /* 裁切背景到文字形状（WebKit内核特有） */
+  background-clip: text;
+  color: transparent; /* 将文字颜色设置为透明，以显示背景 */
+  display: inline; /* 确保元素不会独占一行 */
+}
 
 
 

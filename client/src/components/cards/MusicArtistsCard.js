@@ -4,7 +4,7 @@ import { getFollowedArtists } from '../../services/serverServies/userArtistServi
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
 import FollowArtistBtn from '../buttons/FollowArtistBtn';
-
+import '../../styles/Cards.css'
 
 
 const MusicArtistsCard = ({ artists }) => {
@@ -39,66 +39,136 @@ const MusicArtistsCard = ({ artists }) => {
 
 
     //console.log(artists[0].artist_id);
+    const scrollLeft = () => {
+        const container = document.getElementById('musicCards');
+        container.scrollBy({ left: -300, behavior: 'smooth' });
+    };
 
+    const scrollRight = () => {
+        const container = document.getElementById('musicCards');
+        container.scrollBy({ left: 300, behavior: 'smooth' });
+    };
     return (
-        <div style={{ width: '90%', marginLeft: '5%' }}>
+        // <div style={{ width: '90%', marginLeft: '5%' }}>
 
-            <Row>
+        //     <Row>
+        //         {artists && artists.length > 0 ? (
+        //             artists.map((artist, index) => (
+        //                 <Col key={index} md={2} className="mb-4" style={{
+        //                     flex: "0 0 20%",
+        //                     maxWidth: " 20%"
+        //                 }}> {/* Adjusted column size for outer column */}
+        //                     <Card className="h-100">
+        //                         <Row className="no-gutters"> {/* Add a row inside the card for side-by-side layout */}
+        //                             <Col md={4}> {/* Column for the image */}
+        //                                 <Card.Img
+        //                                     src={artist.artist_image}
+        //                                     alt={artist.artist_name}
+        //                                     style={{ borderRadius: '50%', margin: '15%' }}
+        //                                 />
+        //                             </Col>
+        //                             <Col md={8}> {/* Column for the information */}
+        //                                 <Card.Body className="d-flex flex-column" >
+        //                                     <Card.Title>{artist.artist_name}</Card.Title>
+        //                                     <Card.Text style={{ fontSize: 'small' }}>
+        //                                         <strong>Genre: </strong>
+        //                                         <span>{artist.artist_genre}</span>
+        //                                     </Card.Text>
+        //                                     <Card.Text style={{ fontSize: 'small' }}>
+        //                                         <strong>Followers: </strong>
+        //                                         <span>{artist.artist_followers ? artist.artist_followers.toLocaleString() : 'N/A'}</span> {/* Added toLocaleString for better number formatting */}
+        //                                     </Card.Text>
+        //                                     <Card.Text style={{ fontSize: 'small' }}>
+        //                                         <strong>Popularity: </strong>
+        //                                         <span>{artist.artist_popularity}</span>
+        //                                     </Card.Text>
+        //                                     <Card.Link
+        //                                         href={artist.artist_spotify_url}
+        //                                         target="_blank"
+        //                                         className="mt-auto"
+        //                                     >
+        //                                         Listen on Spotify
+        //                                     </Card.Link>
+
+        //                                     <FollowArtistBtn
+        //                                         artistId={artist.artist_id}
+        //                                         isFollowed={followedArtists[artist.artist_id]}
+        //                                         userId={userId}
+        //                                         onStatusChange={handleStatusChange}
+        //                                     />
+
+        //                                 </Card.Body>
+        //                             </Col>
+        //                         </Row>
+        //                     </Card>
+        //                 </Col>
+        //             ))
+        //         ) : (
+        //             <Col className="col-12">No popular artists found.</Col>
+        //         )}
+        //     </Row>
+        // </div>
+
+        <div className="musicCardsContainer">
+            <button onClick={scrollLeft} className="scrollButtonL scrollButton">Left</button>
+            <div className="musicCards" id="musicCards">
                 {artists && artists.length > 0 ? (
                     artists.map((artist, index) => (
-                        <Col key={index} md={2} className="mb-4" style={{
-                            flex: "0 0 20%",
-                            maxWidth: " 20%"
-                        }}> {/* Adjusted column size for outer column */}
-                            <Card className="h-100">
-                                <Row className="no-gutters"> {/* Add a row inside the card for side-by-side layout */}
-                                    <Col md={4}> {/* Column for the image */}
-                                        <Card.Img
-                                            src={artist.artist_image}
-                                            alt={artist.artist_name}
-                                            style={{ borderRadius: '50%', margin: '15%' }}
-                                        />
-                                    </Col>
-                                    <Col md={8}> {/* Column for the information */}
-                                        <Card.Body className="d-flex flex-column" >
-                                            <Card.Title>{artist.artist_name}</Card.Title>
-                                            <Card.Text style={{ fontSize: 'small' }}>
-                                                <strong>Genre: </strong>
-                                                <span>{artist.artist_genre}</span>
-                                            </Card.Text>
-                                            <Card.Text style={{ fontSize: 'small' }}>
-                                                <strong>Followers: </strong>
-                                                <span>{artist.artist_followers ? artist.artist_followers.toLocaleString() : 'N/A'}</span> {/* Added toLocaleString for better number formatting */}
-                                            </Card.Text>
-                                            <Card.Text style={{ fontSize: 'small' }}>
-                                                <strong>Popularity: </strong>
-                                                <span>{artist.artist_popularity}</span>
-                                            </Card.Text>
-                                            <Card.Link
-                                                href={artist.artist_spotify_url}
-                                                target="_blank"
-                                                className="mt-auto"
-                                            >
-                                                Listen on Spotify
-                                            </Card.Link>
 
-                                            <FollowArtistBtn
-                                                artistId={artist.artist_id}
-                                                isFollowed={followedArtists[artist.artist_id]}
-                                                userId={userId}
-                                                onStatusChange={handleStatusChange}
-                                            />
+                        <div className="musicCardOut" key={artist.artist_id}>
+                            <div className="musicCard">
 
-                                        </Card.Body>
-                                    </Col>
-                                </Row>
-                            </Card>
-                        </Col>
+
+                                <Card.Img className="musicImg"
+                                    src={artist.artist_image}
+                                    alt={artist.artist_name}
+                                   
+                                />
+
+
+                                <div className="musicText">
+                                    <div className="musicTitle">{artist.artist_name}</div>
+                                    <FollowArtistBtn 
+                                        artistId={artist.artist_id}
+                                        isFollowed={followedArtists[artist.artist_id]}
+                                        userId={userId}
+                                        onStatusChange={handleStatusChange}
+                                    />
+
+                                    <Card.Text style={{ fontSize: 'small' }}>
+                                        <strong>Genre: </strong>
+                                        <span>{artist.artist_genre}</span>
+                                    </Card.Text>
+                                    <Card.Text style={{ fontSize: 'small' }}>
+                                        <strong>Followers: </strong>
+                                        <span>{artist.artist_followers ? artist.artist_followers.toLocaleString() : 'N/A'}</span> {/* Added toLocaleString for better number formatting */}
+                                    </Card.Text>
+                                    <Card.Text style={{ fontSize: 'small' }}>
+                                        <strong>Popularity: </strong>
+                                        <span>{artist.artist_popularity}</span>
+                                    </Card.Text>
+                                    <Card.Link
+                                        href={artist.artist_spotify_url}
+                                        target="_blank"
+                                        className="mt-auto"
+                                    >
+                                        Listen on Spotify
+                                    </Card.Link>
+
+
+
+                                </div>
+
+                            </div>
+                           
+                        </div>
+
                     ))
                 ) : (
                     <Col className="col-12">No popular artists found.</Col>
                 )}
-            </Row>
+            </div>
+            <button onClick={scrollRight} className="scrollButtonR scrollButton">Right</button>
         </div>
 
     );

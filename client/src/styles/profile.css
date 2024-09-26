@@ -1,0 +1,222 @@
+.profile_container {
+    position: relative;
+    background-color: #fff;
+    padding: 50px;
+    margin: 50px 100px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+        "avatar modify_area"
+        "delete_btn done_btn";
+}
+
+.profile-title {
+    margin-top: -150px;
+    padding-bottom: 30px;
+}
+
+
+.modify_area {
+    background-color: #15172b;
+    border-radius: 5px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 1);
+    padding: 20px;
+    padding-top: 50px;
+    position: relative;
+    grid-area: modify_area;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-rows: repeat(5, auto);
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas:
+        " userName btn1"
+        " password btn2"
+        " real_name btn3"
+        " date_of_birth btn4"
+        " description btn5";
+}
+
+.profile_container img {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.cut1 {
+    background-color: #15172b;
+    border-radius: 10px;
+    height: 30px;
+    left: 20px;
+    position: absolute;
+    top: -15px;
+    width: 150px;
+    justify-content: center;
+    text-align: center;
+}
+
+.iLabel1 {
+    position: absolute;
+    color: var(--background-color-6);
+    left: 30px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    top: -10px;
+}
+
+#avatar {
+    grid-area: avatar;
+    display: flex;
+    flex-direction: column;
+}
+
+#userName_div,
+#password_div,
+#real_name_div,
+#date_of_birth_div,
+#description_div,
+.password_div {
+    display: flex;
+    position: relative;
+}
+
+#modify_userName,
+#modify_date_of_birth,
+#modify_password,
+#modify_real_name,
+#modify_description,
+#done_btn,
+#delete_btn {
+    display: flex;
+    justify-content: center;
+}
+
+.password_div {
+    position: relative;
+}
+
+#modify_password_error,
+#verify_password_error {
+    position: absolute;
+}
+
+#userName_div {
+    grid-area: userName;
+}
+
+#modify_userName {
+    grid-area: btn1;
+}
+
+#password_div {
+    grid-area: password;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+}
+
+#modify_password {
+    grid-area: btn2;
+    display: flex;
+    flex-direction: column;
+}
+
+#real_name_div {
+    grid-area: real_name;
+}
+
+#modify_real_name {
+    grid-area: btn3;
+}
+
+#date_of_birth_div {
+    grid-area: date_of_birth;
+}
+
+#modify_date_of_birth {
+    grid-area: btn4;
+}
+
+#description_div {
+    grid-area: description;
+}
+
+#modify_description {
+    grid-area: btn5;
+}
+
+#delete_btn {
+    grid-area: delete_btn;
+}
+
+#done_btn {
+    grid-area: done_btn;
+}
+
+.profile_container label {
+    margin-right: 8px;
+}
+
+.profile_container input {
+    height: 50px;
+}
+
+#description {
+    padding-top: 25px;
+    font-size: inherit;
+    font-style: italic;
+    height: 200px;
+}
+
+
+/*---------------------------------avatar---------------------------------*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--background-color-6);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #eee;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.avatar-gallery img {
+    border-radius: 50%;
+    width: 120px;
+    cursor: pointer;
+}
+
+.avatar-gallery {
+    height: 300px;
+    padding-top: 10px;
+}

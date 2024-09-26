@@ -28,7 +28,7 @@ const WhatsNew = () => {
 
     return (
         <div>
-            <h2 className="mb-3">Popular Artists</h2>
+            <div className="mb-3 header1">Popular Artists</div>
             < MusicArtistsCard artists={artists}
             />
         </div>

@@ -29,17 +29,19 @@ const StatusBtn = ({ user_id, targetId, currentStatus, onStatusChange }) => {
     };
 
     return (
-        <DropdownButton
+        <div className='musicBtn'>
+        <DropdownButton 
             title={status.toUpperCase()} // 显示当前状态，并大写
             variant="outline-primary"
             id={`dropdown-status-button-${targetId}`}
             key={targetId}
         >
-            <Dropdown.Item eventKey="to listen" onClick={() => handleStatusChange('to listen')}>To Listen</Dropdown.Item>
-            <Dropdown.Item eventKey="listening" onClick={() => handleStatusChange('listening')}>Listening</Dropdown.Item>
-            <Dropdown.Item eventKey="listened" onClick={() => handleStatusChange('listened')}>Listened</Dropdown.Item>
-            <Dropdown.Item eventKey="delete" onClick={() => handleStatusChange('delete')}>Delete</Dropdown.Item>
+            <Dropdown.Item className='musicBtnOption' eventKey="to listen" onClick={() => handleStatusChange('to listen')}>To Listen</Dropdown.Item>
+            <Dropdown.Item className='musicBtnOption' eventKey="listening" onClick={() => handleStatusChange('listening')}>Listening</Dropdown.Item>
+            <Dropdown.Item className='musicBtnOption' eventKey="listened" onClick={() => handleStatusChange('listened')}>Listened</Dropdown.Item>
+            <Dropdown.Item className='musicBtnOption' eventKey="delete" onClick={() => handleStatusChange('delete')}>Delete</Dropdown.Item>
         </DropdownButton>
+        </div>
     );
 };
 
