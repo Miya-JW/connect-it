@@ -61,3 +61,24 @@ exports.deleteMovie = async (req, res) => {
         res.status(500).send({ message: "Error deleting movie", error: error.message });
     }
 };
+
+
+exports.checkAndCreateMovies = async (req, res) => {
+    const movies = req.body.movies;
+    try {
+        const results = await Promise.all(movies.map(async (movie) => {
+            const found = await Movie.findOne({ where: { movie_id: movie.movie_id } });
+            if (!found) {
+                return Movie.create(movie);
+            }
+            return null;
+        }));
+
+        // 过滤掉 null 值，仅返回新创建的艺术家数据
+        const createdMovies = results.filter(a => a);
+        res.status(201).json(createdMovies);
+    } catch (error) {
+        console.error("Error processing movies:", error);
+        res.status(500).json({ message: "Error processing movies", error: error.message });
+    }
+};

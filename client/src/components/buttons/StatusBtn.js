@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { updateAlbumStatus, deleteAlbumStatus } from '../../services/serverServies/albumsService'; // 确保路径和方法名正确
-import { updateBookStatus,deleteBookStatus } from '../../services/serverServies/bookService';
+import { updateBookStatus, deleteBookStatus } from '../../services/serverServies/bookService';
+import { updateMovieStatus, deleteMovieStatus } from '../../services/serverServies/movieService';
 
 
 const StatusBtn = ({ user_id, targetType, targetId, currentStatus, onStatusChange }) => {
-   
+
     const [status, setStatus] = useState('Set Status');
     const bookStatus = ['to read', 'reading', 'read'];
     const albumStatus = ['to listen', 'listening', 'listened'];
+    const movieStatus = ['to watch', 'watching', 'watched'];
     let statusForDiv;
-    statusForDiv = albumStatus;
-    statusForDiv = bookStatus;
 
     switch (targetType) {
         case 'book': statusForDiv = bookStatus;
             break;
         case 'album': statusForDiv = albumStatus;
+            break;
+        case 'movie': statusForDiv = movieStatus;
             break;
         default:
             statusForDiv = 'unknownStatus'; // 可以设置一个默认值以防未知类型
@@ -41,20 +43,28 @@ const StatusBtn = ({ user_id, targetType, targetId, currentStatus, onStatusChang
                     case 'album': await deleteAlbumStatus(user_id, targetId);
                         setStatus('');
                         break;
+                    case 'movie': await deleteMovieStatus(user_id, targetId);
+                        break;
+
                     default: break;
                 }
 
             } else {
-                if (targetType === 'book') {
-                    await updateBookStatus(user_id, targetId, newStatus); // 发送更新请求到服务器
-                } else if (targetType === 'album') {
-
-                    await updateAlbumStatus(user_id, targetId, newStatus); // 发送更新请求到服务器
-                }
                 setStatus(newStatus); // 更新本地状态
-            }
+                switch (targetType) {
+                    case 'book': await updateBookStatus(user_id, targetId, newStatus); // 发送更新请求到服务器
+                        break;
+                    case 'album': await updateAlbumStatus(user_id, targetId, newStatus); // 发送更新请求到服务器
+                        break;
+                    case 'movie': await updateMovieStatus(user_id, targetId, newStatus);
+                        break;
+                    default: break;
 
-            onStatusChange(targetId, newStatus); // 通知父组件状态已更改
+                }
+
+                onStatusChange(targetId, newStatus); // 通知父组件状态已更改
+
+            }
         } catch (error) {
             console.error('更新专辑状态失败:', error);
         }

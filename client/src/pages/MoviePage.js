@@ -1,8 +1,17 @@
 import React from "react";
+import Header from "../components/Header";
+import NewMovies from "../components/movie/NewMovies";
+import PopularMovies from "../components/movie/PopularMovies";
 
-const homePage = ()=>{
+const homePage = () => {
     return (
-        <h1>This is movie page</h1>
+        <div>
+            <Header />
+            <h1>This is movie page</h1>
+            <NewMovies />
+            <PopularMovies />
+        </div>
+
     );
 }
 

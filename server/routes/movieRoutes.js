@@ -8,4 +8,5 @@ router.get('/movies/:id', movieController.findMovieById);
 router.put('/movies/:id', movieController.updateMovie);
 router.delete('/movies/:id', movieController.deleteMovie);
 
+router.post('/check_and_create_movies', movieController.checkAndCreateMovies);
 module.exports = router;
