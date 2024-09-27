@@ -61,3 +61,27 @@ exports.deleteBook = async (req, res) => {
         res.status(500).send({ message: "Error deleting book", error: error.message });
     }
 };
+
+
+
+
+
+exports.checkAndCreateBooks = async (req, res) => {
+    const books = req.body.books;
+    try {
+        const results = await Promise.all(books.map(async (book) => {
+            const found = await Book.findOne({ where: { book_id: book.book_id } });
+            if (!found) {
+                return Book.create(book);
+            }
+            return null;
+        }));
+
+        // 过滤掉 null 值，仅返回新创建的艺术家数据
+        const createdbooks = results.filter(a => a);
+        res.status(201).json(createdbooks);
+    } catch (error) {
+        console.error("Error processing books:", error);
+        res.status(500).json({ message: "Error processing books", error: error.message });
+    }
+};

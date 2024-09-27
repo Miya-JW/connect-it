@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ListGroup } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
 import StatusBtn from '../buttons/StatusBtn';
 import { getAlbumStatus } from '../../services/serverServies/albumsService'
 import '../../styles/Cards.css'
@@ -106,7 +104,7 @@ const MusicAlbumCard = ({ results }) => {
                 
                 <div className="musicText">
                   <div className="musicTitle">{item.album_title}</div>
-                  <StatusBtn user_id={userId} targetId={item.album_id} currentStatus={albumStatus[item.album_id]?.album_status} onStatusChange={handleStatusChange} />
+                  <StatusBtn user_id={userId} targetType={'album'} targetId={item.album_id} currentStatus={albumStatus[item.album_id]?.album_status} onStatusChange={handleStatusChange} />
                   <div className="musicArtist">Artist: {item.album_artist_name}</div>
                   <div className="musicDate">Release Date: {new Date(item.album_release_date).toLocaleDateString()}</div>
                   <div className="musicTracks">Total Tracks: {item.album_total_tracks}</div>

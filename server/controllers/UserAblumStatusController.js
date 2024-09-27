@@ -52,7 +52,6 @@ exports.createOrUpdateAlbumStatus = async (req, res) => {
 //查询某个用户的所有专辑状态
 exports.getUserAlbumStatuses = async (req, res) => {
     const { user_id} = req.params;
-    console.log("------------------",user_id);
 
     try {
         const statuses = await UserAlbumStatus.findAll({
@@ -78,7 +77,6 @@ exports.getUserAlbumStatuses = async (req, res) => {
 //查询某张专辑的状态
 exports.getAlbumStatusByUser = async (req, res) => {
     const { userId, albumId } = req.params; // 从请求参数中获取 userId 和 albumId
-console.log("----------------",userId,albumId)
     try {
         // 使用 Sequelize 的 findOne 方法来查询单条记录
         const status = await UserAlbumStatus.findOne({
@@ -105,10 +103,8 @@ console.log("----------------",userId,albumId)
 };
 
 // DELETE /api/album_status
-exports.deleteAlbumStatus = async (req, res) => {
-    
+exports.deleteAlbumStatus = async (req, res) => {   
     const { user_id, album_id } = req.body;
-    console.log("后端开始删除用户专辑状态",{ user_id, album_id })
 
     try {
         await UserAlbumStatus.destroy({

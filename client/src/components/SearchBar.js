@@ -9,6 +9,10 @@ import { searchItems } from '../services/spotifyService';
 // import { getMovieByName } from '../services/movieService';
 import { fetchBooksByQuery } from '../services/googleBookService';
 import { searchUsers } from '../services/serverServies/searchBarService';
+import {checkAndCreateBooks} from '../services/serverServies/bookService';
+import {checkAndCreateAlbums} from '../services/serverServies/albumsService';
+import {checkAndCreateArtists} from '../services/serverServies/artistService';
+
 
 function SearchBar() {
 
@@ -22,6 +26,7 @@ function SearchBar() {
         if (searchType === 'music_artist' || searchType === 'music_album') {
             try {
                 const results = await searchItems(searchTerm, searchType);
+                await checkAndCreateArtists(results);
                 navigate(`/search_results/${searchType}`, { state: { results } });
             } catch (error) {
                 console.error('Search failed:', error);
@@ -30,6 +35,7 @@ function SearchBar() {
         } else if (searchType === 'book_title' || searchType ==='book_author') {
             try {
                 const results = await fetchBooksByQuery(searchTerm, searchType);
+                await checkAndCreateBooks(results);
                 navigate(`/search_results/${searchType}`, { state: { results } });
             } catch (error) {
                 console.error('Search failed:', error);
@@ -37,6 +43,7 @@ function SearchBar() {
         } else if (searchType === 'users') {
             try {
                 const results = await searchUsers(searchTerm);
+                await checkAndCreateAlbums(results);
                 navigate(`/search_results/${searchType}`, { state: { results } });
             } catch (error) {
                 console.error('Search failed:', error);
