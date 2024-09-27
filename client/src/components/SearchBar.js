@@ -6,12 +6,13 @@ import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import '../styles/Header.scss'; // 如果需要，引入专门的样式文件
 import { searchItems } from '../services/spotifyService';
-// import { getMovieByName } from '../services/movieService';
+import { fetchMovieByName } from '../services/tmdbService';
 import { fetchBooksByQuery } from '../services/googleBookService';
 import { searchUsers } from '../services/serverServies/searchBarService';
-import {checkAndCreateBooks} from '../services/serverServies/bookService';
-import {checkAndCreateAlbums} from '../services/serverServies/albumsService';
-import {checkAndCreateArtists} from '../services/serverServies/artistService';
+import { checkAndCreateBooks } from '../services/serverServies/bookService';
+import { checkAndCreateAlbums } from '../services/serverServies/albumsService';
+import { checkAndCreateArtists } from '../services/serverServies/artistService';
+import { checkAndCreateMovies } from '../services/serverServies/movieService';
 
 
 function SearchBar() {
@@ -22,7 +23,7 @@ function SearchBar() {
 
     //处理搜索栏---发送搜索请求到API，返回结果------转到结果界面显示搜索结果
     const handleSearch = async () => {
-        console.log("searching---------",searchType);
+        console.log("searching---------", searchType);
         if (searchType === 'music_artist' || searchType === 'music_album') {
             try {
                 const results = await searchItems(searchTerm, searchType);
@@ -32,7 +33,7 @@ function SearchBar() {
                 console.error('Search failed:', error);
                 // 这里可以处理错误，比如显示错误消息
             }
-        } else if (searchType === 'book_title' || searchType ==='book_author') {
+        } else if (searchType === 'book_title' || searchType === 'book_author') {
             try {
                 const results = await fetchBooksByQuery(searchTerm, searchType);
                 await checkAndCreateBooks(results);
@@ -49,15 +50,17 @@ function SearchBar() {
                 console.error('Search failed:', error);
             }
         }
-        // else if (searchType === 'movie') {
-        //     try {
-        //         const results = await getMovieByName(searchTerm);
-        //         navigate(`/search_results/${searchType}`, { state: { results } });
-        //     } catch (error) {
-        //         console.error('Search failed:', error);
-        //         // 对于其他类型的搜索，你可以有其他的处理逻辑
-        //     }
-        // } 
+        else if (searchType === 'movie') {
+            try {
+                const results = await fetchMovieByName(searchTerm);
+                await checkAndCreateMovies(results);
+                navigate(`/search_results/${searchType}`, { state: { results } });
+
+            } catch (error) {
+                console.error('Search failed:', error);
+                // 对于其他类型的搜索，你可以有其他的处理逻辑
+            }
+        }
     };
 
     return (
@@ -76,7 +79,7 @@ function SearchBar() {
                     value={searchType}
                     onChange={(e) => setSearchType(e.target.value)}
                 >
-                   
+
                     <option value="blog">Blog</option>
                     <option value="music_artist">Music - Artist</option>
                     <option value="music_album">Music - Album</option>

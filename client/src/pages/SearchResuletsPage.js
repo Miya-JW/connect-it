@@ -7,6 +7,7 @@ import MusicArtistsCard from '../components/cards/MusicArtistsCard';
 import UserInfoCard from '../components/cards/UserInfoCard';
 import BookCard from '../components/cards/BookCard';
 import MusicAlbumCard from '../components/cards/MusicAlbumCard';
+import MovieCard from '../components/cards/MovieCard';
 
 
 const SearchResultsPage = () => {
@@ -58,6 +59,14 @@ const SearchResultsPage = () => {
                 <Header />
                 <UserInfoCard results={results} />
             </div>
+        )
+    }
+    else if(results[0].movie_id){
+        return(
+            <div>
+            <Header />
+            <MovieCard results={results} />
+        </div>
         )
     }
 }
