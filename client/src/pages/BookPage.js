@@ -1,14 +1,23 @@
 import React from "react";
 import Header from "../components/Header";
-import WhatsNew from "../components/book/Book_WhatsNew";
-import WhatsPopular from "../components/book/Book_WhatsPopular";
+import BookPsychology from "../components/book/BookPsychology";
+import BookHistory from "../components/book/BookHistory";
+import BookComics from '../components/book/BookComics';
+
+import BookComputer from '../components/book/BookComputer'
 
 const homePage = () => {
     return (
-        <div>
+        <div className="singlePage bookPage">
             <Header />
-           <WhatsNew/>
-           <WhatsPopular/>
+            <div className="pageBody">
+                <div className="bookPageBody">
+                        <BookPsychology />
+                        <BookHistory />
+                        <BookComics />
+                        <BookComputer />
+                </div>
+            </div>
         </div>
 
     );

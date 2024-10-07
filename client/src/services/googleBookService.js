@@ -11,28 +11,19 @@ const fetchBooksByQuery = async (query, type) => {
         case 'book_author':
             url += `inauthor:${encodeURIComponent(query)}`;
             break;
-        case 'book_newest':
-            if (!query) {
-                // 如果没有具体的查询关键字，我们仍然可以请求最新的书籍
-                // query = 'fiction'
-                const category = 'psychology';
-                url += `subject:${encodeURIComponent(category)}&key=${apiKey}`;
-            } else {
-                // 如果有查询关键字，按关键字和新书排序
-                url += `${encodeURIComponent(query)}&orderBy=newest`;
-            }
+        case 'book_comics':
+            url += `subject:${encodeURIComponent('comics')}`;
             break;
-        case 'book_popular':
-            if (!query) {
-                // 如果没有具体的查询关键字，我们仍然可以请求最新的书籍
-                // query = 'information technology'
-                const keywords = 'information technology';
-                const category = 'computers';
-                url += `${encodeURIComponent(keywords)}+subject:${encodeURIComponent(category)}`;
-            } else {
-                // 如果有查询关键字，按关键字和新书排序
-                url += `${encodeURIComponent(query)}&orderBy=relevance`;
-            }
+        case 'book_it':
+            const keywords = 'information technology';
+            const category = 'computers';
+            url += `${encodeURIComponent(keywords)}+subject:${encodeURIComponent(category)}`;
+            break;
+        case 'book_psychology':
+            url += `subject:${encodeURIComponent('psychology')}`;
+            break;
+        case 'book_history':
+            url += `subject:${encodeURIComponent('history')}`;
             break;
 
         default:

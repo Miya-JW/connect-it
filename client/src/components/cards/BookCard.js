@@ -13,6 +13,15 @@ const BookCard = ({ results }) => {
     const toggleSummary = (id) => {
         setExpandedId(expandedId === id ? null : id); // 切换展开/收起
     };
+
+    const [detailExpandedId, setDetailExpandedId] = useState(null);
+    const toggleDetail = (id) => {
+
+        setDetailExpandedId(detailExpandedId === id ? null : id);
+
+    }
+
+
     useEffect(() => {
         const fetchBookStatus = async () => {
             if (userId && results.length) {
@@ -56,32 +65,36 @@ const BookCard = ({ results }) => {
             <ListGroup>
                 {results.map((item) => (
                     <ListGroup.Item key={item.book_id}>
-                        <Card>
-                            <Card.Body>
-                                <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    <Card.Img
-                                        variant="top"
-                                        src={item.book_image || 'https://via.placeholder.com/100'}
-                                        style={{ width: '100px', height: '100px', marginRight: '1rem' }}
-                                    />
-                                    <div>
-                                        <Card.Title>{item.book_title}</Card.Title>
-                                        <StatusBtn user_id={userId} targetType={'book'} targetId={item.book_id} currentStatus={bookStatus[item.book_id]?.book_status} onStatusChange={handleStatusChange} />
-                                        <Card.Text>Author: {item.book_author || 'Unknown'}</Card.Text>
-                                        <Card.Text>Publisher: {item.book_publisher || 'Unknown'}</Card.Text>
-                                        <Card.Text>Publish Date: {item.book_publish_date ? new Date(item.book_publish_date).toLocaleDateString() : 'Unknown'}</Card.Text>
-                                        <Card.Text>Genre: {item.book_genre || 'None'}</Card.Text>
-                                        <Card.Text>ISBN: {item.book_ISBN}</Card.Text>
-                                    </div>
-                                </div>
+
+                        <Card.Body>
+                            <Card.Img
+                                variant="top"
+                                src={item.book_image || 'https://via.placeholder.com/100'}
+                                style={{ width: '200px', marginRight: '1rem' }}
+                            />
+                            <Card.Title>{item.book_title}</Card.Title>
+                            <div style={{display:'flex',flexDirection:'row'}}>
+                            <StatusBtn user_id={userId} targetType={'book'} targetId={item.book_id} currentStatus={bookStatus[item.book_id]?.book_status} onStatusChange={handleStatusChange} />
+                            <button  className='expandBtn' onClick={() => toggleDetail(item.book_id)}>
+                                {detailExpandedId ? 'Hide' : 'Show'}
+                            </button>
+                            </div>
+                           
+                            {detailExpandedId === item.book_id && (<>
+                                <Card.Text>Author: {item.book_author || 'Unknown'}</Card.Text>
+                                <Card.Text>Publisher: {item.book_publisher || 'Unknown'}</Card.Text>
+                                <Card.Text>Publish Date: {item.book_publish_date ? new Date(item.book_publish_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                <Card.Text>Genre: {item.book_genre || 'None'}</Card.Text>
+                                <Card.Text>ISBN: {item.book_ISBN}</Card.Text>
                                 <Card.Text>
                                     Summary: {expandedId === item.book_id ? item.book_summary : `${item.book_summary.substring(0, 100)}...`}
                                     <Button variant="link" onClick={() => toggleSummary(item.book_id)}>
                                         {expandedId === item.book_id ? 'Show Less' : 'Show More'}
                                     </Button>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                                </Card.Text></>
+                            )}
+                        </Card.Body>
+
                     </ListGroup.Item>
                 ))}
             </ListGroup>
