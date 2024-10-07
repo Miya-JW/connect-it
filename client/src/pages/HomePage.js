@@ -21,7 +21,7 @@ const HomePage = () => {
 
 
     return (
-        <div>
+        <div className="singlePage homePage">
             <Header />
         </div>
 

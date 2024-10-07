@@ -21,8 +21,8 @@ const NewMovies = () => {
     }, []);
 
     return (
-        <div style={{ marginLeft: '10%' }}>
-            <h2 className="mb-3">What's New</h2>
+        <div className='popularArtistsContainer'>
+            <h2 className="mb-3 header1">What's New</h2>
             <MovieCard results={movies} />
 
         </div>

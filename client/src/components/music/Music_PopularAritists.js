@@ -27,7 +27,7 @@ const WhatsNew = () => {
 
 
     return (
-        <div>
+        <div className='popularArtistsContainer'>
             <div className="mb-3 header1">Popular Artists</div>
             < MusicArtistsCard artists={artists}
             />

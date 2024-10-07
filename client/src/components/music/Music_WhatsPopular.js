@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getPopularAlbums } from '../../services/spotifyService'; // 确保路径正确
-import { Row } from 'react-bootstrap';
 import { checkAndCreateAlbums } from '../../services/serverServies/albumsService';
 import MusicAlbumCard from '../cards/MusicAlbumCard';
 
@@ -23,11 +22,11 @@ const PopularAlbums = () => {
     }, []);
 
     return (
-        <div style={{ marginLeft: '10%' }}>
-            <h2 className="mb-3">Popular Albums</h2>
-            <Row>
+        <div className='popularAlbumsContainer'>
+            <h2 className="mb-3 header1">Popular Albums</h2>
+            
                 <MusicAlbumCard results={albums} />
-            </Row>
+            
         </div>
     );
 };

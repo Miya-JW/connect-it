@@ -50,6 +50,7 @@ export const updateUsername = async (userId, newUsername) => {
 };
 
 export const updateUserInfo = async (userId, newUserInfo) => {
+    console.log('---------',userId,newUserInfo)
     try {
 
         const response = await fetch((`${process.env.REACT_APP_SERVER_URL}/api/users/${userId}`), {

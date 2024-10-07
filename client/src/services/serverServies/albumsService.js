@@ -14,10 +14,8 @@ export const createArtist = async (artist) => {
 };
 
 //获得用户所有专辑状态
-export const getAlbumStatus = async(user_id)=>{
-    console.log("----------------",user_id)
+export const getAlbumStatus = async (user_id) => {
     const response = await axios.get(`${API_BASE_URL}/api/user_album_status/${user_id}`);
-    console.log(response.data)
     return response.data;
 
 }

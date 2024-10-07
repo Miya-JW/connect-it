@@ -33,6 +33,36 @@ const UserPage = ({ userId }) => {
     const [watching, setWatching] = useState([]);
     const [watched, setWatched] = useState([]);
 
+    const [blogIsExpanded, setBlogIsExpanded] = useState(false);
+    // 切换展开/收起状态的函数
+    const toggleContent = () => {
+        setBlogIsExpanded(!blogIsExpanded);
+    };
+
+    const [artistsIsExpanded, setArtistsIsExpanded] = useState(false);
+    // 切换展开/收起状态的函数
+    const toggleArtistsContent = () => {
+        setArtistsIsExpanded(!artistsIsExpanded);
+    };
+
+    const [albumsIsExpanded, setAlbumsIsExpanded] = useState(false);
+    // 切换展开/收起状态的函数
+    const toggleAlbumsContent = () => {
+        setAlbumsIsExpanded(!albumsIsExpanded);
+    };
+
+    const [booksIsExpanded, setBooksIsExpanded] = useState(false);
+    // 切换展开/收起状态的函数
+    const toggleBooksContent = () => {
+        setBooksIsExpanded(!booksIsExpanded);
+    };
+
+    const [moviesIsExpanded, setMoviesIsExpanded] = useState(false);
+    // 切换展开/收起状态的函数
+    const toggleMoviesContent = () => {
+        setMoviesIsExpanded(!moviesIsExpanded);
+    };
+
     useEffect(() => {
 
         // 用户个人信息
@@ -222,32 +252,32 @@ const UserPage = ({ userId }) => {
     }, [userId]);
 
     return (
-        <div>
-            <Header />
-            <div className='containerUserPage'>
-                
+        <div className="singlePage userPage">
+            <Header className='pageBody' />
+            <div className='containerUserPage '>
+
                 <div className="left-column">
 
                     <div className="UserCard">
-                        <div className='header1'>User</div>
+
                         <div className='userInfo'>
-                            <img className="rounded-circle"
+                            <img className="userImg"
                                 variant="top"
                                 src={`${process.env.REACT_APP_SERVER_URL}/uploads${user.user_avatar}` || 'https://via.placeholder.com/100'}
                                 style={{ width: '100px', height: '100px', marginRight: '1rem' }} alt='userAvatar'
                             />
                             <div>
-                                <div >{user.user_name}</div>
+                                <div style={{fontSize:'25px',color:'#30343f',fontWeight:'bold'}}>{user.user_name}</div>
                                 <div>Name: {`${user.user_first_name} ${user.user_last_name}` || 'Unknown'}</div>
                                 <div>Join Date: {user.user_join_date ? new Date(user.user_join_date).toLocaleDateString() : 'Unknown'}</div>
                                 <div>About: {user.user_about_me || 'None'}</div>
-                                <div>Tags: {user.user_tag || ''}</div>
+                               
                             </div>
                         </div>
                     </div>
 
                     <div className='followingContainer'>
-                        {following.length > 0 ? (<div>
+                        {following.length > 0 ? (<div className='followingContainer'>
                             <div className='header1'>Following</div>
                             <UserInfoCard results={following} />
                         </div>) : ''}
@@ -257,66 +287,106 @@ const UserPage = ({ userId }) => {
                 <div className="right-column">
 
                     <div className='blogContainer'>
-                        {blogs.length > 0 ? (
+                        {blogs.length > 0 && (
                             <>
                                 <div className='header1'>Blogs</div>
-                                <BlogCard blogs={blogs} />
+                                {blogIsExpanded && (
+                                    <BlogCard blogs={blogs} />
+                                )}
+                                {/* 按钮点击后切换展开/收起状态，并更新按钮文本 */}
+                                <button className='expandBtn' onClick={toggleContent}>
+                                    {blogIsExpanded ? 'Hide' : 'Show'}
+                                </button>
                             </>
-                        ) : ''}
+                        )}
                     </div>
 
                     <div className='artistContainer'>
-                        {artists.length > 0 ? (<div>
-                            <div className='header1'>Followed Artists</div>
-                            <MusicArtistsCard artists={artists} />
-                        </div>) : ''}
+                        {artists.length > 0 && (
+                            <div>
+                                <div className='header1'>Followed Artists</div>
+                                {artistsIsExpanded && (
+                                    <MusicArtistsCard artists={artists} />
+                                )}
+                                <button className='expandBtn' onClick={toggleArtistsContent}>
+                                    {artistsIsExpanded ? 'Hide' : 'Show'}
+                                </button>
+                            </div>)}
                     </div>
 
                     <div className='albumContainer'>
-                        {toListen.length > 0 ? (<div>
-                            <div className='header1'>To Listen</div>
-                            <MusicAlbumCard results={toListen} />
-                        </div>) : ''}
+                        <div className='header0' >My Music Ablums</div>
+                        {albumsIsExpanded && (
+                            <div style={{ marginTop: '50px' }}>
+                                {toListen.length > 0 ? (<div>
+                                    <div className='header1'>To Listen</div>
+                                    <MusicAlbumCard results={toListen} />
+                                </div>) : ''}
 
-                        {listening.length > 0 ? (<div>
-                            <div className='header1'>Listening</div>
-                            <MusicAlbumCard results={listening} />
-                        </div>) : ''}
+                                {listening.length > 0 ? (<div>
+                                    <div className='header1'>Listening</div>
+                                    <MusicAlbumCard results={listening} />
+                                </div>) : ''}
 
-                        {listened.length > 0 ? (<div>
-                            <div className='header1'>Listened</div>
-                            <MusicAlbumCard results={listened} />
-                        </div>) : ''}
+                                {listened.length > 0 ? (<div>
+                                    <div className='header1'>Listened</div>
+                                    <MusicAlbumCard results={listened} />
+                                </div>) : ''}
+
+
+                            </div>
+
+                        )}
+                        <button className='expandBtn' onClick={toggleAlbumsContent}>
+                            {albumsIsExpanded ? 'Hide' : 'Show'}
+                        </button>
+
                     </div>
 
                     <div className='bookContainer'>
-                        {toRead.length > 0 ? (<div>
-                            <div className='header1'>To Read</div>
-                            <BookCard results={toRead} />
-                        </div>) : ''}
-                        {reading.length > 0 ? (<div>
-                            <div className='header1'>Reading</div>
-                            <BookCard results={reading} />
-                        </div>) : ''}
-                        {read.length > 0 ? (<div>
-                            <div className='header1'>Read</div>
-                            <BookCard results={read} />
-                        </div>) : ''}
+                        <div className='header0' >My Books</div>
+                        {booksIsExpanded && (
+                            <div style={{ marginTop: '50px' }}>
+                                {toRead.length > 0 ? (<div>
+                                    <div className='header1'>To Read</div>
+                                    <BookCard results={toRead} />
+                                </div>) : ''}
+                                {reading.length > 0 ? (<div>
+                                    <div className='header1'>Reading</div>
+                                    <BookCard results={reading} />
+                                </div>) : ''}
+                                {read.length > 0 ? (<div>
+                                    <div className='header1'>Read</div>
+                                    <BookCard results={read} />
+                                </div>) : ''}
+                            </div>
+                        )}
+                        <button className='expandBtn' onClick={toggleBooksContent}>
+                            {booksIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                     </div>
 
                     <div className='movieContainer'>
-                        {toWatch.length > 0 ? (<div>
-                            <div className='header1'>To Watch</div>
-                            <MovieCard results={toWatch} />
-                        </div>) : ''}
-                        {watching.length > 0 ? (<div>
-                            <div className='header1'>Watching</div>
-                            <MovieCard results={watching} />
-                        </div>) : ''}
-                        {watched.length > 0 ? (<div>
-                            <div className='header1'>Watched</div>
-                            <MovieCard results={watched} />
-                        </div>) : ''}
+                        <div className='header0' >My Moives</div>
+                        {moviesIsExpanded && (
+                            <div style={{ marginTop: '50px' }}>
+                                {toWatch.length > 0 ? (<div>
+                                    <div className='header1'>To Watch</div>
+                                    <MovieCard results={toWatch} />
+                                </div>) : ''}
+                                {watching.length > 0 ? (<div>
+                                    <div className='header1'>Watching</div>
+                                    <MovieCard results={watching} />
+                                </div>) : ''}
+                                {watched.length > 0 ? (<div>
+                                    <div className='header1'>Watched</div>
+                                    <MovieCard results={watched} />
+                                </div>) : ''}
+                            </div>
+                        )}
+                        <button className='expandBtn' onClick={toggleMoviesContent}>
+                            {moviesIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                     </div>
 
                 </div>

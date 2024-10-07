@@ -31,8 +31,8 @@ const TagCard =({user})=>{
 
 
     return(
-        <Card style={{ width: '18rem', margin: 'auto' }}>
-        <Card.Body>
+        <Card className='tagContainer card-text'>
+        <Card.Body style={{padding:'0',margin:'0'}}>
             {editMode ? (
                 <Form.Group>
                     <Form.Label>Tag:</Form.Label>

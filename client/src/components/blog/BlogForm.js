@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Editor } from '@tinymce/tinymce-react'; // Import TinyMCE
-import { createBlog,updateBlog } from '../../services/serverServies/blogService';
+import { createBlog, updateBlog } from '../../services/serverServies/blogService';
 
 const BlogForm = ({ blog, onFinish }) => {
     const userId = useSelector(state => state.user.userId);
@@ -10,7 +10,8 @@ const BlogForm = ({ blog, onFinish }) => {
     const [content, setContent] = useState('');
     const [showForm, setShowForm] = useState(false); // State to toggle form display
 
-console.log(blog);
+
+    console.log(blog);
 
     // Effect to initialize form when editing
     useEffect(() => {
@@ -47,15 +48,19 @@ console.log(blog);
             onFinish(); // Call onFinish to hide form and refresh list
         } catch (error) {
             console.error('Error submitting blog:', error);
-            alert('Failed to submit blog');
+
         }
+        setShowForm(false);
     };
 
     return (
-        <Container>
-            <Row className="justify-content-md-center">
+        <Container >
+            <Row >
                 <Col md={8}>
-                    {showForm ? (<Form onSubmit={handleSubmit}>
+                    <Button id='create_article_btn' onClick={() => setShowForm(true)} variant="primary">
+                        Create New Blog
+                    </Button>
+                    {showForm ? (<Form onSubmit={handleSubmit} className='blogForm'>
                         <Form.Group controlId="blogForm.Title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control
@@ -86,14 +91,10 @@ console.log(blog);
                                 }}
                             />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                        {blog ? 'Update Blog' : 'Submit Blog'}
+                        <Button className='blogSubBtn' variant="primary" type="submit">
+                            {blog ? 'Update Blog' : 'Submit Blog'}
                         </Button>
-                    </Form>) : (
-                        <Button onClick={() => setShowForm(true)} variant="primary">
-                            Create New Blog
-                        </Button>
-                    )}
+                    </Form>) : ''}
 
                 </Col>
             </Row>

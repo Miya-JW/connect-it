@@ -7,11 +7,15 @@ import '../styles/MusicPage.css'
 
 const MusicPage = () => {
     return (
-        <div>
+        <div className="singlePage musicPage">
             <Header />
+            <div className="pageBody">
+
+           
             <PopularArtists />
             <WhatsNew />
             <WhatsPopular />
+            </div>
 
         </div>
     );

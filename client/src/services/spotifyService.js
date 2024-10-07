@@ -47,7 +47,7 @@ export const searchItems = async (searchTerm, searchType) => {
         params: {
             q: searchTerm,
             type: type,
-            limit: 10 // 可以根据需要调整返回结果的数量
+            limit: 20 // 可以根据需要调整返回结果的数量
         },
     });
 
@@ -94,7 +94,7 @@ export const fetchNewReleases = async () => {
         },
         params: {
             country: 'US', // 选择合适的市场
-            limit: 10   // 你可以指定返回的专辑数量
+            limit: 30   // 你可以指定返回的专辑数量
         }
     });
 
@@ -118,7 +118,7 @@ export const getPopularAlbums = async () => {
         },
         params: {
             country: 'US', // 根据需要选择合适的市场
-            limit: 10   // 你可以指定返回的播放列表数量
+            limit: 30   // 你可以指定返回的播放列表数量
         }
     });
 
@@ -169,7 +169,7 @@ export const getPopularArtists = async () => {
         if (response.data && response.data.artists && response.data.artists.items.length > 0) {
             return response.data.artists.items
                 .sort((a, b) => b.popularity - a.popularity) // 按流行度降序排序
-                .slice(0, 10) // 选择前10位
+                .slice(0, 20) // 选择前10位
                 .map(artist => ({
                     artist_id: artist.id,
                     artist_name: artist.name,

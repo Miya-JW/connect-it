@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {  Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
 import MusicArtistsCard from '../components/cards/MusicArtistsCard';
@@ -17,9 +17,12 @@ const SearchResultsPage = () => {
     // 如果没有结果或 results 为空数组
     if (!results || results.length === 0) {
         return (
-            <div>
+            <div className="singlePage searchResultsPage">
+
                 <Header />
-                <Alert variant="warning">没有找到相关结果，请尝试其他搜索关键词。</Alert>
+                <div className='pageBody'>
+                    <Alert variant="warning">没有找到相关结果，请尝试其他搜索关键词。</Alert>
+                </div>
             </div>
         );
     }
@@ -27,46 +30,65 @@ const SearchResultsPage = () => {
     //Music Artist
     if (results[0].artist_id) {
         return (
-            <div>
+            <div className="singlePage searchResultsPage">
                 <Header />
-                <MusicArtistsCard artists={results} />
+                <div className='pageBody'>
+                    <div className='searchResult'>
+                        <MusicArtistsCard artists={results} />
+                    </div>
+                </div>
             </div>
         );
     }
     //Music Album
     else if (results[0].album_id) {
         return (
-            <div>
+            <div className="singlePage searchResultsPage">
                 <Header />
-                <MusicAlbumCard results={results}/>
-                
+                <div className='pageBody'>
+                    <div className='searchResult'>
+                        <MusicAlbumCard results={results} />
+                    </div>
+                </div>
             </div>
         );
     }
     //Book
     else if (results[0].book_id) {
         return (
-            <div>
+            <div className="singlePage searchResultsPage">
                 <Header />
-                <BookCard results={results} />
+                <div className='pageBody'>
+                    <div className='searchResult'>
+                        <BookCard results={results} />
+                    </div>
+                </div>
+
             </div>
         )
     }
     //Users
     else if (results[0].user_id) {
         return (
-            <div>
+            <div className="singlePage searchResultsPage">
                 <Header />
-                <UserInfoCard results={results} />
+                <div className='pageBody'>
+                    <div className='searchResult'>
+                        <UserInfoCard results={results} />
+                    </div>
+                </div>
             </div>
         )
     }
-    else if(results[0].movie_id){
-        return(
-            <div>
-            <Header />
-            <MovieCard results={results} />
-        </div>
+    else if (results[0].movie_id) {
+        return (
+            <div className="singlePage searchResultsPage">
+                <Header />
+                <div className='pageBody'>
+                    <div className='searchResult'>
+                        <MovieCard results={results} />
+                    </div></div>
+            </div>
         )
     }
 }

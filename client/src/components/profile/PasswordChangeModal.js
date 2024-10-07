@@ -18,7 +18,7 @@ const PasswordChangeModal = ({ userId, onClose }) => {
     };
 
     return (
-        <div className="modal-content">
+        <div className="modal-content changePassword">
             <form onSubmit={handlePasswordChange}>
                 <div className="form-group">
                     <label htmlFor="currentPassword">Current Password</label>
@@ -35,7 +35,7 @@ const PasswordChangeModal = ({ userId, onClose }) => {
                         required />
                 </div>
                 {error && <div className="alert alert-danger">{error}</div>}
-                <button type="submit" className="btn btn-primary">Update Password</button>
+                <button type="submit" className="btn btn-primary edit_btn">Update Password</button>
             </form>
         </div>
     );

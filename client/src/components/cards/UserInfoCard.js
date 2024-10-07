@@ -6,14 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFollowedUsers } from '../../services/serverServies/userActivityService'
 import UserFollowBtn from '../buttons/UserFollowBtn';
 import { useNavigate } from 'react-router-dom';
-import TagCard from './TagCard';
-import '../../styles/Cards.css';
+// import TagCard from './TagCard';
+
 
 
 const UserInfoCard = ({ results }) => {
     const navigate = useNavigate();
     const userId = useSelector(state => state.user.userId); // 从 Redux 获取 userId
     const [followedUsers, setFollowedUsers] = useState({});// 记录关注的状态
+    const [detailExpandedId, setDetailExpandedId] = useState(null);
+    const toggleDetail = (id) => {
+
+        setDetailExpandedId(detailExpandedId === id ? null : id);
+
+    }
 
 
     useEffect(() => {
@@ -46,38 +52,44 @@ const UserInfoCard = ({ results }) => {
     }
     return (
         <div className="UserInfoCard">
-            <ListGroup>
-                {results.map((item) => (
-                    <ListGroup.Item key={item.user_id}>
-                        <Card>
-                            <Card.Body>
-                                <div style={{ display: 'flex', marginBottom: '1rem' }}>
-                                    <Card.Img onClick={() => toOtherUserPage(item.user_id)} className="rounded-circle"
-                                        variant="top"
-                                        src={`${process.env.REACT_APP_SERVER_URL}/uploads${item.user_avatar}` || 'https://via.placeholder.com/100'}
-                                        style={{ width: '100px', height: '100px', marginRight: '1rem' }}
-                                    />
-                                    <div>
-                                        <Card.Title onClick={() => toOtherUserPage(item.user_id)}>{item.user_name}</Card.Title>
-                                        <Card.Text>Name: {`${item.user_first_name||""} ${item.user_last_name||""}`|| 'Unknown'}</Card.Text>
 
-                                        <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
-                                        <Card.Text>About: {item.user_about_me || 'None'}</Card.Text>
-                                        {/* <Card.Text>Tags: {item.user_tag || ''}</Card.Text> */}
-                                        <TagCard user={item}/>
-                                    </div>
+            {results.map((item) => (
+                // <ListGroup.Item className="userCard" key={item.user_id}>
+
+                    <div className='otherUserInfo'>
+                        <Card.Img onClick={() => toOtherUserPage(item.user_id)} className="rounded-circle"
+                            variant="top"
+                            src={`${process.env.REACT_APP_SERVER_URL}/uploads${item.user_avatar}` || 'https://via.placeholder.com/100'}
+                            style={{ width: '150px', height: '150px', marginBottom:'5px' ,cursor:'pointer'}}
+                        />
+
+                        <Card.Title onClick={() => toOtherUserPage(item.user_id)}>{item.user_name}</Card.Title>
+                        <button className="expandBtnUser" onClick={()=>toggleDetail(item.user_id)}>{detailExpandedId===item.user_id ? 'Show Less' : 'More Info'}</button>
+                        <div className="userOtherInfo">
+                            {detailExpandedId===item.user_id && (
+                                <div>
+                                    <Card.Text>Name: {`${item.user_first_name || ""} ${item.user_last_name || ""}` || 'Unknown'}</Card.Text>
+
+                                    <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                    <Card.Text>About: {item.user_about_me || 'None'}</Card.Text>
+                                    {/* <Card.Text>Tags: {item.user_tag || ''}</Card.Text> */}
+                                    {/* <TagCard user={item} /> */}
+                                    <UserFollowBtn
+                                        follow_id={item.user_id}
+                                        isFollowed={followedUsers[item.user_id]}
+                                        userId={userId}
+                                        onStatusChange={handleStatusChange}
+                                    />
                                 </div>
-                                <UserFollowBtn
-                                    follow_id={item.user_id}
-                                    isFollowed={followedUsers[item.user_id]}
-                                    userId={userId}
-                                    onStatusChange={handleStatusChange}
-                                />
-                            </Card.Body>
-                        </Card>
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
+                            )}
+
+                        </div>
+                    </div>
+
+
+                // </ListGroup.Item>
+            ))}
+
         </div>
     )
 }

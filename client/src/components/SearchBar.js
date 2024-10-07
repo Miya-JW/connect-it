@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import '../styles/Header.scss'; // 如果需要，引入专门的样式文件
 import { searchItems } from '../services/spotifyService';
 import { fetchMovieByName } from '../services/tmdbService';
 import { fetchBooksByQuery } from '../services/googleBookService';
@@ -23,8 +22,8 @@ function SearchBar() {
 
     //处理搜索栏---发送搜索请求到API，返回结果------转到结果界面显示搜索结果
     const handleSearch = async () => {
-        console.log("searching---------", searchType);
-        if (searchType === 'music_artist' || searchType === 'music_album') {
+        console.log("searching---------", searchTerm, searchType);
+        if (searchType === 'music_artist') {
             try {
                 const results = await searchItems(searchTerm, searchType);
                 await checkAndCreateArtists(results);
@@ -33,7 +32,18 @@ function SearchBar() {
                 console.error('Search failed:', error);
                 // 这里可以处理错误，比如显示错误消息
             }
-        } else if (searchType === 'book_title' || searchType === 'book_author') {
+        } else if (searchType === 'music_album') {
+            try {
+                const results = await searchItems(searchTerm, searchType);
+                await checkAndCreateAlbums(results);
+                navigate(`/search_results/${searchType}`, { state: { results } });
+            } catch (error) {
+                console.error('Search failed:', error);
+                // 这里可以处理错误，比如显示错误消息
+            }
+        }
+
+        else if (searchType === 'book_title' || searchType === 'book_author') {
             try {
                 const results = await fetchBooksByQuery(searchTerm, searchType);
                 await checkAndCreateBooks(results);
@@ -44,7 +54,6 @@ function SearchBar() {
         } else if (searchType === 'users') {
             try {
                 const results = await searchUsers(searchTerm);
-                await checkAndCreateAlbums(results);
                 navigate(`/search_results/${searchType}`, { state: { results } });
             } catch (error) {
                 console.error('Search failed:', error);
@@ -64,33 +73,36 @@ function SearchBar() {
     };
 
     return (
-        <Form inline>
+        <Form inline className='searchBarContainer'>
             <InputGroup className='input_group'>
-                <FormControl
-                    className='input_area'
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <Form.Control
-                    className='select_area'
-                    as="select"
-                    value={searchType}
-                    onChange={(e) => setSearchType(e.target.value)}
-                >
+                <div className="searchArea">
+                    <FormControl
+                        className='input_area'
+                        type="text"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+                <div className="selectArea">
+                    <Form.Control
+                        className='select_area'
+                        as="select"
+                        value={searchType}
+                        onChange={(e) => setSearchType(e.target.value)}
+                    >
+                        <option value="">Option</option>
+                        <option value="users">User</option>
+                        <option value="blog">Blog</option>
+                        <option value="movie">Movie</option>
+                        <option value="music_artist">Music - Artist</option>
+                        <option value="music_album">Music - Album</option>
+                        <option value="book_title">Book - Title</option>
+                        <option value="book_author">Book - Author</option>
+                 
 
-                    <option value="blog">Blog</option>
-                    <option value="music_artist">Music - Artist</option>
-                    <option value="music_album">Music - Album</option>
-                    <option value="movie">Movie</option>
-                    <option value="book_title">Book - Title</option>
-                    <option value="book_author">Book - Author</option>
-                    <option value="album">Album</option>
-                    <option value="topic">Topic</option>
-                    <option value="place">Place</option>
-                    <option value="users">User</option>
-                </Form.Control>
+                    </Form.Control>
+                </div>
                 <Button className='search_btn' variant="outline-success" onClick={handleSearch}>Search</Button>
             </InputGroup>
         </Form>

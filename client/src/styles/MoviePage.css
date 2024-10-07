@@ -1,0 +1,207 @@
+/*-------------------------------movie card -------------------------------*/
+.movieCardsContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--background-color-1);
+    background: linear-gradient(90deg, white, grey 50%, white);
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.movieCards {
+    display: flex;
+
+    justify-content: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+}
+
+.scrollButton {
+    cursor: pointer;
+    opacity: 0;
+}
+
+
+
+
+/* ----------------single card---------- */
+.movieCardOut {
+    background-color: transparent;
+    display: flex;
+    width: 300px;
+    height: 450px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    flex: 0 0 auto;
+    /* Ensure cards do not shrink */
+    margin: 10px;
+
+
+}
+
+.movieCard {
+    width: 290px;
+    height: 440px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.movieImg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 290px;
+    height: 440px;
+    transition: 0.35s;
+    cursor: pointer;
+    /* z-index: 1; */
+    border-radius: 10px;
+}
+
+.movieText {
+    display: flex;
+    flex-direction: column;
+    /* 设置为列布局 */
+    justify-content: start;
+    /* 在主轴（即列方向）上居中对齐 */
+    align-items: flex-start;
+    /* 在交叉轴（即行方向）上起始对齐 */
+    line-height: 1;
+    /* 减少行高，增加文本紧凑度 */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    padding: 20px 10px;
+    opacity: 0;
+    /* 确保一开始不可见 */
+    transform: translate(100%, 0%);
+    /* 初始状态位移 */
+    transition: transform 0.5s, opacity 0.5s;
+    /* 平滑过渡动画 */
+    font-size: 20px;
+    z-index: 1;
+
+ 
+}
+
+.movieTitle {
+    color: var(--font-color-dark);
+    font-size: 30px;
+}
+.movieSummary{
+    width: 200px;
+    white-space: nowrap;
+    overflow: visible;
+}
+.movieText>* {
+   
+    margin-top: 2px;
+    /* 细微调整顶部间距 */
+    margin-bottom: 2px;
+    /* 细微调整底部间距 */
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+}
+
+.movieCard .movieText::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 100%;
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 119, 0.752);
+    opacity: 0.1;
+    transition: 1.5s;
+    transition-delay: 0.6s;
+}
+
+
+.movieCard:hover .movieImg {
+    opacity: 0.1;
+}
+
+.movieCard:hover .movieText {
+    color: var(--font-color-dark);
+    font-size: 18px;
+    opacity: 1;
+    transform: translate(0%, 0%);
+    transition-delay: 0.6s;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+}
+
+
+.movieCard:hover .movieText::before {
+    background-color: rgba(255, 255, 255, 0);
+    left: 0;
+    opacity: 1;
+    transition-delay: 0;
+}
+
+
+/* 调整 Dropdown 按钮本身的样式 */
+.movieBtn,
+.dropdown-toggle {
+    font-size: 20px;
+    /* 减小文字大小 */
+    padding: 5px 10px;
+    height: fit-content;
+    /* 如果你设置了特定的高度，可以调整或设置为 auto 以适应内容 */
+    width: fit-content;
+    z-index: 100;
+    border: none;
+    margin-left: 0px;
+}
+
+
+
+/* 调整下拉菜单项的文字大小 */
+.movieBtnOption {
+    font-size: 15px;
+    /* 统一下拉菜单项的文字大小也进行调整 */
+    font-style: normal;
+    font-weight: bold;
+    color: var(--font-color-dark);
+    padding: 0px 50px;
+    /* 可选的：调整下拉菜单项的填充以改变大小 */
+
+}
+
+.dropdown-menu.show {
+    z-index: 200;
+    display: block;
+}
+
+.dropdown-menu {
+    z-index: 1050;
+    /* Bootstrap 默认使用这个值 */
+}
+
+.movieTitle .movieArtist .movieArtist .movieDate .movieTracks {
+    color: var(--card-font-color);
+}
+
+.movieBtnOut {
+    background-color: transparent;
+}
+
+/* dropdown menu */
+
+.dropdown-menu {
+    border: none;
+    background: linear-gradient(to right, rgba(100, 100, 100, 0.858), white);
+
+}

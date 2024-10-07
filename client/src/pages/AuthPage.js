@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 const AuthPage = () => {
     return (
-        <div>
+        <div className="singlePage authPage">
             <Header />
             <AuthForm />
         </div>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import header_image from '../assets/images/header_img.jpg';
+import logo_image from '../assets/images/logo.jpg';
 import Menu from '../components/Menu';
 import SearchBar from '../components/SearchBar';
-import '../styles/Header.scss'; // 如果需要，引入专门的样式文件
 import { logoutUser } from '../store/actions/action';
 import { useDispatch } from 'react-redux';
 
@@ -31,8 +31,10 @@ function Header() {
 
     return (
         <header className="header">
-            <p className='logo' onClick={handleHomePage}>CONNECT IT</p>
+          
+            <p className='logo' onClick={handleHomePage}>CONNECT-IT</p>
             <img src={header_image} alt='head_img' className='header_img' />
+            <img src={logo_image} alt='logo_image' className='logo_image'/>
             <button onClick={handleLogoutLogin} className="logout_btn"> {isLoggedIn ? 'Logout' : 'Login'}</button>
             <Menu />
             <SearchBar />

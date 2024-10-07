@@ -25,13 +25,13 @@ const UserFollowBtn = ({ follow_id, isFollowed, userId, onStatusChange }) => {
             console.error('Failed to update user follow status:', error);
         }
     };
-    return (<div>
-        <Button variant="outline-primary"
+    return (
+        <Button className={isFollowed?'followBtn delete_btn':'followBtn edit_btn'}  variant="outline-primary"
             onClick={() => handleUserFollow(follow_id)}
         >
             {isFollowed ? 'Unfollow' : 'Follow'}
         </Button>
-    </div>);
+    );
 };
 
 export default UserFollowBtn;

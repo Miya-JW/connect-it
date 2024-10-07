@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import StatusBtn from '../buttons/StatusBtn';
 import { getMovieStatus } from '../../services/serverServies/movieService'
-import '../../styles/Cards.css'
 import { Button } from 'react-bootstrap';
 
 
@@ -53,35 +52,35 @@ const MovieCard = ({ results }) => {
     };
 
     const scrollLeft = () => {
-        const container = document.getElementById('musicCards');
+        const container = document.getElementById('movieCards');
         container.scrollBy({ left: -300, behavior: 'smooth' });
     };
 
     const scrollRight = () => {
-        const container = document.getElementById('musicCards');
+        const container = document.getElementById('movieCards');
         container.scrollBy({ left: 300, behavior: 'smooth' });
     };
 
     return (
 
-        <div className="musicCardsContainer">
+        <div className="movieCardsContainer">
             <button onClick={scrollLeft} className="scrollButtonL scrollButton">Left</button>
-            <div className="musicCards" id="musicCards">
+            <div className="movieCards" id="movieCards">
                 {results.map(item => (
-                    <div className="musicCardOut" key={item.movie_id}>
-                        <div className="musicCard">
+                    <div className="movieCardOut" key={item.movie_id}>
+                        <div className="movieCard">
 
-                            <img className="musicImg" src={item.movie_poster} alt="movie Cover" />
+                            <img className="movieImg" src={item.movie_poster} alt="movie Cover" style={{width:'290px',height:'auto'}} />
 
-                            <div className="musicText">
-                                <div className="musicTitle">{item.movie_title}</div>
+                            <div className="movieText">
+                                <div className="movieTitle">{item.movie_title}</div>
                                 <StatusBtn user_id={userId} targetType={'movie'} targetId={item.movie_id} currentStatus={movieStatus[item.movie_id]?.movie_status} onStatusChange={handleStatusChange} />
-                                <div className="musicArtist">Artist: {item.movie_artist_name}</div>
-                                <div className="musicDate">Release Date: {new Date(item.movie_date).toLocaleDateString()}</div>
-                                <div className="musicTracks">Rate: {item.movie_rating}</div>
-                                <div>
-                                    Summary: {expandedId === item.movie_id ? item.movie_summary : `${item.movie_summary.substring(0, 100)}...`}
-                                    <Button variant="link" onClick={() => toggleSummary(item.movie_id)}>
+                               
+                                <div className="movieDate">Release Date: {new Date(item.movie_date).toLocaleDateString()}</div>
+                                <div className="movieTracks">Rate: {item.movie_rating}</div>
+                                <div className='movieSummary'>
+                                    Summary: {expandedId === item.movie_id ? item.movie_summary : `...`}
+                                    <Button  variant="link" onClick={() => toggleSummary(item.movie_id)}>
                                         {expandedId === item.movie_id ? 'Show Less' : 'Show More'}
                                     </Button>
                                 </div>

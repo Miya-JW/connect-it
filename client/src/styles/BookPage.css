@@ -1,0 +1,39 @@
+
+.bookPageBody{
+    width: 80%;
+    display: grid;
+
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+    "area1 area2 area3 area4 ";
+    grid-column-gap: 20px;
+        
+}
+
+.bookComputer{
+grid-area: area1;
+}
+
+.bookPsychology{
+    grid-area: area2;
+}
+
+.bookHistory{
+    grid-area: area3;
+}
+
+.bookComics{
+    grid-area: area4;
+}
+
+.list-group-item{
+    background-color: e7ecef;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding:20px
+}
+
+.card-img-top{
+    border-radius: 20px;
+}

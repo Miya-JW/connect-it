@@ -8,9 +8,6 @@ import UserPage from './pages/UserPage';
 import BookPage from './pages/BookPage';
 import MoviePage from './pages/MoviePage';
 import MusicPage from './pages/MusicPage';
-import PlacePage from './pages/PlacePage';
-import PhotoAlbumPage from './pages/PhotoAlbumPage';
-import TopicPage from './pages/TopicPage';
 import BlogPage from './pages/BlogPage';
 import SearchResultsPage from './pages/SearchResuletsPage';
 import { useSelector } from 'react-redux';
@@ -31,9 +28,6 @@ function App() {
           <Route path="/book" element={<BookPage/>} />
           <Route path="/movie" element={<MoviePage/>} />
           <Route path="/music" element={<MusicPage/>} />
-          <Route path="/place" element={<PlacePage/>} />
-          <Route path="/album" element={<PhotoAlbumPage/>} />
-          <Route path="/topic" element={<TopicPage/>} />
           <Route path="/blog" element={<BlogPage/>} />
           <Route path="/search_results/:type" element={<SearchResultsPage />} />
          

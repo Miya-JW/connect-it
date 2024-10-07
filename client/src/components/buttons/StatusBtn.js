@@ -71,8 +71,8 @@ const StatusBtn = ({ user_id, targetType, targetId, currentStatus, onStatusChang
     };
 
     return (
-        <div className='musicBtn'>
-            <DropdownButton
+        <div className='musicBtnOut'>
+            <DropdownButton className='musicDropdown '
                 title={status.toUpperCase()} // 显示当前状态，并大写
                 variant="outline-primary"
                 id={`dropdown-status-button-${targetId}`}

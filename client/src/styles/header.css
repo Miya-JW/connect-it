@@ -1,0 +1,124 @@
+.header {
+    position: relative;
+    width: 100%;
+    font-family: var(--header-font-family);
+    
+    
+    margin-bottom: 2rem;
+}
+
+.header_img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    opacity: 90%;
+}
+
+.logo {
+    font-family: var(--header-font-family);
+    position: absolute;
+    top: 50%;  /* 定位到父元素的中央 */
+    left: 50%; /* 定位到父元素的中央 */
+    transform: translate(-50%, -50%); /* 向上和向左偏移自身宽度和高度的50% */
+    color: var(--font-color-dark);
+    font-size: 5rem;
+    z-index: 10;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: white;
+    cursor: pointer;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.783),rgba(106, 106, 106, 0.205));
+  
+    padding: 50px 60px;
+    border-radius: 30px;
+    
+}
+
+.logo_image{
+    position: absolute;
+    top: 8%;
+    left:2%;
+    width: 11%;
+    border-radius: 50%;
+}
+
+
+
+
+/* ---------search bar */
+.searchBarContainer{
+  
+    border: none;
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    width: 700px;
+    height: 60px;
+    display: flex;
+}
+
+
+
+.selectArea {
+    width: 150px;
+    
+}
+
+.select_area{
+    background-color:var(--background-color);
+    font-weight: bold;
+    border-radius: 0;
+    height: 60px;
+    
+}
+
+.input_area{
+    border-radius: 0;
+    height: 60px;
+    font-size: 25px;
+}
+
+.searchArea {
+
+    width: 300px;
+}
+
+.search_btn {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    background-color: var(  --background-color-auth);
+    color: var(--font-color-dark);
+    font-weight: 600;
+    border: none;
+    
+}
+
+/* ----------login btn */
+.logout_btn {
+    position: absolute;
+    top: 80%;
+    right: 5%;
+    width: 200px;
+    height: 200px;
+    border-radius: 60% 130% 90% 110%;
+    padding: 5px 10px;
+    background-color: var(--font-color-dark);
+    color: var(--font-color-light);
+    font-size: 30px;
+    text-shadow: 5px 5px 5px 6d6875;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    z-index: 11;
+}
+
+.logout_btn:hover {
+    background-color: var(--background-color-1);
+    color: var(--font-color-light);
+    width: 150px;
+    height: 150px;
+    transition: --background-color-search 0.5s ease, width 0.5s ease, height 0.5s ease, color 0.5s ease;
+    font-size: large;
+    font-weight: 800;
+}

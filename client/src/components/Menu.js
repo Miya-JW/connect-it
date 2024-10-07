@@ -19,7 +19,7 @@ function Menu() {
 
 
     const dockerRef = useRef(null);
-    const [scales, setScales] = useState(Array(18).fill(1));
+    const [scales, setScales] = useState(Array(12).fill(1));
     const lastUpdateTime = useRef(Date.now()); // 用于节流
 
     const handleMouseMove = (e) => {
@@ -31,8 +31,8 @@ function Menu() {
 
         if (dockerRef.current) {
             const dockerRect = dockerRef.current.getBoundingClientRect();
-            const range = 300;
-            const maxScale = 1.5;
+            const range = 800;
+            const maxScale = 2;
             const curve = createCurve(range, e.clientX - dockerRect.left, 1, maxScale);
             const children = dockerRef.current.querySelectorAll('.menu_item, .gap');
             const newScales = Array.from(children).map(child => {
@@ -73,9 +73,10 @@ function Menu() {
     }, []);
 
     return (
+        <div className='menuBar'>
         <div className='docker' ref={dockerRef}>
             <div className="menu">
-                {["home","blog", "music", "movie", "book", "album", "topic", "place", "me"].flatMap((item, index) => (
+                {["home","blog", "music", "movie", "book", "me"].flatMap((item, index) => (
                     <React.Fragment key={index}>
                         <div
                             className='menu_item'
@@ -91,6 +92,7 @@ function Menu() {
                     </React.Fragment>
                 ))}
             </div>
+        </div>
         </div>
     );
 }

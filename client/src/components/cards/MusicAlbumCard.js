@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import StatusBtn from '../buttons/StatusBtn';
 import { getAlbumStatus } from '../../services/serverServies/albumsService'
-import '../../styles/Cards.css'
+
 
 
 const MusicAlbumCard = ({ results }) => {
@@ -49,7 +49,6 @@ const MusicAlbumCard = ({ results }) => {
         console.log(albumStatus);
     };
 
-    console.log(results)
     const scrollLeft = () => {
         const container = document.getElementById('musicCards');
         container.scrollBy({ left: -300, behavior: 'smooth' });
@@ -61,38 +60,7 @@ const MusicAlbumCard = ({ results }) => {
     };
 
     return (
-        // <div className='musicCards '>
-        //     <ListGroup >
-              
-        //             {results.map(item => (
-        //                 // Card for Album
-
-        //                 <ListGroup.Item key={item.album_id} className='musicCardOut '>
-        //                     <Card className='musicCard '>
-        //                         <Card.Body className='musicCard '>
-        //                             <Card.Img className='musicImg' variant="top" src={item.album_image} />
-        //                             <div className='musicText '>
-        //                                 <Card.Text className=' musicTitle'>{item.album_title}</Card.Text>
-        //                                 < StatusBtn user_id={userId} targetId={item.album_id} currentStatus={albumStatus[item.album_id]?.album_status} onStatusChange={handleStatusChange} />
-        //                                 <Card.Text className=' musicArtist'>Artist: {item.album_artist_name}</Card.Text>
-        //                                 <Card.Text className=' musicDate'>Release Date: {new Date(item.album_release_date).toLocaleDateString()}</Card.Text>
-        //                                 <Card.Text className=' musicTracks'>Total Tracks: {item.album_total_tracks}</Card.Text>
-        //                                 <Card.Link className='' href={item.album_spotifyUrl} target="_blank">Listen on Spotify</Card.Link>
-
-
-        //                             </div>
-        //                         </Card.Body>
-        //                     </Card>
-        //                 </ListGroup.Item>
-
-        //             ))}
-        //      <div className='button-prev'>left</div>
-        //      <div className='button-next'>right</div>
-        //     </ListGroup>
-
-         
-
-        // </div>
+        
         <div className="musicCardsContainer">
         <button onClick={scrollLeft} className="scrollButtonL scrollButton">Left</button>
         <div className="musicCards" id="musicCards">

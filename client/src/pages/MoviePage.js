@@ -5,11 +5,12 @@ import PopularMovies from "../components/movie/PopularMovies";
 
 const homePage = () => {
     return (
-        <div>
+        <div className="singlePage moviePage">
             <Header />
-            <h1>This is movie page</h1>
+            <div className="pageBody">
             <NewMovies />
             <PopularMovies />
+            </div>
         </div>
 
     );

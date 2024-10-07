@@ -37,3 +37,258 @@ button.btn_login_submit {
 button.btn_register_submit {
     background-color: var(--btn-register-submit);
 }
+
+
+/*-------------------------------create article button -------------------------------*/
+#create_article_btn {
+    margin-bottom: 50px;
+    background-image: linear-gradient(to right, var(--font-color-dark), var(--font-color-light));
+    color: var(--font-color-dark);
+    padding: 20px 40px;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: x-large;
+    border: none;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+#create_article_btn:hover {
+    color: var(--font-color-light);
+}
+
+#create_article_btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--background-color-white), var(--background-color-search), transparent);
+    opacity: 0;
+    border-radius: 5px;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+#create_article_btn:hover::after {
+    animation: glow 2s infinite;
+}
+
+/*-------------------------------delete button -------------------------------*/
+
+.delete_btn {
+    background-image: linear-gradient(to bottom, var(--btn-delete), var(--background-color-white));
+    color: var(--font-color-dark);
+}
+
+.delete_btn:hover {
+    color: var(--font-color-light);
+}
+
+.delete_btn::after {
+    background: linear-gradient(90deg, var(--background-color-white), var(--btn-delete), transparent);
+}
+
+/*-------------------------------edit button -------------------------------*/
+.edit_btn {
+
+    background-image: linear-gradient(to bottom, var(--btn-edit), var(--background-color-white));
+    color: var(--font-color-dark);
+}
+
+.edit_btn:hover {
+    color: var(--font-color-light);
+}
+
+.edit_btn::after {
+    background: linear-gradient(90deg, var(--background-color-white), var(--btn-edit), transparent);
+}
+
+/*------------------------------ blogSubBtn -------------------------------*/
+.blogSubBtn {
+    background-image: linear-gradient(to right, var(--background-color-search), var(--background-color-white));
+    color: var(--font-color-dark);
+    margin: 20px;
+}
+
+.blogSubBtn:hover {
+    color: var(--font-color-dark);
+}
+
+.blogSubBtn::after {
+    background: linear-gradient(45deg, var(--background-color-search), var(--background-color-white), transparent);
+}
+
+
+/*-------------------------------mutiple buttons:  delete,edit,followArtist,followUser,Status-------------------------------*/
+.delete_btn,
+.edit_btn,
+.blogSubBtn,
+.musicBtn,.expandBtn,.expandBtnUser {
+    transform: scale(0.7);
+    font-size: 23px;
+    padding: 15px 30px;
+    margin-left: -20px;
+    margin-right: -30px;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU */
+
+.delete_btn:hover,
+.edit_btn:hover,
+.blogSubBtn:hover,
+.musicBtn:hover,.expandBtn:hover,.expandBtnUser:hover {
+    font-style: italic;
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU:hover */
+
+.delete_btn::after,
+.edit_btn::after,
+.blogSubBtn::after,
+.menu_item::after,
+.expandBtn::after,.expandBtnUser::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    border-radius: 5px;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+/*  */
+
+@keyframes glow {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.delete_btn:hover::after,
+.edit_btn:hover::after,
+.blogSubBtn:hover::after,
+.expandBtn:hover::after,.expandBtnUser:hover::after {
+    animation: glow 2s infinite;
+}
+
+
+
+
+
+/*++++++++++++++++++music page+++++++++++++++  */
+
+/* --------follow btn -----------------*/
+.musicBtn {
+
+    background-image: linear-gradient(to right, var(--background-color-search), var(--background-color-white));
+    color: var(--font-color-dark);
+   
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU */
+
+.musicBtn:hover {
+    color: var(--font-color-dark);
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU:hover */
+
+.musicBtn::after {
+    background: linear-gradient(45deg, var(--background-color-search), var(--background-color-white), transparent);
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU::after */
+
+
+/* ---------------status btn-------------- */
+.dropdown-toggle {
+    background-color: transparent;
+    background-image: linear-gradient(to right, var(--background-color-search), var(--background-color-white));
+    color: var(--font-color-dark);
+    margin: 5px;
+    width: fit-content;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+}
+
+/* -------------expandBtn------------- */
+.expandBtn {
+    width: 120px;
+    background-image: linear-gradient(to right, black, lightgrey);
+    color: var(--font-color-light);
+    border: none;
+    border-radius: 10px;
+    margin-left: 20px;
+    align-self:self-end;
+  
+}
+/* ,
+#dropdown-status-button-2kX3enxQiHLTtuNwIXZMXU */
+
+.expandBtn:hover {
+    color: var(--font-color-dark);
+}
+
+.expandBtn::after {
+    background: linear-gradient(45deg, var(--background-color-search), var(--background-color-white), transparent);
+}
+
+/* ---------- expandBtnUser-----------*/
+.expandBtnUser {
+    width: 150px;
+    background-image: linear-gradient(to right, black, lightgrey);
+    color: var(--font-color-light);
+    border: none;
+    border-radius: 5px;
+    align-self: center;
+    font-size: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    
+  
+}
+
+
+.expandBtnUser:hover {
+    color: var(--font-color-dark);
+}
+
+.expandBtnUser::after {
+    background: linear-gradient(45deg, var(--background-color-search), var(--background-color-white), transparent);
+}

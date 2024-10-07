@@ -1,0 +1,36 @@
+.userProfilePage{
+    font-size: 25px;
+}
+
+.uploadAvatar{
+    background-color: var(--background-color-6);
+    padding:30px;
+    margin: 30px;
+    border-radius: 20px;
+   width: 80%;
+    margin-left: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.changePassword{
+   margin: 10px 0px 10px 0px;
+    border-radius: 20px;
+}
+
+.changePassword label {
+    margin:10px;
+}
+
+.form-control{
+    font-size: 23px;
+}
+.userProfilePage input {
+    width: 80%;
+}
+
+.userProfilePage textarea{
+    width: 80%;
+}
