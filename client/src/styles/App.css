@@ -9,7 +9,7 @@
 @import url("./effects.css");
 @import url('./menu.css');
 @import url('./ProfilePage.css');
-
+@import url('./HomePage.css');
 @import url('./header.css');
 
 
@@ -67,13 +67,14 @@
   /* font */
   --font-family: 'Squada One', sans-serif;
   --header-font-family:"Abril Fatface", serif;
+  --homepage-font-family:"Abyssinica SIL", serif;
   --font-color: #303841;
   --font-color-light: #f9f7f3;
   --font-color-dark: #303841;
   --text-shadow: 8px 8px 5px rgba(95, 92, 92, 0.5);
 
 /* bolgCard */
---blog-1:#f7ede2;
+--blog-1:#dfdfdf;
 --blog-2:#84a59d;
 
 }
@@ -89,7 +90,7 @@
   padding: 0;
   display: flex;
   justify-content: center;
-  background-color: var(--background-color);
+  background: radial-gradient(circle, #1b263b9d, #1B263B);
 }
 
 .singlePage{

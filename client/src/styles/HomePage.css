@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+.homePage {
+    background: radial-gradient(circle, #1b263b9d, #1B263B);
+}
+
+.homePageBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#main {
+
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#click-section {
+    width: 30%;
+    height: 100%;
+    padding: 20px 0;
+    padding-left: 100px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.108);
+    margin-left: 70px;
+    padding-left: 10px;
+    padding-right: -10px;
+    border-radius: 50px;
+}
+
+#drawerboxes {
+    margin-left: 10%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#drawerboxes::before {
+    content: '';
+    width: 8px;
+    height: 94%;
+    position: absolute;
+    left: -10px;
+    top: 3%;
+    z-index: 100;
+}
+
+.drawerbox {
+    height: calc(100%/5.5);
+    width: 70%;
+    position: relative;
+    z-index: 50;
+    transform: translateX(-70%);
+    transition: transform .5s ease-in-out;
+}
+
+.drawerbox.active {
+    background-color: rgba(223, 32, 32, 0.095);
+    transform: translateX(0);
+}
+
+.drawer-btn {
+    width: 100%;
+    height: 100%;
+    font: 800 70px '';
+    background-color: rgba(255, 255, 255, 0.197);
+    background: linear-gradient(90deg, #FFD54D, #fbdb70 ,#fae7a9, #f9f4e2);
+    background: linear-gradient(270deg, #1b263b, #2e384b ,#535c6f, #7f858e);
+    border-radius: 10px;
+    border: none;
+    transition: background-color .5s ease-in-out;
+    color: rgba(240, 240, 240, 0.845)
+}
+
+.drawer-btn.active {
+    background-color: red;
+    background-size: cover;
+}
+
+.drawer-btn:hover {
+    cursor: pointer;
+}
+
+.drawer-head {
+    position: absolute;
+    color: #ffd54dcd;
+    font-size: 200px;
+    font-weight: 700;
+    right: -38px;
+    top: calc(100% - 135px);
+    text-shadow: 4px 4px 10px #7f858e;
+
+}
+
+#slide-section {
+    position: relative;
+    height: 100%;
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+    background-color: transparent;
+    backdrop-filter: blur(11px);
+}
+
+#slide-bar {
+    position: absolute;
+    top: 10%;
+    left: 40px;
+    height: 80%;
+    width: 1px;
+    background-color: white;
+}
+
+#bar {
+    position: absolute;
+    height: calc(100% / 4);
+    width: 5px;
+    top: 0;
+    left: -1.2px;
+    background-color: var(--background-color-search);
+    transition: transform .5s ease-in-out;
+}
+
+#card-section {
+    height: 100%;
+    width: 80%;
+    overflow: hidden;
+}
+
+.card {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 10% 0;
+    color: black;
+    font-size: 30px;
+    transition: transform .5s ease-in-out;
+}
+
+/* .card.active{
+    transform: translateY(-100%);
+} */
+
+.card-small-title {
+
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: min(5%, 20px);
+    color: #1b263b;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.card-title {
+    font-family: var(--header-font-family);
+    font-size: 80px;
+    font-weight: 700;
+    padding-bottom: min(20%, 40px);
+    margin-bottom: 30px;
+    padding-top: 20px;
+    background: radial-gradient(circle, rgba(180, 180, 180, 0.602), white);
+    -webkit-background-clip: text;
+    /* 使背景仅应用于文字 */
+    -webkit-text-fill-color: transparent;
+    /* 将文字颜色设置为透明，让背景渐变显示出来 */
+    display: inline-block;
+    /* 确保背景仅应用于文本本身 */
+    cursor: pointer;
+    
+}
+
+.card-content {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: lighter;
+    margin-bottom: 40px; 
+}
+
+
+
+
+.card-img {
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    opacity: 0.8;
+    filter: blur(1px);
+    
+}
