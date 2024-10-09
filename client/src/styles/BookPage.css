@@ -10,7 +10,9 @@
     grid-column-gap: 20px;
         
 }
-
+.bookPageBody .header1{
+    font-family: var(--font-family);
+}
 .bookComputer{
 grid-area: area1;
 }
@@ -28,7 +30,7 @@ grid-area: area1;
 }
 
 .list-group-item{
-    background-color: e7ecef;
+    background-color: #e7ecefcd;
     border-radius: 20px;
     margin-top: 20px;
     padding:20px

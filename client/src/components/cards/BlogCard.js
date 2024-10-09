@@ -37,13 +37,13 @@ const BlogCard = ({ blogs, refreshBlogs }) => {
                         {editingBlogId === blog.blog_id ? (
                             <BlogForm blog={blog} onFinish={() => setEditingBlogId(null)} />
                         ) : (
-                            <Card className='bolgCard'>
-                                <Card.Body>
-                                    <Card.Title style={{cursor:'pointer'}} onClick={() => toggleDetail(blog.blog_id)}>{blog.blog_title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">
+                            <div className='bolgCard'>
+                                <div>
+                                    <div className='blog_title' onClick={() => toggleDetail(blog.blog_id)}>{blog.blog_title}</div>
+                                    <div className="mb-2 text-muted">
                                         <img src={`${process.env.REACT_APP_IMAGE_URL}${blog.author.user_avatar}`} alt="Author" style={{ width: 30, height: 30, marginRight: 10 }} className="rounded-circle" />
                                         {blog.author.user_name}
-                                    </Card.Subtitle>
+                                    </div>
                                     {
                                         detailExpandedId === blog.blog_id && (
                                             <div>
@@ -65,8 +65,8 @@ const BlogCard = ({ blogs, refreshBlogs }) => {
                                         )
                                     }
 
-                                </Card.Body>
-                            </Card>
+                                </div>
+                            </div>
                         )}
                     </Col>
                 </Row>

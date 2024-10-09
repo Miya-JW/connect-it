@@ -118,7 +118,7 @@ const UserProfilePage = () => {
                 <div className="mb-3">
                     <img src={avatarUrl || `${process.env.REACT_APP_SERVER_URL}/uploads${profile.user_avatar}`} alt="avatar img" className="rounded-circle avatar_image"
                         style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
-                    <button  onClick={openModal} className="btn btn-primary edit_btn" >Change Avatar</button>
+                    <button  onClick={openModal} className="btn btn-primary expandBtn" >Change Avatar</button>
 
                     {showModal && (
 
@@ -135,7 +135,7 @@ const UserProfilePage = () => {
                 <div className="mb-3">
                     <label htmlFor="userName" className="form-label">Username</label>
                     <input type="text" className="form-control" id="userName" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} />
-                    <button className="btn btn-primary edit_btn" onClick={(e) => handleUsernameChange(e.target.value)}>Edit</button>
+                    <button className="btn btn-primary expandBtn" onClick={(e) => handleUsernameChange(e.target.value)}>Edit</button>
                 </div>
                 <label>Change Password</label>
                 <PasswordChangeModal
@@ -144,22 +144,22 @@ const UserProfilePage = () => {
                 <div className="mb-3">
                     <label htmlFor="userFirstName" className="form-label">First Name</label>
                     <input type="text" className="form-control" id="userFirstName" value={newUserInfo.user_first_name} onChange={(e) => handleInputChange("user_first_name", e.target.value)} />
-                    <button className="btn btn-primary edit_btn" onClick={(e) => handleOtherChange()}>Edit</button>
+                    <button className="btn btn-primary expandBtn" onClick={(e) => handleOtherChange()}>Edit</button>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="userLastName" className="form-label">Last Name</label>
                     <input type="text" value={newUserInfo.user_last_name} onChange={(e) => handleInputChange("user_last_name", e.target.value)} className="form-control" id="userLastName" />
-                    <button className="btn btn-primary edit_btn" onClick={(e) => handleOtherChange()}>Edit</button>
+                    <button className="btn btn-primary expandBtn" onClick={(e) => handleOtherChange()}>Edit</button>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="userDOB" className="form-label">Date of Birth</label>
                     <input type="date" value={newUserInfo.user_date_of_birth} onChange={(e) => handleInputChange("user_date_of_birth", e.target.value)} className="form-control" id="userDOB" />
-                    <button className="btn btn-primary edit_btn" onClick={(e) => handleOtherChange()}>Edit</button>
+                    <button className="btn btn-primary expandBtn" onClick={(e) => handleOtherChange()}>Edit</button>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="userAboutMe" className="form-label">About Me</label>
                     <textarea value={newUserInfo.user_about_me} onChange={(e) => handleInputChange("user_about_me", e.target.value)} className="form-control" id="userAboutMe" ></textarea>
-                    <button className="btn btn-primary edit_btn" onClick={(e) => handleOtherChange()}>Edit</button>
+                    <button className="btn btn-primary expandBtn" onClick={(e) => handleOtherChange()}>Edit</button>
                 </div>
 
 

@@ -3,7 +3,7 @@
 }
 
 .uploadAvatar{
-    background-color: var(--background-color-6);
+    background-color: rgba(255, 255, 255, 0.165);
     padding:30px;
     margin: 30px;
     border-radius: 20px;
@@ -18,6 +18,8 @@
 .changePassword{
    margin: 10px 0px 10px 0px;
     border-radius: 20px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.165);
 }
 
 .changePassword label {
@@ -33,4 +35,15 @@
 
 .userProfilePage textarea{
     width: 80%;
+}
+
+.expandBtn{
+    width: fit-content;
+    margin-left: -10px;
+}
+
+.userProfilePage label{
+color: black;
+margin-bottom: 5px;
+margin-top: 20px;
 }

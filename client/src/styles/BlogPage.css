@@ -1,7 +1,4 @@
-.blogPage{
-    /* background-color: var(  --background-color-1);
-    background: linear-gradient(to left, var(  --background-color-1),white); */
-}
+
 
 .blogForm{
 
@@ -24,10 +21,18 @@
 }
 
 .bolgCard{
-    background-color: #ffffffb0;
+    background-color: var(--blog-1);
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px;
+  }
+
+  .blog_title{
+    cursor: pointer;
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    text-decoration-color: grey;
   }
 
 

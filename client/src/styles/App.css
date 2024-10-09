@@ -132,7 +132,7 @@ a{
   font-weight: bold;
   background: linear-gradient(45deg, var(--font-color-dark), black);
   margin-bottom: 100px;
- 
+  font-family: var(--header-font-family);
   background-clip: text;
   color: transparent;
   /* 将文字颜色设置为透明，以显示背景 */
@@ -140,9 +140,10 @@ a{
   /* 确保元素不会独占一行 */
 }
 .header1 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
-  background: linear-gradient(45deg, var(--font-color-dark), black);
+  background: linear-gradient(45deg, var(--font-color-light), white);
+  font-family: var(--header-font-family);
 
   -webkit-background-clip: text;
   /* 裁切背景到文字形状（WebKit内核特有） */

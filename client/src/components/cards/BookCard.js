@@ -66,13 +66,13 @@ const BookCard = ({ results }) => {
                 {results.map((item) => (
                     <ListGroup.Item key={item.book_id}>
 
-                        <Card.Body>
+                        <div>
                             <Card.Img
                                 variant="top"
                                 src={item.book_image || 'https://via.placeholder.com/100'}
                                 style={{ width: '200px', marginRight: '1rem' }}
                             />
-                            <Card.Title>{item.book_title}</Card.Title>
+                            <div>{item.book_title}</div>
                             <div style={{display:'flex',flexDirection:'row'}}>
                             <StatusBtn user_id={userId} targetType={'book'} targetId={item.book_id} currentStatus={bookStatus[item.book_id]?.book_status} onStatusChange={handleStatusChange} />
                             <button  className='expandBtn' onClick={() => toggleDetail(item.book_id)}>
@@ -93,7 +93,7 @@ const BookCard = ({ results }) => {
                                     </Button>
                                 </Card.Text></>
                             )}
-                        </Card.Body>
+                        </div>
 
                     </ListGroup.Item>
                 ))}

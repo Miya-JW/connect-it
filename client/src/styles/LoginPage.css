@@ -1,7 +1,7 @@
 .authPage{
   
-    background: radial-gradient(circle, var(--background-color), #485671bc);
-    background-color: #1b263bbc;
+    background: radial-gradient(circle, #1b263b9d, #1B263B); 
+   
 }
 .login_container {
     margin-top: -200px;

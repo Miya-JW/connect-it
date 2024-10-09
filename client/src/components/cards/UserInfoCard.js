@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { ListGroup } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getFollowedUsers } from '../../services/serverServies/userActivityService'
@@ -57,23 +56,25 @@ const UserInfoCard = ({ results }) => {
                 // <ListGroup.Item className="userCard" key={item.user_id}>
 
                     <div className='otherUserInfo'>
-                        <Card.Img onClick={() => toOtherUserPage(item.user_id)} className="rounded-circle"
+                        <Card.Img onClick={()=>toggleDetail(item.user_id)} className="rounded-circle"
                             variant="top"
                             src={`${process.env.REACT_APP_SERVER_URL}/uploads${item.user_avatar}` || 'https://via.placeholder.com/100'}
                             style={{ width: '150px', height: '150px', marginBottom:'5px' ,cursor:'pointer'}}
                         />
 
-                        <Card.Title onClick={() => toOtherUserPage(item.user_id)}>{item.user_name}</Card.Title>
-                        <button className="expandBtnUser" onClick={()=>toggleDetail(item.user_id)}>{detailExpandedId===item.user_id ? 'Show Less' : 'More Info'}</button>
+                       
+                        {/* <button className="expandBtnUser" onClick={()=>toggleDetail(item.user_id)}>{detailExpandedId===item.user_id ? 'Show Less' : 'More Info'}</button> */}
                         <div className="userOtherInfo">
                             {detailExpandedId===item.user_id && (
                                 <div>
-                                    <Card.Text>Name: {`${item.user_first_name || ""} ${item.user_last_name || ""}` || 'Unknown'}</Card.Text>
+                                     <div onClick={() => toOtherUserPage(item.user_id)} style={{color:'#f9f7f3',marginBottom:'20px',marginTop:'20px'}}>{item.user_name}</div>
+                                    <Card.Text style={{color:'#f9f7f3'}}>Name: {`${item.user_first_name || ""} ${item.user_last_name || ""}` || 'Unknown'}</Card.Text>
 
-                                    <Card.Text>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
-                                    <Card.Text>About: {item.user_about_me || 'None'}</Card.Text>
+                                    <Card.Text style={{color:'#f9f7f3'}}>Join Date: {item.user_join_date ? new Date(item.user_join_date).toLocaleDateString() : 'Unknown'}</Card.Text>
+                                    <Card.Text style={{color:'#f9f7f3'}}>About: {item.user_about_me || 'None'}</Card.Text>
                                     {/* <Card.Text>Tags: {item.user_tag || ''}</Card.Text> */}
                                     {/* <TagCard user={item} /> */}
+                                    <div onClick={() => toOtherUserPage(item.user_id)} style={{color:'#f9f7f3',marginBottom:'20px',marginTop:'20px',textDecoration: 'underline',cursor:'pointer'}}>Home Page</div>
                                     <UserFollowBtn
                                         follow_id={item.user_id}
                                         isFollowed={followedUsers[item.user_id]}

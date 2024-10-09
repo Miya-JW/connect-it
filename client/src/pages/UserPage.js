@@ -267,18 +267,18 @@ const UserPage = ({ userId }) => {
                                 style={{ width: '100px', height: '100px', marginRight: '1rem' }} alt='userAvatar'
                             />
                             <div>
-                                <div style={{fontSize:'25px',color:'#30343f',fontWeight:'bold'}}>{user.user_name}</div>
+                                <div style={{ fontSize: '25px', color: '#30343f', fontWeight: 'bold' }}>{user.user_name}</div>
                                 <div>Name: {`${user.user_first_name} ${user.user_last_name}` || 'Unknown'}</div>
                                 <div>Join Date: {user.user_join_date ? new Date(user.user_join_date).toLocaleDateString() : 'Unknown'}</div>
                                 <div>About: {user.user_about_me || 'None'}</div>
-                               
+
                             </div>
                         </div>
                     </div>
 
                     <div className='followingContainer'>
                         {following.length > 0 ? (<div className='followingContainer'>
-                            <div className='header1'>Following</div>
+                            <div className='header1' style={{ color: 'white' }}>Following</div>
                             <UserInfoCard results={following} />
                         </div>) : ''}
                     </div>
@@ -287,35 +287,42 @@ const UserPage = ({ userId }) => {
                 <div className="right-column">
 
                     <div className='blogContainer'>
+                        <div className='header1'>Blogs</div>
+                        <button className='expandBtn' onClick={toggleContent}>
+                            {blogIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                         {blogs.length > 0 && (
                             <>
-                                <div className='header1'>Blogs</div>
+
                                 {blogIsExpanded && (
                                     <BlogCard blogs={blogs} />
                                 )}
                                 {/* 按钮点击后切换展开/收起状态，并更新按钮文本 */}
-                                <button className='expandBtn' onClick={toggleContent}>
-                                    {blogIsExpanded ? 'Hide' : 'Show'}
-                                </button>
+
                             </>
                         )}
                     </div>
 
                     <div className='artistContainer'>
+                        <div className='header1'>Followed Artists</div>
+                        <button className='expandBtn' onClick={toggleArtistsContent}>
+                            {artistsIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                         {artists.length > 0 && (
                             <div>
-                                <div className='header1'>Followed Artists</div>
+
                                 {artistsIsExpanded && (
                                     <MusicArtistsCard artists={artists} />
                                 )}
-                                <button className='expandBtn' onClick={toggleArtistsContent}>
-                                    {artistsIsExpanded ? 'Hide' : 'Show'}
-                                </button>
+
                             </div>)}
                     </div>
 
                     <div className='albumContainer'>
                         <div className='header0' >My Music Ablums</div>
+                        <button className='expandBtn' onClick={toggleAlbumsContent}>
+                            {albumsIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                         {albumsIsExpanded && (
                             <div style={{ marginTop: '50px' }}>
                                 {toListen.length > 0 ? (<div>
@@ -337,14 +344,15 @@ const UserPage = ({ userId }) => {
                             </div>
 
                         )}
-                        <button className='expandBtn' onClick={toggleAlbumsContent}>
-                            {albumsIsExpanded ? 'Hide' : 'Show'}
-                        </button>
+
 
                     </div>
 
                     <div className='bookContainer'>
                         <div className='header0' >My Books</div>
+                        <button className='expandBtn' onClick={toggleBooksContent}>
+                            {booksIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                         {booksIsExpanded && (
                             <div style={{ marginTop: '50px' }}>
                                 {toRead.length > 0 ? (<div>
@@ -361,13 +369,14 @@ const UserPage = ({ userId }) => {
                                 </div>) : ''}
                             </div>
                         )}
-                        <button className='expandBtn' onClick={toggleBooksContent}>
-                            {booksIsExpanded ? 'Hide' : 'Show'}
-                        </button>
+
                     </div>
 
                     <div className='movieContainer'>
                         <div className='header0' >My Moives</div>
+                        <button className='expandBtn' onClick={toggleMoviesContent}>
+                            {moviesIsExpanded ? 'Hide' : 'Show'}
+                        </button>
                         {moviesIsExpanded && (
                             <div style={{ marginTop: '50px' }}>
                                 {toWatch.length > 0 ? (<div>
@@ -384,9 +393,7 @@ const UserPage = ({ userId }) => {
                                 </div>) : ''}
                             </div>
                         )}
-                        <button className='expandBtn' onClick={toggleMoviesContent}>
-                            {moviesIsExpanded ? 'Hide' : 'Show'}
-                        </button>
+
                     </div>
 
                 </div>

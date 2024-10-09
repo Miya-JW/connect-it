@@ -6,15 +6,16 @@
     justify-content: center;
     overflow: hidden;
     background-color: var(--background-color-1);
-    background: linear-gradient(90deg, white, grey 50%, white);
-    border-radius: 20px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.454), rgba(128, 128, 128, 0.464) 50%, rgba(255, 255, 255, 0.454));
+    border-radius: 10px;
     margin-bottom: 30px;
+    padding: 40px 0;
 }
 
 .movieCards {
     display: flex;
 
-    justify-content: center;
+    justify-content: first baseline;
     overflow-x: auto;
     scroll-behavior: smooth;
 
