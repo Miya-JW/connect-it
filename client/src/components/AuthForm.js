@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/App.css';
 import logo_img from '../assets/images/logo.jpg';
-import { useSelector,useDispatch } from 'react-redux';
+import {useDispatch } from 'react-redux';
 import { setUser } from '../store/actions/action';
 
 
@@ -16,7 +16,7 @@ const AuthForm = () => {
     const [passwordError, setPasswordError] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const userId = useSelector(state => state.user.userId);
+  
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         username: '',
